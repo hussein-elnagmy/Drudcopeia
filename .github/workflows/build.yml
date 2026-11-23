@@ -12,12 +12,12 @@ jobs:
       - name: Unpack source archive
         run: |
           ls -- *Drugcopoeia-r178.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
-          echo '42f0fd6e7c22fd86e14ee157bf149b9e49a641fd1b5b3800eedf4bc2b0e3bf90  /tmp/src.zip' | sha256sum -c -
+          echo 'ffffc24ab079d33682143024b1cb69cd23218028ce263b20b368a67507879a71  /tmp/src.zip' | sha256sum -c -
           unzip -q /tmp/src.zip
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -44,7 +44,7 @@ jobs:
       - name: Unpack source archive
         run: |
           ls -- *Drugcopoeia-r178.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
-          echo '42f0fd6e7c22fd86e14ee157bf149b9e49a641fd1b5b3800eedf4bc2b0e3bf90  /tmp/src.zip' | sha256sum -c -
+          echo 'ffffc24ab079d33682143024b1cb69cd23218028ce263b20b368a67507879a71  /tmp/src.zip' | sha256sum -c -
           unzip -q /tmp/src.zip
       - uses: actions/setup-go@v5
         with:
@@ -54,6 +54,8 @@ jobs:
           mkdir -p /tmp/llama-runtime
           curl -fL -o /tmp/llama-runtime/win.zip https://github.com/ggml-org/llama.cpp/releases/download/b11985/llama-b11985-bin-win-cpu-x64.zip
           echo '1c93f23afd48f8434c4cdc4d9f0a46f47a0d98ea6b3214007cbddc10c34c0c16  /tmp/llama-runtime/win.zip' | sha256sum -c -
+      - name: Install go-winres on the host toolchain
+        run: go install github.com/tc-hib/go-winres@latest
       - name: Cross-compile Windows exe
         working-directory: Source/windows
         env:
@@ -74,7 +76,7 @@ jobs:
       - name: Unpack source archive
         run: |
           ls -- *Drugcopoeia-r178.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
-          echo '42f0fd6e7c22fd86e14ee157bf149b9e49a641fd1b5b3800eedf4bc2b0e3bf90  /tmp/src.zip' | shasum -a 256 -c -
+          echo 'ffffc24ab079d33682143024b1cb69cd23218028ce263b20b368a67507879a71  /tmp/src.zip' | shasum -a 256 -c -
           unzip -q /tmp/src.zip
       - name: Build ad-hoc signed DMG
         working-directory: Source/macos
@@ -91,7 +93,7 @@ jobs:
       - name: Unpack source archive
         run: |
           ls -- *Drugcopoeia-r178.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
-          echo '42f0fd6e7c22fd86e14ee157bf149b9e49a641fd1b5b3800eedf4bc2b0e3bf90  /tmp/src.zip' | shasum -a 256 -c -
+          echo 'ffffc24ab079d33682143024b1cb69cd23218028ce263b20b368a67507879a71  /tmp/src.zip' | shasum -a 256 -c -
           unzip -q /tmp/src.zip
       - name: Build iOS app (unsigned, simulator)
         working-directory: Source/ios/App
