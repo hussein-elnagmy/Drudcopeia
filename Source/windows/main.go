@@ -32,7 +32,7 @@ var content embed.FS
 var llamaRuntime embed.FS
 
 const (
-	appName       = "Drugcopoeia"
+	appName       = "Drugcopeia"
 	appVersion    = "1.7.8"
 	preferredPort = 47123
 	llamaVersion  = "b11985"

@@ -3,8 +3,8 @@
   "direction": "rtl",
   "comment": "كل الرسائل الثابتة للعربي. الكود هو اللي يطبعها، مش النموذج. أي نص فيه {size} أو {phone} بيستبدل بالقيمة وقت العرض.",
   "disclaimer": "هذه المعلومات للتوعية فقط وليست بديلًا عن استشارة الطبيب أو الصيدلي المختص. استشر الطبيب أو الصيدلي قبل استخدام أي دواء أو تغيير العلاج.",
-  "navLabel": "Drugcopoeia AI",
-  "pageTitle": "Drugcopoeia AI",
+  "navLabel": "Drugcopeia AI",
+  "pageTitle": "Drugcopeia AI",
   "pageKicker": "مساعد يعمل على جهازك",
   "pageSubtitle": "أسئلة عن الأدوية والصحة، بإجابات من قاعدة بيانات التطبيق — تشتغل على جهازك بدون إنترنت.",
   "state": {
@@ -92,10 +92,10 @@
   },
   "conversation": {
     "comment": "Fixed replies for a greeting, thanks, goodbye or a question about the assistant itself, used when the device has no on-device model to phrase them. The chat guard rejects a model reply that carries a number, a medicine name or medical advice, and this is what the reader gets instead.",
-    "greeting": "أهلاً بيك! أنا مساعد Drugcopoeia. تحب تسأل عن إيه النهاردة؟",
+    "greeting": "أهلاً بيك! أنا مساعد Drugcopeia. تحب تسأل عن إيه النهاردة؟",
     "thanks": "العفو. أنا موجود في أي وقت تسأل فيه عن دواء أو عرض.",
     "farewell": "مع السلامة وألف سلامة. أي سؤال عن دواء أنا موجود.",
-    "smallTalk": "أنا مساعد Drugcopoeia. بساعدك تعرف مكونات الأدوية المصرية، الجرعة المكتوبة على العلبة، الأعراض الجانبية، التداخلات، والأسعار، وكمان المعلومات العامة عن الأعراض والأمراض. تحب تسأل في إيه؟"
+    "smallTalk": "أنا مساعد Drugcopeia. بساعدك تعرف مكونات الأدوية المصرية، الجرعة المكتوبة على العلبة، الأعراض الجانبية، التداخلات، والأسعار، وكمان المعلومات العامة عن الأعراض والأمراض. تحب تسأل في إيه؟"
   },
   "emergency": {
     "title": "دي حالة طارئة",
@@ -227,7 +227,7 @@
   "menu": {
     "aria": "قائمة المساعد",
     "closeAria": "إغلاق القائمة",
-    "title": "قائمة Drugcopoeia AI",
+    "title": "قائمة Drugcopeia AI",
     "conversations": "المحادثات السابقة",
     "settings": "إعدادات المساعد",
     "conversation": "محادثة",

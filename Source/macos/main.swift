@@ -565,7 +565,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             backing: .buffered,
             defer: false
         )
-        window.title = "Drugcopoeia"
+        window.title = "Drugcopeia"
         window.minSize = NSSize(width: 880, height: 640)
         window.contentView = webView
         window.center()
@@ -727,7 +727,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     @objc private func zoomOut() { webView.pageZoom = max(0.5, webView.pageZoom - 0.1) }
 
     private func showFailure(_ message: String) {
-        let html = "<html><body style=\"font-family:-apple-system;padding:40px\"><h2>Drugcopoeia</h2><p>\(message)</p></body></html>"
+        let html = "<html><body style=\"font-family:-apple-system;padding:40px\"><h2>Drugcopeia</h2><p>\(message)</p></body></html>"
         webView.loadHTMLString(html, baseURL: nil)
     }
 
@@ -737,10 +737,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         let appItem = NSMenuItem()
         mainMenu.addItem(appItem)
         let appMenu = NSMenu()
-        appMenu.addItem(withTitle: "About Drugcopoeia", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: "")
+        appMenu.addItem(withTitle: "About Drugcopeia", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: "")
         appMenu.addItem(.separator())
-        appMenu.addItem(withTitle: "Hide Drugcopoeia", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h")
-        appMenu.addItem(withTitle: "Quit Drugcopoeia", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        appMenu.addItem(withTitle: "Hide Drugcopeia", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h")
+        appMenu.addItem(withTitle: "Quit Drugcopeia", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         appItem.submenu = appMenu
 
         let editItem = NSMenuItem()
@@ -1174,7 +1174,7 @@ final class NativeBridge: NSObject, WKScriptMessageHandlerWithReply {
 
     private func importModelFile() -> [String: Any] {
         let panel = NSOpenPanel()
-        panel.title = "Import the Drugcopoeia model file"
+        panel.title = "Import the Drugcopeia model file"
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = false
         panel.allowedFileTypes = ["gguf"]

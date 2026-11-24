@@ -57,8 +57,8 @@ rm -f rsrc_windows_*.syso
   --out rsrc \
   --manifest gui \
   --icon tools/dawaya.ico \
-  --product-name "Drugcopoeia" \
-  --file-description "Drugcopoeia - offline Egypt medicine, condition and lab test guide" \
+  --product-name "Drugcopeia" \
+  --file-description "Drugcopeia - offline Egypt medicine, condition and lab test guide" \
   --product-version 1.7.8.0 \
   --file-version 1.7.8.0 \
   --original-filename "Dawaya.exe" \

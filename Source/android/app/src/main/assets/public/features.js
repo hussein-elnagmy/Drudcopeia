@@ -1,4 +1,4 @@
-/* Drugcopoeia clinician features: same-spec price comparison, active-ingredient
+/* Drugcopeia clinician features: same-spec price comparison, active-ingredient
  * card, clinical calculators and study mode. Loaded after app.js and uses only
  * the public window.DawayaApp surface plus the #featSlot hook it injects into
  * the medicine detail dialog.

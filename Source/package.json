@@ -1,8 +1,8 @@
 {
-  "name": "drugcopoeia",
+  "name": "drugcopeia",
   "version": "1.0.0",
   "private": true,
-  "description": "Drugcopoeia medicine-guide source, web revision 175 on the build 48 line.",
+  "description": "Drugcopeia medicine-guide source, web revision 175 on the build 48 line.",
   "license": "AGPL-3.0",
   "engines": {
     "node": ">=22"

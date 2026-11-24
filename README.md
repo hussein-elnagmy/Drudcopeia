@@ -1,4 +1,4 @@
-# Drugcopoeia (دوايا)
+# Drugcopeia (دوايا)
 
 A bilingual Arabic/English medicine reference for Egyptian medical staff: 25,070 medicines registered in Egypt, searchable by brand name, active ingredient or price. Conditions and lab tests, a pediatric dose calculator, a drug-interaction checker, a pregnancy & lactation reference, six medical calculators, study mode, barcode scanning, dose reminders, and a free on-device AI assistant that runs locally with no API keys, no CDN and no accounts.
 
@@ -6,8 +6,8 @@ A bilingual Arabic/English medicine reference for Egyptian medical staff: 25,070
 
 ## Downloads
 
-- Web app (runs in the browser, installable as a PWA): https://hussein-elnagmy.github.io/Drudcopeia/
-- Android APK, Windows EXE, macOS DMG and the unsigned iOS build: [Releases](https://github.com/hussein-elnagmy/Drudcopeia/releases)
+- Web app (runs in the browser, installable as a PWA): https://hussein-elnagmy.github.io/Drugcopeia/
+- Android APK, Windows EXE, macOS DMG and the unsigned iOS build: [Releases](https://github.com/hussein-elnagmy/Drugcopeia/releases)
 
 Windows and macOS builds are not code-signed yet (see the code signing policy below). On Windows click "More info" then "Run anyway"; on macOS right-click the app and choose "Open".
 

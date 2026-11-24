@@ -1,4 +1,4 @@
-Dawaya / Drugcopoeia r181 - build instructions
+Dawaya / Drugcopeia r181 - build instructions
 ==============================================
 
 What r181 is
@@ -16,18 +16,18 @@ Source/RELEASE-NOTES-r181.md and Source/webapp/ai/README.md.
 The fastest way to build: GitHub Actions
 -----------------------------------------
 Everything is already wired in the private repo:
-  https://github.com/hussein-elnagmy/Drudcopeia
+  https://github.com/hussein-elnagmy/Drugcopeia
 Open the Actions tab, pick the newest "build-native" run, and download the
 artifacts when it finishes: Dawaya-android-apk, Dawaya-windows-exe,
 Dawaya-macos-dmg, Dawaya-ios-simulator-unsigned.
 
 Rebuild the source archive from the parts (identical in the Drive folder and
 in the GitHub repo):
-  cat Drugcopoeia-r181.zip.part* > Drugcopoeia-r181-source.zip
-  sha256sum Drugcopoeia-r181-source.zip
+  cat Drugcopeia-r181.zip.part* > Drugcopeia-r181-source.zip
+  sha256sum Drugcopeia-r181-source.zip
   # must equal the hash in SHA256SUMS-r181.txt, kept next to the parts both
   # in this Drive folder and in the GitHub repository
-  unzip Drugcopoeia-r181-source.zip   # gives Source/, PRIVACY.md and docs
+  unzip Drugcopeia-r181-source.zip   # gives Source/, PRIVACY.md and docs
 
 Local builds from Source/
 --------------------------

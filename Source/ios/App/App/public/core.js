@@ -1,5 +1,5 @@
 /*
- * Drugcopoeia core — framework-free state, device adapters, and scheduling.
+ * Drugcopeia core — framework-free state, device adapters, and scheduling.
  *
  * Native shells expose a bridge before this file runs:
  *   iOS (WKWebView): window.webkit.messageHandlers.dawayaSpeech.postMessage({action,text,lang,rate})

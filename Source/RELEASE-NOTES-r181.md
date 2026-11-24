@@ -56,7 +56,7 @@ which holds name, ingredient, maker, class and price only), and the Arabic Conco
   runtime, iOS/macOS embed llama.xcframework. A browser without WebAssembly,
   OPFS or enough memory keeps the grounded smart-search fallback.
 
-# Drugcopoeia release notes
+# Drugcopeia release notes
 
 ## r179 - 2026-11-24 - Android on-device AI runtime built in CI
 
@@ -112,7 +112,7 @@ which holds name, ingredient, maker, class and price only), and the Arabic Conco
 Based on the delivered Dawaya build 48 / revision 174 source. No native binary was built.
 
 ## Changed
-- Visible brand renamed to Drugcopoeia in web UI and native display-name settings. App IDs, native class names, executable paths and localStorage keys are unchanged for compatibility.
+- Visible brand renamed to Drugcopeia in web UI and native display-name settings. App IDs, native class names, executable paths and localStorage keys are unchanged for compatibility.
 - Black-outline D and capsule on white, with an inverse white-on-black dark logo. Capsule halves are hollow, separated by a line. This follows the owner's latest line-art direction. Web logos follow the in-app theme; iOS icon assets include dark appearance and Android includes night resources. Windows ICO and fixed PWA install icons use the light variant. Teal UI accents are unchanged.
 - Teal palette in light and dark themes, rounded desktop sidebar, floating icon-only mobile navigation. Text labels remain available to screen readers.
 - Search results are dropdown-only in the main/medicine search, condition picker, lab search and pregnancy search. Selecting an item opens the existing detail. Directory browsing is retained.

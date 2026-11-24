@@ -1,4 +1,4 @@
-/* Drugcopoeia: same-spec product matching and price comparison (pure logic, no DOM).
+/* Drugcopeia: same-spec product matching and price comparison (pure logic, no DOM).
  *
  * This is a price comparison of products that match EXACTLY on active
  * ingredient(s), strength(s), route, dosage form and release type. It is not

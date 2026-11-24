@@ -14,15 +14,15 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; form-action 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob: data:; connect-src 'self' https://www.who.int https://api.fda.gov https://eutils.ncbi.nlm.nih.gov https://commons.wikimedia.org https://thumb.wikimedia.org https://upload.wikimedia.org https://huggingface.co https://*.hf.co http://127.0.0.1:* http://localhost:*; worker-src 'self' blob:; manifest-src 'self'">
   <meta name="theme-color" content="#1b5fc2">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Drugcopoeia">
+  <meta name="apple-mobile-web-app-title" content="Drugcopeia">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="icon" href="assets/red-crescent-rx-192.png" type="image/png">
   <meta name="description" content="Search medicines in Egypt by brand, generic name, manufacturer, or price. Simple pharmacology and medicine information.">
-  <title>Drugcopoeia — Egypt Medicine Guide</title>
+  <title>Drugcopeia — Egypt Medicine Guide</title>
   <script>(()=>{try{const saved=localStorage.getItem('dawaya-theme');document.documentElement.dataset.theme=saved==='dark'||(saved!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'}catch(_){document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}try{const scale=Number(localStorage.getItem('dawaya-type-scale'));if(Number.isFinite(scale)&&scale>=.9&&scale<=1.3)document.documentElement.style.setProperty('--type-scale',String(scale))}catch(_){}try{if(localStorage.getItem('dawaya-language')==='ar'){document.documentElement.lang='ar';document.documentElement.dir='rtl'}}catch(_){}})();</script>
-  <link rel="stylesheet" href="styles.css?v=182">
+  <link rel="stylesheet" href="styles.css?v=183">
 </head>
 <body data-view="home">
   <a class="skip-link" href="#mainContent" data-i18n="skipToContent">Skip to main content</a>
@@ -58,7 +58,7 @@
   <header class="topbar">
     <div class="topbar-leading">
       <button id="appBack" class="app-back" type="button" hidden aria-label="Back to the previous page" data-i18n-aria="appBackAria"><svg class="app-back-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-back"></use></svg></button>
-      <a class="brand" href="#" aria-label="Drugcopoeia home" data-i18n-aria="brandAria"><img class="brand-mark" src="assets/red-crescent-rx-96.png" srcset="assets/red-crescent-rx-96.png 1x, assets/red-crescent-rx-192.png 2x" alt=""><span><strong id="brandName">Drugcopoeia</strong><small id="brandSubtitle">EGYPT MEDICINE GUIDE</small></span></a>
+      <a class="brand" href="#" aria-label="Drugcopeia home" data-i18n-aria="brandAria"><img class="brand-mark" src="assets/red-crescent-rx-96.png" srcset="assets/red-crescent-rx-96.png 1x, assets/red-crescent-rx-192.png 2x" alt=""><span><strong id="brandName">Drugcopeia</strong><small id="brandSubtitle">EGYPT MEDICINE GUIDE</small></span></a>
     </div>
     <span class="top-note"><i></i><span id="dbStatus">Connecting to medicine database</span></span>
     <div class="header-actions"><button id="menuToggle" class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="drawerBackdrop">☰</button></div>
@@ -78,13 +78,13 @@
         <button class="sidenav-link" type="button" data-app-nav="calculators"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-calc"></use></svg><span data-i18n="navCalculators">Clinical calculators</span></button>
         <button class="sidenav-link" type="button" data-app-nav="study"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-study"></use></svg><span data-i18n="navStudy">Study mode</span></button>
         <button class="sidenav-link" type="button" data-app-nav="reminders"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-bell"></use></svg><span data-i18n="navReminders">Reminders</span></button>
-        <button class="sidenav-link" type="button" data-app-nav="assistant"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-dawaya-ai"></use></svg><span data-i18n="navAssistant">Drugcopoeia AI</span></button>
+        <button class="sidenav-link" type="button" data-app-nav="assistant"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-dawaya-ai"></use></svg><span data-i18n="navAssistant">Drugcopeia AI</span></button>
       </div>
       <div class="sidenav-separator" role="presentation"></div>
       <p class="sidenav-kicker" data-i18n="navSupportLabel">SUPPORT</p>
       <div class="sidenav-links">
         <button class="sidenav-link" type="button" data-app-nav="suggestions"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-feedback"></use></svg><span data-i18n="suggestionsMenu">Feedback</span></button>
-        <button class="sidenav-link" type="button" data-app-nav="about"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-info"></use></svg><span data-i18n="navAbout">About Drugcopoeia</span></button>
+        <button class="sidenav-link" type="button" data-app-nav="about"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-info"></use></svg><span data-i18n="navAbout">About Drugcopeia</span></button>
         <button class="sidenav-link" type="button" data-app-nav="privacy"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-lock"></use></svg><span data-i18n="navPrivacy">Privacy</span></button>
         <button class="sidenav-link" type="button" data-app-nav="settings"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-settings"></use></svg><span data-i18n="navSettings">Settings</span></button>
       </div>
@@ -373,7 +373,7 @@
             <p class="reminder-limit" id="reminderLimit" data-i18n="reminderLimitNote">Up to 20 reminders can be saved on this device.</p>
           </form>
           <aside class="clinical-disclaimer reminder-note">
-            <p><span data-i18n="reminderNotice">Reminders repeat every day. Drugcopoeia sounds a long alert at the chosen time and follows up 10 and 30 minutes later until you mark the dose as taken. Keep the alarm your pharmacist recommends as a backup, and do not double a dose after a missed one unless a clinician tells you to.</span><span id="reminderNoticeExtra" hidden></span></p>
+            <p><span data-i18n="reminderNotice">Reminders repeat every day. Drugcopeia sounds a long alert at the chosen time and follows up 10 and 30 minutes later until you mark the dose as taken. Keep the alarm your pharmacist recommends as a backup, and do not double a dose after a missed one unless a clinician tells you to.</span><span id="reminderNoticeExtra" hidden></span></p>
           </aside>
         </div>
       </div>
@@ -382,7 +382,7 @@
     <section class="suggestions-page" id="suggestionsPage" data-main-page="suggestions" hidden>
       <span class="section-kicker" data-i18n="suggestionsEyebrow">APP FEEDBACK</span>
       <h1 data-i18n="suggestionsTitle">Share feedback</h1>
-      <p class="suggestions-intro" data-i18n="suggestionsDescription">Tell us what could make Drugcopoeia more useful or report a problem.</p>
+      <p class="suggestions-intro" data-i18n="suggestionsDescription">Tell us what could make Drugcopeia more useful or report a problem.</p>
       <form id="suggestionsForm" class="suggestion-form">
         <label for="suggestionSubject" data-i18n="suggestionSubjectLabel">Subject</label>
         <input id="suggestionSubject" name="subject" type="text" maxlength="160" required>
@@ -506,15 +506,15 @@
     </section>
 
     <section class="about-section" id="about" data-main-page="about" hidden>
-      <div><span class="section-kicker" data-i18n="aboutEyebrow">ABOUT DRUGCOPOEIA</span><h2><span data-i18n="aboutTitle1">A local guide</span><br><em data-i18n="aboutTitle2">to clearer answers.</em></h2></div>
-      <div class="about-copy"><div class="about-intro"><div class="eyebrow"><span class="eyebrow-line"></span> <span data-i18n="eyebrow">YOUR MEDICINE, MADE CLEAR</span></div><h3><span data-i18n="heroTitle1">Find a medicine.</span> <em data-i18n="heroTitle2">Understand it better.</em></h3><p data-i18n="heroDescription">Search medicines available in Egypt by brand name, active ingredient, drug group, company, or price.</p></div><p data-i18n="aboutText1">Drugcopoeia brings medicines found in Egypt into one searchable directory. Look up brand names, active ingredients, manufacturers, classifications, routes, and listed prices.</p><p data-i18n="aboutText2">Medicine listing data ships inside the app from the open Egyptian drug database and changes only when a new app build is installed. Educational pharmacology notes are separately curated and are not a substitute for an approved product leaflet.</p><p class="developer-credit"><strong data-i18n="developerCredit">Developed by Dr. Hussein Elnagmy</strong><span data-i18n="developerTitle">Clinical Pharmacist</span></p><p class="app-version"><span data-i18n="versionLabel">App version</span> <strong>1.7.8</strong></p><a class="source-link" href="https://github.com/hussein-elnagmy/egyptian-drug-database" target="_blank" rel="noreferrer"><span data-i18n="sourceLink">View medicine data source</span> <span>↗</span></a></div>
+      <div><span class="section-kicker" data-i18n="aboutEyebrow">ABOUT DRUGCOPEIA</span><h2><span data-i18n="aboutTitle1">A local guide</span><br><em data-i18n="aboutTitle2">to clearer answers.</em></h2></div>
+      <div class="about-copy"><div class="about-intro"><div class="eyebrow"><span class="eyebrow-line"></span> <span data-i18n="eyebrow">YOUR MEDICINE, MADE CLEAR</span></div><h3><span data-i18n="heroTitle1">Find a medicine.</span> <em data-i18n="heroTitle2">Understand it better.</em></h3><p data-i18n="heroDescription">Search medicines available in Egypt by brand name, active ingredient, drug group, company, or price.</p></div><p data-i18n="aboutText1">Drugcopeia brings medicines found in Egypt into one searchable directory. Look up brand names, active ingredients, manufacturers, classifications, routes, and listed prices.</p><p data-i18n="aboutText2">Medicine listing data ships inside the app from the open Egyptian drug database and changes only when a new app build is installed. Educational pharmacology notes are separately curated and are not a substitute for an approved product leaflet.</p><p class="developer-credit"><strong data-i18n="developerCredit">Developed by Dr. Hussein Elnagmy</strong><span data-i18n="developerTitle">Clinical Pharmacist</span></p><p class="app-version"><span data-i18n="versionLabel">App version</span> <strong>1.7.8</strong></p><a class="source-link" href="https://github.com/hussein-elnagmy/egyptian-drug-database" target="_blank" rel="noreferrer"><span data-i18n="sourceLink">View medicine data source</span> <span>↗</span></a></div>
       <div class="about-notices"><section class="disclaimer-strip"><span class="shield">✳</span><div><b data-i18n="disclaimerTitle">For information, not treatment</b><span data-i18n="disclaimerText">Never start, stop, or change a medicine without advice from a qualified healthcare professional.</span></div><a href="#safety"><span data-i18n="readSafety">Read safety note</span> <span>→</span></a></section><section class="safety-section" id="safety"><div class="safety-icon">!</div><div><h2 data-i18n="safetyTitle">Important safety information</h2><p data-i18n="safetyText">This guide is educational and does not provide diagnosis or individualized treatment. Doses and risks depend on the product, age, pregnancy, medical history, and other medicines. Read the product leaflet and ask a doctor or pharmacist. Prices and availability can change; verify locally before use.</p></div></section></div>
     </section>
     <section class="privacy-page" id="privacyPage" data-main-page="privacy" hidden>
       <header class="privacy-head">
         <span class="section-kicker" data-i18n="privacyEyebrow">PRIVACY</span>
         <h2 data-i18n="privacyTitle">Your data stays on this device</h2>
-        <p class="privacy-lede" data-i18n="privacyLede">Drugcopoeia has no account, no analytics, no advertising, no crash reporting and no telemetry. Nothing you search for, read or save is sent to us or to anyone else.</p>
+        <p class="privacy-lede" data-i18n="privacyLede">Drugcopeia has no account, no analytics, no advertising, no crash reporting and no telemetry. Nothing you search for, read or save is sent to us or to anyone else.</p>
       </header>
       <div class="privacy-grid">
         <section class="privacy-card privacy-card-wide" aria-labelledby="privacyCollectTitle">
@@ -534,8 +534,8 @@
           <p data-i18n="privacyDownloadsText">The medicine, condition and lab-test databases are built into the app. The only optional downloads are the news list and the photographs in the “Photos” section of a medicine page, and each one runs only when you press its own button, with no identifiers, cookies or tracking parameters.</p>
           <ul class="privacy-hosts" id="privacyHostList" aria-label="Allowed update hosts"></ul>
           <p class="privacy-small" data-i18n="privacyDownloadsNote">Every other network request is blocked inside the app. Links open in a browser view only when you tap them.</p>
-          <p class="privacy-small" data-i18n="privacyLinksNote">Links — news, sources, product photographs — open in a browser view over the page you were reading. Drugcopoeia reads nothing from it: no cookies, no history, no page content. Offline mode closes every link.</p>
-          <p class="privacy-small" data-i18n="privacyLinksWhere">On a phone that view is the browser component already on your device, with its own cookies and extensions, and it carries a button that hands the address to your default browser. On a computer Drugcopoeia opens its own window and forgets it when you close it.</p>
+          <p class="privacy-small" data-i18n="privacyLinksNote">Links — news, sources, product photographs — open in a browser view over the page you were reading. Drugcopeia reads nothing from it: no cookies, no history, no page content. Offline mode closes every link.</p>
+          <p class="privacy-small" data-i18n="privacyLinksWhere">On a phone that view is the browser component already on your device, with its own cookies and extensions, and it carries a button that hands the address to your default browser. On a computer Drugcopeia opens its own window and forgets it when you close it.</p>
           <p class="privacy-small" data-i18n="privacyFeedbackNote">Feedback and new-medicine notes are prepared inside the app and handed to your own email app. Nothing is sent until you press Send there, and no account or email address is required.</p>
         </section>
 
@@ -545,15 +545,15 @@
             <li data-i18n="privacyPermNotify">Notifications: to show the reminders you created, at the time you chose.</li>
             <li data-i18n="privacyPermAlarm">Alarms and restart (Android): to keep your reminders exact and restore them after a restart.</li>
             <li data-i18n="privacyPermInternet">Internet: for the news update you press and the source links you open. The medicine directory works fully without it.</li>
-            <li data-i18n="privacyPermCamera">Camera: only when you scan a box code or take a search photo. A scanned frame is decoded on this device and is never stored or uploaded; a photo you pick for a search is sent to Google image search and Drugcopoeia keeps no copy of it.</li>
-            <li data-i18n="privacyPermMic">Microphone: only while Voice search is listening. Drugcopoeia does not store the audio; the device’s speech service turns it into text, on-device where supported.</li>
+            <li data-i18n="privacyPermCamera">Camera: only when you scan a box code or take a search photo. A scanned frame is decoded on this device and is never stored or uploaded; a photo you pick for a search is sent to Google image search and Drugcopeia keeps no copy of it.</li>
+            <li data-i18n="privacyPermMic">Microphone: only while Voice search is listening. Drugcopeia does not store the audio; the device’s speech service turns it into text, on-device where supported.</li>
             <li data-i18n="privacyPermNone">No location, contacts, phone state, files or advertising permissions are requested.</li>
           </ul>
         </section>
 
         <section class="privacy-card privacy-card-wide" aria-labelledby="privacyLocalTitle">
           <h3 id="privacyLocalTitle" data-i18n="privacyLocalTitle">Data on this device</h3>
-          <p data-i18n="privacyLocalText">Reminders, medicines you add and the saved headlines stay in this app’s private storage. They are never uploaded, and this device’s cloud backup is disabled for Drugcopoeia where the platform allows it.</p>
+          <p data-i18n="privacyLocalText">Reminders, medicines you add and the saved headlines stay in this app’s private storage. They are never uploaded, and this device’s cloud backup is disabled for Drugcopeia where the platform allows it.</p>
           <div class="privacy-actions">
             <button type="button" class="privacy-danger" id="privacyWipe" data-i18n="privacyWipe">Delete all local data</button>
             <span class="privacy-actions-note" id="privacyWipeStatus" role="status" aria-live="polite"></span>
@@ -564,7 +564,7 @@
           <div class="privacy-history-head">
             <div>
               <h3 id="privacyHistoryTitle" data-i18n="privacyHistoryTitle">Saved conversations</h3>
-              <p data-i18n="privacyHistoryText">Drugcopoeia AI saves each conversation on this device, encrypted, so you can reopen it. Saving is on by default; turn it off here and everything saved is erased.</p>
+              <p data-i18n="privacyHistoryText">Drugcopeia AI saves each conversation on this device, encrypted, so you can reopen it. Saving is on by default; turn it off here and everything saved is erased.</p>
             </div>
             <label class="privacy-switch">
               <input type="checkbox" id="privacyHistory" role="switch" data-i18n-aria="privacyHistoryTitle">
@@ -595,7 +595,7 @@
           </label>
         </section>
       </div>
-      <p class="privacy-foot" data-i18n="privacyFoot">Drugcopoeia is an educational medicine guide, not a medical record. Please do not type personal or patient details anywhere in the app.</p>
+      <p class="privacy-foot" data-i18n="privacyFoot">Drugcopeia is an educational medicine guide, not a medical record. Please do not type personal or patient details anywhere in the app.</p>
     </section>
 
     <section class="settings-page" id="settingsPage" data-main-page="settings" hidden>
@@ -662,11 +662,11 @@
       <section class="settings-card" aria-labelledby="settingsMoreTitle">
         <h3 id="settingsMoreTitle" data-i18n="settingsMore">More</h3>
         <div class="settings-row">
-          <div class="settings-copy"><strong data-i18n="navAssistant">Drugcopoeia AI</strong><span data-i18n="settingsAiHint">Download and manage the on-device model.</span></div>
+          <div class="settings-copy"><strong data-i18n="navAssistant">Drugcopeia AI</strong><span data-i18n="settingsAiHint">Download and manage the on-device model.</span></div>
           <button class="settings-link" type="button" data-app-nav="assistant" aria-label="Open" data-i18n-aria="settingsOpen"><span aria-hidden="true">›</span></button>
         </div>
         <div class="settings-row">
-          <div class="settings-copy"><strong data-i18n="navAbout">About Drugcopoeia</strong><span id="settingsVersion">Drugcopoeia</span></div>
+          <div class="settings-copy"><strong data-i18n="navAbout">About Drugcopeia</strong><span id="settingsVersion">Drugcopeia</span></div>
           <button class="settings-link" type="button" data-app-nav="about" aria-label="Open" data-i18n-aria="settingsOpen"><span aria-hidden="true">›</span></button>
         </div>
       </section>
@@ -679,7 +679,7 @@
           <span class="assistant-brand" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-dawaya-ai"></use></svg></span>
           <div class="assistant-head-copy">
             <span class="section-kicker" id="aiKicker">ON-DEVICE ASSISTANT</span>
-            <h2 id="aiPageTitle">Drugcopoeia AI</h2>
+            <h2 id="aiPageTitle">Drugcopeia AI</h2>
             <p id="aiPageSubtitle"></p>
           </div>
           <button type="button" class="ai-menu-button" id="aiMenuButton" aria-label="Assistant menu" aria-expanded="false" aria-controls="aiAssistantMenu">
@@ -693,7 +693,7 @@
       </header>
       <div class="drawer-backdrop ai-menu-backdrop" id="aiMenuBackdrop" hidden>
         <aside class="app-drawer ai-menu" id="aiAssistantMenu" role="dialog" aria-modal="true" aria-labelledby="aiMenuTitle" hidden>
-          <div class="drawer-head ai-menu-head"><strong id="aiMenuTitle">Drugcopoeia AI menu</strong><button type="button" class="ai-menu-close" id="aiMenuClose" aria-label="Close menu">×</button></div>
+          <div class="drawer-head ai-menu-head"><strong id="aiMenuTitle">Drugcopeia AI menu</strong><button type="button" class="ai-menu-close" id="aiMenuClose" aria-label="Close menu">×</button></div>
           <nav class="drawer-nav ai-menu-body" aria-labelledby="aiMenuTitle">
             <p class="drawer-kicker ai-menu-kicker" id="aiMenuConversationsKicker"></p>
             <button class="drawer-link ai-menu-new" type="button" id="aiMenuNewChat"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg><span class="drawer-link-label"></span></button>
@@ -827,13 +827,13 @@
       </div>
     </aside>
 
-    <footer><a class="brand footer-brand" href="#"><img class="brand-mark" src="assets/red-crescent-rx-96.png" srcset="assets/red-crescent-rx-96.png 1x, assets/red-crescent-rx-192.png 2x" alt=""><span><strong class="footer-brand-name">Drugcopoeia</strong><small class="footer-brand-subtitle">EGYPT MEDICINE GUIDE</small></span></a><span data-i18n="footerText">Built for learning, not diagnosis or treatment.</span><span data-i18n="footerSource">Medicine listings: CC0 · GitHub source</span></footer>
+    <footer><a class="brand footer-brand" href="#"><img class="brand-mark" src="assets/red-crescent-rx-96.png" srcset="assets/red-crescent-rx-96.png 1x, assets/red-crescent-rx-192.png 2x" alt=""><span><strong class="footer-brand-name">Drugcopeia</strong><small class="footer-brand-subtitle">EGYPT MEDICINE GUIDE</small></span></a><span data-i18n="footerText">Built for learning, not diagnosis or treatment.</span><span data-i18n="footerSource">Medicine listings: CC0 · GitHub source</span></footer>
   </div>
 
   <nav class="bottom-nav" aria-label="Quick navigation" data-i18n-aria="quickNavAria">
     <button class="bottom-nav-item is-active" type="button" data-app-nav="unified-search" aria-current="page"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-home"></use></svg><span data-i18n="navHome">Home</span></button>
     <button class="bottom-nav-item" type="button" data-app-nav="medicine-list"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-pill"></use></svg><span data-i18n="navMedicines">Medicines</span></button>
-    <button class="bottom-nav-item bottom-nav-ai" type="button" data-app-nav="assistant" aria-label="Drugcopoeia AI"><span class="nav-ai-badge" aria-hidden="true"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-dawaya-ai"></use></svg></span><span data-i18n="navAssistant">Drugcopoeia AI</span></button>
+    <button class="bottom-nav-item bottom-nav-ai" type="button" data-app-nav="assistant" aria-label="Drugcopeia AI"><span class="nav-ai-badge" aria-hidden="true"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-dawaya-ai"></use></svg></span><span data-i18n="navAssistant">Drugcopeia AI</span></button>
     <button class="bottom-nav-item" type="button" data-app-nav="dose-calculator"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-dose"></use></svg><span data-i18n="navDoses">Doses</span></button>
     <button class="bottom-nav-item" type="button" data-app-nav="interactions"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-interactions"></use></svg><span data-i18n="navInteractions">Interactions</span></button>
   </nav>
@@ -841,7 +841,7 @@
   <div class="modal-backdrop" id="modalBackdrop" hidden>
     <article class="drug-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal-close" id="modalClose" aria-label="Close" data-i18n-aria="closeAria">×</button>
-      <figure class="medicine-image-panel" id="modalImagePanel" hidden><div id="modalImage" class="modal-image"></div><div class="medicine-image-tools"><button type="button" class="image-search-button image-browser-button" id="modalImageSearch" data-i18n="viewInBrowser">View in browser</button></div><figcaption id="modalImageCaption">Drugcopoeia medicine guide</figcaption></figure>
+      <figure class="medicine-image-panel" id="modalImagePanel" hidden><div id="modalImage" class="modal-image"></div><div class="medicine-image-tools"><button type="button" class="image-search-button image-browser-button" id="modalImageSearch" data-i18n="viewInBrowser">View in browser</button></div><figcaption id="modalImageCaption">Drugcopeia medicine guide</figcaption></figure>
       <div class="modal-topline"><span class="drug-type" id="modalClass">Medicine guide</span><span class="modal-brand" id="modalManufacturer"></span></div>
       <h2 id="modalTitle"></h2><p class="modal-english" id="modalEnglish"></p><p class="modal-arabic" id="modalArabic" lang="ar" dir="rtl"></p>
       <div class="detail-tools">
@@ -953,7 +953,7 @@
     <div class="photo-viewer-stage" id="photoViewerStage"><img class="photo-viewer-image" id="photoViewerImage" alt="" decoding="async"><p class="photo-viewer-status" id="photoViewerStatus" role="status" aria-live="polite" hidden></p></div>
     <footer class="photo-viewer-foot"><span class="photo-viewer-name" id="photoViewerCaption"></span><span class="photo-viewer-hint" data-i18n="photoZoomHint">Pinch to zoom</span></footer>
   </div>
-  <div class="drawer-backdrop" id="drawerBackdrop" hidden><aside class="app-drawer" role="dialog" aria-modal="true" aria-label="Navigation" data-i18n-aria="navAria"><div class="drawer-head"><strong>Drugcopoeia</strong><button id="menuClose" type="button" aria-label="Close menu" data-i18n-aria="menuCloseAria">×</button></div><nav class="drawer-nav" aria-label="All pages" data-i18n-aria="drawerNavAria">
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden><aside class="app-drawer" role="dialog" aria-modal="true" aria-label="Navigation" data-i18n-aria="navAria"><div class="drawer-head"><strong>Drugcopeia</strong><button id="menuClose" type="button" aria-label="Close menu" data-i18n-aria="menuCloseAria">×</button></div><nav class="drawer-nav" aria-label="All pages" data-i18n-aria="drawerNavAria">
 <p class="drawer-kicker" data-i18n="workspaceLabel">MEDICINE SAFETY WORKSPACE</p>
 <button class="drawer-link is-active" type="button" data-app-nav="unified-search" aria-current="page"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-home"></use></svg><span data-i18n="navHome">Home</span></button>
 <button class="drawer-link" type="button" data-app-nav="medicine-list"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-pill"></use></svg><span data-i18n="navMedicines">Medicines</span></button>
@@ -965,35 +965,35 @@
 <button class="drawer-link" type="button" data-app-nav="calculators"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-calc"></use></svg><span data-i18n="navCalculators">Clinical calculators</span></button>
 <button class="drawer-link" type="button" data-app-nav="study"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-study"></use></svg><span data-i18n="navStudy">Study mode</span></button>
 <button class="drawer-link" type="button" data-app-nav="reminders"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-bell"></use></svg><span data-i18n="navReminders">Reminders</span></button>
-<button class="drawer-link" type="button" data-app-nav="assistant"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-dawaya-ai"></use></svg><span data-i18n="navAssistant">Drugcopoeia AI</span></button>
+<button class="drawer-link" type="button" data-app-nav="assistant"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-dawaya-ai"></use></svg><span data-i18n="navAssistant">Drugcopeia AI</span></button>
 <div class="drawer-separator" role="presentation"></div>
 <p class="drawer-kicker" data-i18n="navSupportLabel">SUPPORT</p>
 <button class="drawer-link" type="button" data-app-nav="suggestions"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-feedback"></use></svg><span data-i18n="suggestionsMenu">Feedback</span></button>
-<a class="drawer-link" href="#about" data-app-nav="about"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-info"></use></svg><span data-i18n="navAbout">About Drugcopoeia</span></a>
+<a class="drawer-link" href="#about" data-app-nav="about"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-info"></use></svg><span data-i18n="navAbout">About Drugcopeia</span></a>
 <button class="drawer-link" type="button" data-app-nav="privacy"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-lock"></use></svg><span data-i18n="navPrivacy">Privacy</span></button>
 </nav><div class="drawer-bottom"><p class="drawer-safety-note" data-i18n="drawerSafetyNote">For information only. Ask a healthcare professional.</p><button class="drawer-settings" type="button" data-app-nav="settings"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-settings"></use></svg><span class="drawer-settings-copy"><strong data-i18n="navSettings">Settings</strong><small data-settings-summary>Follow system · 100%</small></span><span class="utility-chevron" aria-hidden="true">›</span></button></div></aside></div>
-  <script src="generated/privacy-config.js?v=182"></script>
-  <script src="net.js?v=182"></script>
-  <script src="core.js?v=182"></script>
-  <script src="lab-tests.js?v=182"></script>
-  <script src="clinical-tools.js?v=182"></script>
-  <script src="reading.js?v=182"></script>
-  <script src="news.js?v=182"></script>
-  <script src="app.js?v=182"></script>
-  <script src="alt-map.js?v=182"></script>
-  <script src="same-spec.js?v=182"></script>
-  <script src="features.js?v=182"></script>
-  <script src="ai/text.js?v=182"></script>
-  <script src="ai/search-index.js?v=182"></script>
-  <script src="ai/safety.js?v=182"></script>
-  <script src="ai/retrieval.js?v=182"></script>
-  <script src="ai/llm-bridge.js?v=182"></script>
-  <script src="ai/wasm-bridge.js?v=182"></script>
-  <script src="ai/model-manager.js?v=182"></script>
-  <script src="ai/pipeline.js?v=182"></script>
-  <script src="ai/secure-history.js?v=182"></script>
-  <script src="ai/photo-ask.js?v=182"></script>
-  <script src="ai/chat-ui.js?v=182"></script>
+  <script src="generated/privacy-config.js?v=183"></script>
+  <script src="net.js?v=183"></script>
+  <script src="core.js?v=183"></script>
+  <script src="lab-tests.js?v=183"></script>
+  <script src="clinical-tools.js?v=183"></script>
+  <script src="reading.js?v=183"></script>
+  <script src="news.js?v=183"></script>
+  <script src="app.js?v=183"></script>
+  <script src="alt-map.js?v=183"></script>
+  <script src="same-spec.js?v=183"></script>
+  <script src="features.js?v=183"></script>
+  <script src="ai/text.js?v=183"></script>
+  <script src="ai/search-index.js?v=183"></script>
+  <script src="ai/safety.js?v=183"></script>
+  <script src="ai/retrieval.js?v=183"></script>
+  <script src="ai/llm-bridge.js?v=183"></script>
+  <script src="ai/wasm-bridge.js?v=183"></script>
+  <script src="ai/model-manager.js?v=183"></script>
+  <script src="ai/pipeline.js?v=183"></script>
+  <script src="ai/secure-history.js?v=183"></script>
+  <script src="ai/photo-ask.js?v=183"></script>
+  <script src="ai/chat-ui.js?v=183"></script>
   <script>window.addEventListener('load',()=>{const start=()=>{if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)&&location.hostname!=='127.0.0.1'&&location.hostname!=='localhost')navigator.serviceWorker.register('./service-worker.js').catch(()=>{})};(window.requestIdleCallback||(fn=>setTimeout(fn,1500)))(start)});</script>
 </body>
 </html>

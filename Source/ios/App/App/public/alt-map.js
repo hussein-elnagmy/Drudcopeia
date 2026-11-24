@@ -1,4 +1,4 @@
-/* Drugcopoeia: ingredient spelling map for the same-spec price comparison.
+/* Drugcopeia: ingredient spelling map for the same-spec price comparison.
  *
  * Two product records are only compared when their active ingredients are the
  * same set after this map is applied. The map holds pure spelling or naming

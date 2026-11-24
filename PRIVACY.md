@@ -1,6 +1,6 @@
 # Dawaya privacy
 
-Dawaya (Drugcopoeia) is an offline-first medicine reference. This document is the
+Dawaya (Drugcopeia) is an offline-first medicine reference. This document is the
 human-readable companion to `Source/privacy.config.json`, which the build-time gate
 (`Source/scripts/privacy-check.py`) enforces: any drift between this document, the
 configuration, and the code fails the build.

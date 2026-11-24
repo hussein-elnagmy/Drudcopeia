@@ -3,8 +3,8 @@
   "direction": "ltr",
   "comment": "English mirror of messages-ar.json. Keys must stay identical; the assistant answers in Arabic, this file covers interface labels and the English localization target.",
   "disclaimer": "This information is for awareness only and is not a substitute for consulting a doctor or pharmacist. Consult a doctor or pharmacist before using any medicine or changing treatment.",
-  "navLabel": "Drugcopoeia AI",
-  "pageTitle": "Drugcopoeia AI",
+  "navLabel": "Drugcopeia AI",
+  "pageTitle": "Drugcopeia AI",
   "pageKicker": "ON-DEVICE ASSISTANT",
   "pageSubtitle": "Questions about medicines and health, answered from the app's own database — on your device, offline.",
   "state": {
@@ -227,7 +227,7 @@
   "menu": {
     "aria": "Assistant menu",
     "closeAria": "Close menu",
-    "title": "Drugcopoeia AI menu",
+    "title": "Drugcopeia AI menu",
     "conversations": "Previous conversations",
     "settings": "Assistant settings",
     "conversation": "Conversation",

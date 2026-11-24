@@ -1,5 +1,5 @@
 /*
- * Drugcopoeia — daily health news from official publishers.
+ * Drugcopeia — daily health news from official publishers.
  *
  * Endpoints, all of which send `Access-Control-Allow-Origin: *` so the
  * packaged WebViews can call them directly with no proxy and no server:
@@ -9,7 +9,7 @@
  *   NLM    latest PubMed abstracts                        (eutils json + xml)
  *
  * Only the headline and a trimmed summary are kept, and every card links back
- * to the publisher's own page — Drugcopoeia never re-hosts or rewrites an article.
+ * to the publisher's own page — Drugcopeia never re-hosts or rewrites an article.
  * A snapshot of the same feeds ships as news.json so a first run with no
  * network still shows dated headlines.
  *

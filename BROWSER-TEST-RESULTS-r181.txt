@@ -1,4 +1,4 @@
-Drugcopoeia r181 real-browser runs, 2026-11-24
+Drugcopeia r181 real-browser runs, 2026-11-24
 Google Chrome 157 headless, fresh profile per run, real www build served locally, REAL model
 (Qwen2.5-0.5B-Instruct Q4_K_M through wllama 4.0.0, downloaded from huggingface.co, SHA-256 verified).
 Device: 2 GB RAM, 1 core, single-thread wasm (no COOP/COEP). navigator.deviceMemory spoofed to 8.

@@ -1,5 +1,5 @@
 /* Home reading: official Egyptian drug news + curated scientific articles.
-   News entries carry their official URL and are never rewritten by Drugcopoeia.
+   News entries carry their official URL and are never rewritten by Drugcopeia.
    Article entries are offline educational content with cited source pages. */
 window.DAWAYA_READING = {
   ui: {
@@ -12,7 +12,7 @@ window.DAWAYA_READING = {
       readingTabArticles: 'Articles',
       readingSourceEda: 'Egyptian Drug Authority',
       readingSourceMohp: 'Egyptian Ministry of Health',
-      readingSourceDawaya: 'Drugcopoeia Egyptian medicine information',
+      readingSourceDawaya: 'Drugcopeia Egyptian medicine information',
       readingKindNews: 'Official announcement',
       readingKindArticle: 'Article',
       readingOpenSource: 'Open the official page',
@@ -47,7 +47,7 @@ window.DAWAYA_READING = {
       readingTabArticles: 'مقالات',
       readingSourceEda: 'هيئة الدواء المصرية',
       readingSourceMohp: 'وزارة الصحة والسكان',
-      readingSourceDawaya: 'معلومات Drugcopoeia الدوائية المصرية',
+      readingSourceDawaya: 'معلومات Drugcopeia الدوائية المصرية',
       readingKindNews: 'إعلان رسمي',
       readingKindArticle: 'مقال',
       readingOpenSource: 'افتح الصفحة الرسمية',
@@ -182,7 +182,7 @@ window.DAWAYA_READING = {
       },
       sources: [
         { en: 'Registered product leaflets — Egyptian Drug Authority', ar: 'نشرات المستحضرات المسجلة — هيئة الدواء المصرية', url: 'https://edaegypt.gov.eg/en/' },
-        { en: 'Drugcopoeia medicine directory (Egyptian market listings)', ar: 'دليل Drugcopoeia للأدوية (قوائم السوق المصري)', url: 'https://github.com/hussein-elnagmy/egyptian-drug-database' }
+        { en: 'Drugcopeia medicine directory (Egyptian market listings)', ar: 'دليل Drugcopeia للأدوية (قوائم السوق المصري)', url: 'https://github.com/hussein-elnagmy/egyptian-drug-database' }
       ],
       sections: [
         {
@@ -215,7 +215,7 @@ window.DAWAYA_READING = {
         en: 'What each line of a CBC says, and why one number outside the range rarely means anything on its own.',
         ar: 'ماذا يعني كل سطر في صورة الدم، ولماذا نادراً ما يعني رقم واحد خارج المدى شيئاً بمفرده.'
       },
-      sources: [{ en: 'Laboratory directory in Drugcopoeia', ar: 'دليل التحاليل داخل Drugcopoeia', url: '' }],
+      sources: [{ en: 'Laboratory directory in Drugcopeia', ar: 'دليل التحاليل داخل Drugcopeia', url: '' }],
       sections: [
         {
           heading: { en: 'What the test measures', ar: 'ماذا يقيس التحليل' },
@@ -311,7 +311,7 @@ window.DAWAYA_READING = {
         en: 'Interactions are missed most often because supplements, inhalers and as-needed tablets never made it onto the list.',
         ar: 'أكثر أسباب تفويت التداخلات الدوائية أن المكملات والبخاخات وأقراص الحاجة لم تدخل القائمة أصلاً.'
       },
-      sources: [{ en: 'Interaction checker in Drugcopoeia', ar: 'أداة فحص التداخلات في Drugcopoeia', url: '' }],
+      sources: [{ en: 'Interaction checker in Drugcopeia', ar: 'أداة فحص التداخلات في Drugcopeia', url: '' }],
       sections: [
         {
           heading: { en: 'What to disclose', ar: 'ماذا يجب أن تذكر' },

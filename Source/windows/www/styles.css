@@ -2183,7 +2183,7 @@ html[dir="rtl"] .app-back-icon{transform:scaleX(-1)}
 [data-theme="dark"] .preg-product strong{color:#e6eef9}
 [data-theme="dark"] .preg-block p{color:#d6e2f2}
 
-/* ---------- Drugcopoeia clinician features ---------- */
+/* ---------- Drugcopeia clinician features ---------- */
 .feat-slot{margin:14px 0}
 .feat-card-buttons{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 12px}
 .feat-card-btn{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--white);color:var(--ink);cursor:pointer;text-align:start;font:inherit}
@@ -2263,7 +2263,7 @@ html[data-theme="dark"] .feat-save{color:#34d399}
 
 
 
-/* Drugcopoeia visual system, revision 175. Kept at the end for legacy compatibility. */
+/* Drugcopeia visual system, revision 175. Kept at the end for legacy compatibility. */
 :root{--branding-color:#1b5fc2;--blue:#1b5fc2;--blue-dark:#124a9c;--blue-light:#e3eefc;--link:#1a56b0;--focus:#1b5fc2;--ink:#14294a;--ink-soft:#34507a;--muted:#5a6f8c;--faint:#6b7e99;--paper:#f2f6fc;--white:#fff;--line:#d9e4f3;--line-strong:#b9cce6;--surface-soft:#eaf1fb;--shadow:0 18px 50px rgba(20,60,130,.09);--radius-card:20px}
 html[data-theme="dark"]{--branding-color:#7db4ff;--blue:#3d86e8;--blue-dark:#7db4ff;--blue-light:#14305a;--link:#8cc2ff;--focus:#8cc2ff;--ink:#eaf2fd;--ink-soft:#cddcf2;--muted:#a3b9d6;--faint:#8ea6c6;--paper:#0b1626;--white:#12233b;--line:#2a4266;--line-strong:#43628f;--surface-soft:#172d4b;--shadow:0 18px 50px rgba(0,0,0,.25)}
 html[data-theme] body{background:var(--paper);color:var(--ink)}

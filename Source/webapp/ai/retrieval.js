@@ -455,7 +455,7 @@
   function drugSource() {
     const meta = (data && data.datasetMeta) || {};
     return {
-      nameEn: (meta.sourceNameEn) || 'Drugcopoeia Egyptian medicines database',
+      nameEn: (meta.sourceNameEn) || 'Drugcopeia Egyptian medicines database',
       nameAr: (meta.sourceNameAr) || 'قاعدة بيانات الأدوية المصرية داخل التطبيق',
       url: meta.url || '',
       date: meta.date || '',
