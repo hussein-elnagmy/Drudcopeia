@@ -2353,3 +2353,17 @@ html[data-theme] .browse-toggle:active{background:var(--blue-light)}
 [data-theme="dark"] .preg-search-panel,[data-theme="dark"] .preg-cat-btn,[data-theme="dark"] .preg-cat-detail{background:#152a45;border-color:#2f4a70}
 [data-theme="dark"] .preg-cats-panel h2,[data-theme="dark"] .preg-cat-detail h3{color:#e6eef9}
 html[data-theme] .lab-specialties h2.browse-toggle{font-size:.8125rem;font-weight:700;letter-spacing:.06em;line-height:1.4}
+
+/* r185: home shortcuts, labelled bottom bar */
+.home-shortcuts{gap:8px;overflow-x:auto;margin:0 0 12px;padding:2px 2px 6px;scrollbar-width:none}
+.home-shortcuts{display:flex}
+.home-shortcuts::-webkit-scrollbar{display:none}
+.home-shortcut{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:8px 14px;border:1px solid var(--line-strong);border-radius:999px;background:var(--white);color:var(--link);font:600 .8125rem/1.2 var(--font-ui);cursor:pointer;white-space:nowrap}
+.home-shortcut .nav-icon{width:18px;height:18px}
+.home-shortcut:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+[data-theme="dark"] .home-shortcut{background:#152a45;border-color:#2f4a70}
+html[data-theme] .bottom-nav-item>span:not(.nav-ai-badge){position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;font:600 .625rem/1.1 var(--font-ui);padding:0}
+html[data-theme] .bottom-nav-item{min-height:52px;padding:6px 4px;gap:2px;border-radius:20px}
+html[data-theme] .bottom-nav-item .nav-icon{width:22px;height:22px}
+html[data-theme] .bottom-nav-item .nav-ai-badge{width:26px;height:26px;padding:3px}
+.home-shortcuts{margin-top:12px}

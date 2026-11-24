@@ -22,7 +22,7 @@
   <meta name="description" content="Search medicines in Egypt by brand, generic name, manufacturer, or price. Simple pharmacology and medicine information.">
   <title>Drugcopeia — Egypt Medicine Guide</title>
   <script>(()=>{try{const saved=localStorage.getItem('dawaya-theme');document.documentElement.dataset.theme=saved==='dark'||(saved!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'}catch(_){document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}try{const scale=Number(localStorage.getItem('dawaya-type-scale'));if(Number.isFinite(scale)&&scale>=.9&&scale<=1.3)document.documentElement.style.setProperty('--type-scale',String(scale))}catch(_){}try{if(localStorage.getItem('dawaya-language')==='ar'){document.documentElement.lang='ar';document.documentElement.dir='rtl'}}catch(_){}})();</script>
-  <link rel="stylesheet" href="styles.css?v=184">
+  <link rel="stylesheet" href="styles.css?v=185">
 </head>
 <body data-view="home">
   <a class="skip-link" href="#mainContent" data-i18n="skipToContent">Skip to main content</a>
@@ -124,13 +124,19 @@
         <div id="suggestions" class="suggestions" role="listbox" aria-label="Search suggestions" data-i18n-aria="suggestionsAria" hidden></div>
       </div>
       <p class="wildcard-hint" data-i18n="wildcardHint">Use * or a space for letters you cannot remember</p>
+      <div class="home-shortcuts" role="group" aria-label="Shortcuts">
+        <button type="button" class="home-shortcut" data-app-nav="lab-tests"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-interactions"></use></svg><span data-i18n="labMenu">Medical tests</span></button>
+        <button type="button" class="home-shortcut" data-app-nav="calculators"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-dose"></use></svg><span data-i18n="navCalculators">Clinical calculators</span></button>
+        <button type="button" class="home-shortcut" data-app-nav="interactions"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-interactions"></use></svg><span data-i18n="navInteractions">Interactions</span></button>
+        <button type="button" class="home-shortcut" data-app-nav="pregnancy"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-pregnancy"></use></svg><span data-i18n="navPregnancyShort">Pregnancy</span></button>
+        <button type="button" class="home-shortcut" data-app-nav="reminders"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-pill"></use></svg><span data-i18n="navReminders">Reminders</span></button>
+      </div>
+
     </section>
 
     <section class="home-reading" data-main-page="medicines" aria-labelledby="readingHeading">
       <div class="reading-head">
-        <span class="section-kicker" data-i18n="readingEyebrow">NEWS AND ARTICLES</span>
         <h2 id="readingHeading" data-i18n="readingTitle">Drug news and scientific articles</h2>
-        <p class="reading-intro" data-i18n="readingIntro">Daily drug news from the Egyptian Drug Authority and the Ministry of Health, plus official headlines from WHO, the U.S. FDA and PubMed. Tap any headline to read the full article on the publisher’s own website.</p>
         <div class="reading-filters" role="group" aria-label="Filter news and articles" data-i18n-aria="readingFiltersAria">
           <button type="button" class="search-by-chip is-active" data-reading-filter="all" aria-pressed="true" data-i18n="readingTabAll">All</button>
           <button type="button" class="search-by-chip" data-reading-filter="news" aria-pressed="false" data-i18n="readingTabNews">Drug news</button>
@@ -141,6 +147,7 @@
       <div class="reading-list" id="readingList" aria-live="polite"></div>
       <p class="reading-note" data-i18n="readingDisclaimer">Educational information only. It does not replace the product leaflet or advice from a doctor or pharmacist.</p>
     </section>
+
 
       <div class="new-medicine-cta" data-main-page="medicines">
         <button id="newMedicineButton" class="new-medicine-button" type="button" aria-label="Add a new medicine" data-i18n-aria="addMedicineButtonAria">
@@ -971,29 +978,29 @@
 <a class="drawer-link" href="#about" data-app-nav="about"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-info"></use></svg><span data-i18n="navAbout">About Drugcopeia</span></a>
 <button class="drawer-link" type="button" data-app-nav="privacy"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-lock"></use></svg><span data-i18n="navPrivacy">Privacy</span></button>
 </nav><div class="drawer-bottom"><p class="drawer-safety-note" data-i18n="drawerSafetyNote">For information only. Ask a healthcare professional.</p><button class="drawer-settings" type="button" data-app-nav="settings"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-settings"></use></svg><span class="drawer-settings-copy"><strong data-i18n="navSettings">Settings</strong><small data-settings-summary>Follow system · 100%</small></span><span class="utility-chevron" aria-hidden="true">›</span></button></div></aside></div>
-  <script src="generated/privacy-config.js?v=184"></script>
-  <script src="net.js?v=184"></script>
-  <script src="ios-shell.js?v=184"></script>
-  <script src="core.js?v=184"></script>
-  <script src="lab-tests.js?v=184"></script>
-  <script src="clinical-tools.js?v=184"></script>
-  <script src="reading.js?v=184"></script>
-  <script src="news.js?v=184"></script>
-  <script src="app.js?v=184"></script>
-  <script src="alt-map.js?v=184"></script>
-  <script src="same-spec.js?v=184"></script>
-  <script src="features.js?v=184"></script>
-  <script src="ai/text.js?v=184"></script>
-  <script src="ai/search-index.js?v=184"></script>
-  <script src="ai/safety.js?v=184"></script>
-  <script src="ai/retrieval.js?v=184"></script>
-  <script src="ai/llm-bridge.js?v=184"></script>
-  <script src="ai/wasm-bridge.js?v=184"></script>
-  <script src="ai/model-manager.js?v=184"></script>
-  <script src="ai/pipeline.js?v=184"></script>
-  <script src="ai/secure-history.js?v=184"></script>
-  <script src="ai/photo-ask.js?v=184"></script>
-  <script src="ai/chat-ui.js?v=184"></script>
+  <script src="generated/privacy-config.js?v=185"></script>
+  <script src="net.js?v=185"></script>
+  <script src="ios-shell.js?v=185"></script>
+  <script src="core.js?v=185"></script>
+  <script src="lab-tests.js?v=185"></script>
+  <script src="clinical-tools.js?v=185"></script>
+  <script src="reading.js?v=185"></script>
+  <script src="news.js?v=185"></script>
+  <script src="app.js?v=185"></script>
+  <script src="alt-map.js?v=185"></script>
+  <script src="same-spec.js?v=185"></script>
+  <script src="features.js?v=185"></script>
+  <script src="ai/text.js?v=185"></script>
+  <script src="ai/search-index.js?v=185"></script>
+  <script src="ai/safety.js?v=185"></script>
+  <script src="ai/retrieval.js?v=185"></script>
+  <script src="ai/llm-bridge.js?v=185"></script>
+  <script src="ai/wasm-bridge.js?v=185"></script>
+  <script src="ai/model-manager.js?v=185"></script>
+  <script src="ai/pipeline.js?v=185"></script>
+  <script src="ai/secure-history.js?v=185"></script>
+  <script src="ai/photo-ask.js?v=185"></script>
+  <script src="ai/chat-ui.js?v=185"></script>
   <script>window.addEventListener('load',()=>{const start=()=>{if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)&&location.hostname!=='127.0.0.1'&&location.hostname!=='localhost')navigator.serviceWorker.register('./service-worker.js').catch(()=>{})};(window.requestIdleCallback||(fn=>setTimeout(fn,1500)))(start)});</script>
 </body>
 </html>
