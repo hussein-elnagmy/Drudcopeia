@@ -11,9 +11,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unpack source archive
         run: |
-          ls -- *Drugcopoeia-r180.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
+          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
           # In-archive copy: the repository's build.yml carries the current archive hash.
-          echo '6300b8880d101867045e71f9675c1d57e5ef4f6b807c51ef772d410230e9d6a0  /tmp/src.zip' | sha256sum -c -
+          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6  /tmp/src.zip' | sha256sum -c -
           unzip -qo /tmp/src.zip
       - uses: actions/setup-java@v4
         with:
@@ -71,9 +71,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unpack source archive
         run: |
-          ls -- *Drugcopoeia-r180.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
+          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
           # In-archive copy: the repository's build.yml carries the current archive hash.
-          echo '6300b8880d101867045e71f9675c1d57e5ef4f6b807c51ef772d410230e9d6a0  /tmp/src.zip' | sha256sum -c -
+          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6  /tmp/src.zip' | sha256sum -c -
           unzip -qo /tmp/src.zip
       - uses: actions/setup-go@v5
         with:
@@ -104,9 +104,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unpack source archive
         run: |
-          ls -- *Drugcopoeia-r180.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
+          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
           # In-archive copy: the repository's build.yml carries the current archive hash.
-          echo '6300b8880d101867045e71f9675c1d57e5ef4f6b807c51ef772d410230e9d6a0  /tmp/src.zip' | shasum -a 256 -c -
+          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6  /tmp/src.zip' | shasum -a 256 -c -
           unzip -qo /tmp/src.zip
       - name: Build ad-hoc signed DMG
         working-directory: Source/macos
@@ -123,8 +123,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unpack source archive
         run: |
-          ls -- *Drugcopoeia-r180.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
-          echo '6300b8880d101867045e71f9675c1d57e5ef4f6b807c51ef772d410230e9d6a0  /tmp/src.zip' | sha256sum -c -
+          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
+          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6  /tmp/src.zip' | sha256sum -c -
           unzip -qo /tmp/src.zip
       - uses: actions/setup-node@v4
         with:
@@ -150,9 +150,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unpack source archive
         run: |
-          ls -- *Drugcopoeia-r180.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
+          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
           # In-archive copy: the repository's build.yml carries the current archive hash.
-          echo '6300b8880d101867045e71f9675c1d57e5ef4f6b807c51ef772d410230e9d6a0  /tmp/src.zip' | shasum -a 256 -c -
+          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6  /tmp/src.zip' | shasum -a 256 -c -
           unzip -qo /tmp/src.zip
       - name: Build iOS app (unsigned, device)
         working-directory: Source/ios/App
