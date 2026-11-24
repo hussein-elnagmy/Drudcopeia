@@ -283,6 +283,14 @@
       run: function (v) { var w = v.kg, d = w <= 10 ? w * 100 : w <= 20 ? 1000 + (w - 10) * 50 : 1500 + (w - 20) * 20; return { value: nf(d, 0) + ' mL/day', extra: nf(d / 24, 1) + ' mL/h' }; },
       note: ['Maintenance only. It does not cover deficit or ongoing losses. Not for neonates in the first days of life.', 'صيانة فقط. لا تغطي العجز أو الفقد المستمر. ليست لحديثي الولادة في الأيام الأولى.'] }
   ];
+  var CALC_META = {
+    egfr: ['eGFR', 'Kidney function from creatinine', 'وظائف الكلى من الكرياتينين'],
+    map: ['MAP', 'Average pressure driving blood flow', 'متوسط الضغط المغذي للأعضاء'],
+    bmi: ['BMI', 'Weight against height', 'الوزن بالنسبة للطول'],
+    ag: ['AG', 'Helps explain metabolic acidosis', 'يساعد في تفسير الحماض الأيضي'],
+    cca: ['Ca', 'Calcium adjusted for albumin', 'الكالسيوم مصححًا بالألبومين'],
+    fluids: ['IV', 'Daily fluid need for a child', 'احتياج الطفل اليومي من السوائل']
+  };
   var calcOpen = '';
   function buildCalcPage() {
     pageShell('calcPage', 'calculators',
@@ -296,7 +304,7 @@
     $('.feat-title', p).textContent = L('Quick clinical calculators', 'حاسبات طبية سريعة');
     $('.feat-intro', p).textContent = L('Six published formulas. Each shows its formula and source. Nothing you enter leaves the device.', 'ست معادلات منشورة. كل حاسبة تعرض المعادلة ومصدرها. لا شيء مما تدخله يغادر الجهاز.');
     $('.feat-disc', p).textContent = L(DISCLAIMER[0], DISCLAIMER[1]);
-    $('#calcGrid', p).innerHTML = CALCS.map(function (c) { return '<button type="button" class="feat-tile' + (c.id === calcOpen ? ' active' : '') + '" data-calc="' + c.id + '"><span>' + esc(L(c.t[0], c.t[1])) + '</span></button>'; }).join('');
+    $('#calcGrid', p).innerHTML = CALCS.map(function (c) { return '<button type="button" class="feat-tile' + (c.id === calcOpen ? ' active' : '') + '" data-calc="' + c.id + '"><span class="calc-ic" aria-hidden="true">' + (CALC_META[c.id]||['🧮'])[0] + '</span><span class="calc-t">' + esc(L(c.t[0], c.t[1])) + '</span><span class="calc-d">' + esc(L((CALC_META[c.id]||['','',''])[1], (CALC_META[c.id]||['','',''])[2])) + '</span></button>'; }).join('');
     if (calcOpen) renderCalc(calcOpen);
     setBackLabels();
   }

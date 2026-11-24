@@ -1350,6 +1350,7 @@ const CONDITION_SUBGROUPS={
   /* Display only: the directory stores brand names in capitals; show them as Title Case. */
   const NAME_KEEP_UPPER=/^(?:[A-Z]\.)+[A-Z]*\.?$/;
   const NAME_LOWER_UNITS=/^(mg|gm|g|ml|mcg|iu|kg|l|%)$/i;
+  function fullMaker(m){m=clean(m||'');if(!m)return '';return m.split(/\s*>\s*/).map(p=>p.toLowerCase().replace(/(^|[\s(.-])([a-z])/g,(x,s,ch)=>s+ch.toUpperCase())).join(' › ');}
   function prettyDrugName(value){
     const s=String(value==null?'':value);
     if(!s||/[a-z]/.test(s)||!/[A-Z]/.test(s))return s;
@@ -2461,7 +2462,7 @@ const CONDITION_SUBGROUPS={
     $('#modalEnglish').textContent=sci||'';
     $('#modalArabic').textContent=arabicName;
     $('#modalClass').textContent=isCustom?t('addMedicineTag'):(cls||t('classificationMissing'));
-    $('#modalManufacturer').textContent=maker||'';
+    $('#modalManufacturer').textContent=fullMaker(maker);
     const facts=$('#modalFacts');facts.className=`modal-facts${isCustom?' custom-facts':''}`;
     facts.innerHTML=isCustom
       ?`<div class="fact"><span>${esc(t('activeIngredient'))}</span><b>${esc(sci||t('notListed'))}</b></div><div class="fact"><span>${esc(t('addMedicineConcentrationLabel'))}</span><b>${esc(concentration||t('notListed'))}</b></div><div class="fact"><span>${esc(t('addMedicineUnitsLabel'))}</span><b>${esc(units||t('notListed'))}</b></div><div class="fact"><span>${esc(t('listedPrice'))}</span><b>${esc(priceLabel)}</b></div>`
@@ -5175,7 +5176,7 @@ const CONDITION_SUBGROUPS={
     }
   };
   Object.assign(translations.en,pregnancyUi.en);Object.assign(translations.ar,pregnancyUi.ar);
-  Object.assign(translations.en,{navCalculators:'Clinical calculators',navStudy:'Study mode'});Object.assign(translations.ar,{navCalculators:'حاسبات طبية',navStudy:'وضع المذاكرة'});
+  Object.assign(translations.en,{navToolsLabel:'TOOLS'});Object.assign(translations.ar,{navToolsLabel:'أدوات'});Object.assign(translations.en,{navCalculators:'Clinical calculators',navStudy:'Study mode'});Object.assign(translations.ar,{navCalculators:'حاسبات طبية',navStudy:'وضع المذاكرة'});
 
   let pregnancyData=null,pregnancyLoadFailed=false,pregnancyLoadPromise=null,pregnancyLookup=null;
   let pregnancySelectedProduct=null,pregnancyLastQuery='',pregnancyDbWaitTimer=0;

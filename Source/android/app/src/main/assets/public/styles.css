@@ -2378,3 +2378,9 @@ html[data-theme] .bottom-nav-item .nav-ai-badge{width:26px;height:26px;padding:3
 .study-topic{padding:8px 12px;border:1px solid var(--line-strong);border-radius:999px;background:var(--white);color:var(--link);font:600 .8125rem/1.2 var(--font-ui);cursor:pointer}
 .study-topic.is-on{background:var(--blue-light);border-color:var(--blue)}
 [data-theme="dark"] .study-topic{background:#152a45;border-color:#2f4a70}
+
+.feat-tile{display:grid;gap:4px}.feat-tile .calc-ic{font-size:1.5rem;line-height:1}.feat-tile .calc-d{font-weight:400;font-size:.8125rem;color:var(--ink-soft,#5b7488)}
+html[data-theme] body .modal-arabic{font-size:1.375rem;line-height:1.7;font-weight:600;color:var(--ink)}
+.modal-image{height:120px;max-width:260px}
+@media(max-width:760px){.modal-image{height:96px}.medicine-image-panel{margin-bottom:10px}}
+.feat-tile .calc-ic{display:inline-grid;place-items:center;min-width:44px;height:30px;padding:0 10px;border-radius:15px;background:#e3f0fb;color:#1b5fc2;font-size:.8125rem;font-weight:700;justify-self:start}html[data-theme=dark] .feat-tile .calc-ic{background:#16324a;color:#8cc4f0}
