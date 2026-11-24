@@ -1347,6 +1347,21 @@ const CONDITION_SUBGROUPS={
      first, then the page they came from. Sheets keep their own dismiss button
      because the header is hidden behind them. */
   let labSpecOpen=false;
+  /* Display only: the directory stores brand names in capitals; show them as Title Case. */
+  const NAME_KEEP_UPPER=/^(?:[A-Z]\.)+[A-Z]*\.?$/;
+  const NAME_LOWER_UNITS=/^(mg|gm|g|ml|mcg|iu|kg|l|%)$/i;
+  function prettyDrugName(value){
+    const s=String(value==null?'':value);
+    if(!s||/[a-z]/.test(s)||!/[A-Z]/.test(s))return s;
+    return s.replace(/[A-Za-z0-9.%]+/g,w=>{
+      if(NAME_KEEP_UPPER.test(w))return w;
+      if(NAME_LOWER_UNITS.test(w))return w.toLowerCase();
+      const m=w.match(/^(\d+)([A-Za-z]+)$/);
+      if(m)return m[1]+(NAME_LOWER_UNITS.test(m[2])?m[2].toLowerCase():m[2].toLowerCase());
+      if(/^\d/.test(w)||w.replace(/[^A-Za-z]/g,'').length<=3)return w;
+      return w.charAt(0)+w.slice(1).toLowerCase();
+    });
+  }
   const appBackButton=$('#appBack');
   const backTrail=[];
   let backLocation={page:'medicines',view:'home'};
@@ -2029,7 +2044,7 @@ const CONDITION_SUBGROUPS={
     const modeLabel={brand:t('brandMatches'),generic:t('genericMatches'),class:t('classMatches'),manufacturer:t('manufacturerMatches'),price:t('priceMatches')}[mode];
     const activeGroup=DRUG_GROUPS.find(group=>group[0]===activeDrugGroup),taxonomyTitle=$('#drugGroupTrail').innerText.replace(/\s*›\s*/g,' · ');$('#resultsTitle').textContent=query?`${t('matches')} “${query}”`:activeDrugPath.length?taxonomyTitle:activeGroup?`${t(activeGroup[1])}${selectedMedicineLetter?` · ${t('startsWith')} ${selectedMedicineLetter}`:''}`:`${t('startsWith')} ${selectedMedicineLetter||t('browseAll')}`;const matchCount=matching.length.toLocaleString(language==='ar'?'ar-EG':'en-US'),matchNoun=resultNoun(matching.length);$('#resultCount').textContent=`${matchCount} ${matchNoun}${query&&modeLabel?` · ${modeLabel}`:''}`;
     const frag=document.createDocumentFragment();matching.slice(0,shown).forEach(drug=>{
-      const ar=val(drug,'commercial_name_ar'),en=brandEn(drug),sci=val(drug,'scientific_name'),cls=val(drug,'drug_class'),price=priceText(drug),isCustom=Boolean(drug&&drug._custom),genericLabel=[sci,isCustom?val(drug,'custom_concentration'):''].filter(Boolean).join(' · '),tag=cls||val(drug,'manufacturer')||(isCustom?t('addMedicineTag'):t('medicine')),displayName=en||ar,arabicName=ar&&clean(ar)!==clean(en||'')?ar:'';
+      const ar=val(drug,'commercial_name_ar'),en=brandEn(drug),sci=val(drug,'scientific_name'),cls=val(drug,'drug_class'),price=priceText(drug),isCustom=Boolean(drug&&drug._custom),genericLabel=[sci,isCustom?val(drug,'custom_concentration'):''].filter(Boolean).join(' · '),tag=cls||val(drug,'manufacturer')||(isCustom?t('addMedicineTag'):t('medicine')),displayName=prettyDrugName(en)||ar,arabicName=ar&&clean(ar)!==clean(en||'')?ar:'';
       const card=document.createElement('article');card.className='drug-card';
       card.innerHTML=`<span class="medicine-thumbnail" aria-hidden="true">${medicineLogoMark()}</span><button type="button" class="drug-info" aria-label="${esc(t('medicine'))} ${esc(displayName)}"><span class="drug-name">${esc(displayName||t('medicine'))}</span>${arabicName?`<span class="drug-name-ar" lang="ar" dir="rtl">${esc(arabicName)}</span>`:''}<span class="drug-generic">${esc(genericLabel||t('notListed'))}</span><span class="drug-card-bottom"><span class="drug-tag">${esc(tag)}</span><span class="drug-price">${price?`${esc(Number(price).toLocaleString(language==='ar'?'ar-EG':'en-US'))} ${language==='ar'?'ج.م':'EGP'}`:''}</span></span></button><span class="card-arrow" aria-hidden="true">›</span>`;
       card.querySelector('.drug-info').addEventListener('click',()=>openDrug(drug));frag.append(card);
@@ -2058,7 +2073,7 @@ const CONDITION_SUBGROUPS={
     const drugsFound=suggestionCandidates(query);
     const conditions=isUnifiedView()&&query?unifiedConditionItems:[],labs=isUnifiedView()&&query?labSearchItems(query,5):[];mainSuggestionItems=[...drugsFound.map(item=>({kind:'drug',item})),...conditions.map(item=>({kind:'condition',item})),...labs.map(item=>({kind:'lab',item}))];activeSuggestion=Math.min(activeSuggestion,mainSuggestionItems.length-1);
     if(!mainSuggestionItems.length){suggestions.hidden=true;return}
-    const drugHtml=drugsFound.length?`<div class="suggestion-label">${esc(t('medicineMatches'))}</div>`+drugsFound.map((drug,i)=>{const price=priceText(drug),meta=(mode==='class'?[val(drug,'drug_class'),val(drug,'scientific_name')]:[val(drug,'scientific_name'),drug._custom?val(drug,'custom_concentration'):val(drug,'manufacturer')]).filter(Boolean).slice(0,2).join(' · '),en=brandEn(drug),ar=val(drug,'commercial_name_ar'),displayName=en||ar,arabicName=ar&&clean(ar)!==clean(en||'')?ar:'';return `<button type="button" class="suggestion${i===activeSuggestion?' active':''}" role="option" aria-selected="${i===activeSuggestion}" data-kind="drug" data-index="${i}"><span class="drug-search-logo" aria-hidden="true"><img src="assets/red-crescent-rx-96.png" alt=""></span><span class="suggestion-copy"><span class="suggestion-name">${esc(displayName||t('medicine'))}</span>${arabicName?`<span class="suggestion-name-ar" lang="ar" dir="rtl">${esc(arabicName)}</span>`:''}<span class="suggestion-meta">${esc(meta)}</span></span>${price?`<span class="suggestion-price">${esc(price)} EGP</span>`:''}</button>`}).join(''):'';
+    const drugHtml=drugsFound.length?`<div class="suggestion-label">${esc(t('medicineMatches'))}</div>`+drugsFound.map((drug,i)=>{const price=priceText(drug),meta=(mode==='class'?[val(drug,'drug_class'),val(drug,'scientific_name')]:[val(drug,'scientific_name'),drug._custom?val(drug,'custom_concentration'):val(drug,'manufacturer')]).filter(Boolean).slice(0,2).join(' · '),en=brandEn(drug),ar=val(drug,'commercial_name_ar'),displayName=prettyDrugName(en)||ar,arabicName=ar&&clean(ar)!==clean(en||'')?ar:'';return `<button type="button" class="suggestion${i===activeSuggestion?' active':''}" role="option" aria-selected="${i===activeSuggestion}" data-kind="drug" data-index="${i}"><span class="drug-search-logo" aria-hidden="true"><img src="assets/red-crescent-rx-96.png" alt=""></span><span class="suggestion-copy"><span class="suggestion-name">${esc(displayName||t('medicine'))}</span>${arabicName?`<span class="suggestion-name-ar" lang="ar" dir="rtl">${esc(arabicName)}</span>`:''}<span class="suggestion-meta">${esc(meta)}</span></span>${price?`<span class="suggestion-price">${esc(price)} EGP</span>`:''}</button>`}).join(''):'';
     const conditionHtml=conditions.length?`<div class="suggestion-label">${esc(language==='ar'?'الحالات المرضية':'Health conditions')}</div>`+conditions.map((topic,i)=>`<button type="button" class="suggestion" role="option" aria-selected="false" data-kind="condition" data-index="${i}"><span class="suggestion-icon">＋</span><span class="suggestion-copy"><span class="suggestion-name">${esc(topic.title)}</span><span class="suggestion-meta">${esc(topic.primaryName!==topic.title?topic.primaryName:'NLM ClinicalTables')}</span></span></button>`).join(''):'';
     const labHtml=labs.length?`<div class="suggestion-label">${esc(t('labSuggestionLabel'))}</div>`+labs.map((test,i)=>{const specialty=labText(labSpecialty(test[1])?.name),group=labText(labGroup(test[1],test[2])?.name);return `<button type="button" class="suggestion" role="option" aria-selected="false" data-kind="lab" data-index="${i}"><span class="suggestion-icon">＋</span><span class="suggestion-copy"><span class="suggestion-name">${esc(language==='ar'?test[4]:test[3])}</span><span class="suggestion-meta">${esc([language==='ar'?test[3]:'',specialty,group].filter(Boolean).join(' · '))}</span></span></button>`}).join(''):'';
     suggestions.innerHTML=drugHtml+conditionHtml+labHtml;suggestions.hidden=false;
@@ -2442,7 +2457,7 @@ const CONDITION_SUBGROUPS={
     const isCustom=Boolean(drug&&drug._custom),concentration=val(drug,'custom_concentration'),units=val(drug,'custom_units');
     const priceLabel=price?`${Number(price).toLocaleString(language==='ar'?'ar-EG':'en-US')} ${language==='ar'?'ج.م':'EGP'}`:t('notAvailable');
     const primaryName=en||ar,arabicName=ar&&clean(ar)!==clean(primaryName||'')?ar:'';
-    $('#modalTitle').textContent=primaryName||t('medicine');
+    $('#modalTitle').textContent=prettyDrugName(primaryName)||t('medicine');
     $('#modalEnglish').textContent=sci||'';
     $('#modalArabic').textContent=arabicName;
     $('#modalClass').textContent=isCustom?t('addMedicineTag'):(cls||t('classificationMissing'));

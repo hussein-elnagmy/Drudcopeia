@@ -226,11 +226,10 @@
   function pageShell(id, page, inner) {
     var s = document.createElement('section');
     s.className = 'clinical-page feat-page'; s.id = id; s.setAttribute('data-main-page', page); s.hidden = true;
-    s.innerHTML = '<button class="clinical-back" type="button" data-feat-back><span aria-hidden="true">←</span> <span class="feat-back-label"></span></button>' + inner;
+    s.innerHTML = inner;
     var anchor = $('#pregnancyPage') || $('#aboutPage') || $('#mainContent').lastElementChild;
     var host = $('#mainContent');
     host.insertBefore(s, anchor && anchor.parentNode === host ? anchor : null);
-    s.querySelector('[data-feat-back]').addEventListener('click', function () { if (App().switchPage) App().switchPage('medicines', 'home'); });
     return s;
   }
   function setBackLabels() { document.querySelectorAll('.feat-back-label').forEach(function (n) { n.textContent = L('Back to search', 'العودة للبحث'); }); }
@@ -403,21 +402,37 @@
     var wrong = shuffle(p.ings.filter(function (i) { return !p.ingClasses.get(i).has(cls); })).slice(0, 3);
     return { q: L('Which ingredient is listed under the class "', 'أي مادة فعالة مدرجة تحت التصنيف "') + cls + L('" in the dataset?', '" في قاعدة البيانات؟'), opts: shuffle([correct].concat(wrong)), ans: correct, kind: 'cls' };
   }
-  var round = null;
+  var round = null, topic = '';
+  var GOAL = 20;
+  function topicPool(p) {
+    if (!topic || !p.classIngs.get(topic)) return p;
+    var set = p.classIngs.get(topic), ings = p.ings.filter(function (i) { return set.has(i); });
+    if (ings.length < 4) return p;
+    return { ings: ings, byIng: p.byIng, ingClasses: p.ingClasses, classIngs: p.classIngs, classes: [topic] };
+  }
+  function topTopics(p) {
+    return p.classes.filter(function (c) { return /[A-Za-z]{4,}/.test(c); }).map(function (c) { return [c, p.classIngs.get(c).size]; }).filter(function (x) { return x[1] >= 6; }).sort(function (a, b) { return b[1] - a[1]; }).slice(0, 10).map(function (x) { return x[0]; });
+  }
+  function weekBars(s) {
+    var out = '', d = new Date(), max = Math.max(GOAL, 1);
+    for (var i = 6; i >= 0; i--) { var dt = new Date(d.getTime() - i * 86400000).toISOString().slice(0, 10), n = (s.hist && s.hist[dt]) || 0; out += '<i title="' + dt + ': ' + n + '" style="height:' + Math.max(4, Math.min(100, Math.round(100 * n / max))) + '%"></i>'; }
+    return '<span class="study-week" aria-hidden="true">' + out + '</span>';
+  }
   function buildStudyPage() {
     pageShell('studyPage', 'study', '<span class="section-kicker feat-k"></span><h1 class="feat-title"></h1><p class="clinical-intro feat-intro"></p><div id="studyStats" class="feat-stats"></div><div id="studyBody" class="feat-panel"></div>');
   }
-  function stats() { var s = store('dawaya-study-stats', null) || {}; var today = new Date().toISOString().slice(0, 10); s.total = s.total || 0; s.correct = s.correct || 0; s.streak = s.streak || 0; s.last = s.last || ''; s.todayDate = s.todayDate || ''; s.today = s.todayDate === today ? (s.today || 0) : 0; s.todayDate = today; return s; }
+  function stats() { var s = store('dawaya-study-stats', null) || {}; var today = new Date().toISOString().slice(0, 10); s.total = s.total || 0; s.correct = s.correct || 0; s.streak = s.streak || 0; s.last = s.last || ''; s.todayDate = s.todayDate || ''; s.today = s.todayDate === today ? (s.today || 0) : 0; s.todayDate = today; s.hist = s.hist || {}; s.hist[today] = s.today; return s; }
   function renderStudy() {
     var p = $('#studyPage'); if (!p) return;
     $('.feat-k', p).textContent = L('STUDY MODE', 'وضع المذاكرة');
     $('.feat-title', p).textContent = L('Study mode', 'وضع المذاكرة');
     $('.feat-intro', p).textContent = L('Quizzes built only from the bundled drug dataset: brand and ingredient pairs, and the class label each record carries. No outside medical content.', 'اختبارات مبنية فقط من قاعدة بيانات الأدوية المضمنة: أزواج الاسم التجاري والمادة الفعالة، والتصنيف المدرج في كل سجل. لا يوجد محتوى طبي من خارجها.');
     var s = stats(), acc = s.total ? Math.round(100 * s.correct / s.total) : 0;
-    $('#studyStats', p).innerHTML = '<span>' + esc(L('Accuracy ', 'الدقة ') + acc + '%') + '</span><span>' + esc(L('Today ', 'اليوم ') + s.today) + '</span><span>' + esc(L('Streak ', 'التتابع ') + s.streak) + '</span><span>' + esc(L('Total ', 'الإجمالي ') + s.total) + '</span>';
+    var pct = Math.min(100, Math.round(100 * s.today / GOAL));
+    $('#studyStats', p).innerHTML = '<div class="study-goal"><div class="study-goal-row"><b>' + esc(L('Daily goal', 'الهدف اليومي')) + '</b><span>' + s.today + ' / ' + GOAL + '</span></div><div class="study-goal-bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + GOAL + '" aria-valuenow="' + Math.min(s.today, GOAL) + '"><i style="width:' + pct + '%"></i></div></div><span>' + esc(L('Accuracy ', 'الدقة ') + acc + '%') + '</span><span>' + esc(L('Streak ', 'التتابع ') + s.streak) + '</span><span>' + esc(L('Total ', 'الإجمالي ') + s.total) + '</span>' + weekBars(s);
     var body = $('#studyBody', p);
     if (!drugs().length) { body.innerHTML = '<p class="feat-muted">' + esc(L('The medicine directory is still loading.', 'دليل الأدوية ما زال يُحمّل.')) + '</p>'; setTimeout(function () { if (!$('#studyPage').hidden) renderStudy(); }, 900); return; }
-    if (!round) { body.innerHTML = '<button type="button" class="feat-primary" data-study-start>' + esc(L('Start a round (20 questions)', 'ابدأ جولة (20 سؤالًا)')) + '</button>'; }
+    if (!round) { var tps = topTopics(buildPool()); body.innerHTML = '<h2 class="study-topics-title">' + esc(L('Topic', 'الموضوع')) + '</h2><div class="study-topics" role="group">' + ['' ].concat(tps).map(function (c) { return '<button type="button" class="study-topic' + (c === topic ? ' is-on' : '') + '" data-study-topic="' + esc(c) + '" aria-pressed="' + (c === topic) + '">' + esc(c || L('All topics', 'كل المواضيع')) + '</button>'; }).join('') + '</div><button type="button" class="feat-primary" data-study-start>' + esc(L('Start a round (20 questions)', 'ابدأ جولة (20 سؤالًا)')) + '</button>'; }
     else if (round.i >= round.n) { body.innerHTML = '<h2>' + esc(L('Round finished', 'انتهت الجولة')) + '</h2><p class="feat-value">' + round.score + ' / ' + round.n + '</p><button type="button" class="feat-primary" data-study-start>' + esc(L('New round', 'جولة جديدة')) + '</button>'; }
     else showQuestion(body);
     setBackLabels();
@@ -430,18 +445,20 @@
     }).join('') + '</div>' + (answered ? '<p class="feat-fb">' + esc(q.opts[round.picked] === q.ans ? L('Correct.', 'إجابة صحيحة.') : L('Not correct. The answer is ', 'غير صحيحة. الإجابة هي ') + q.ans) + '</p><button type="button" class="feat-primary" data-study-next>' + esc(L('Next', 'التالي')) + '</button>' : '');
   }
   document.addEventListener('click', function (e) {
+    var tb = e.target.closest && e.target.closest('[data-study-topic]');
+    if (tb) { topic = tb.getAttribute('data-study-topic') || ''; renderStudy(); return; }
     if (e.target.closest && e.target.closest('[data-study-start]')) {
       var p = buildPool(); if (!p.ings.length) return;
-      round = { i: 0, n: 20, score: 0, picked: null, cur: makeQuestion(p) }; renderStudy(); return;
+      var tp = topicPool(p); round = { i: 0, n: 20, score: 0, picked: null, topic: topic, cur: makeQuestion(tp) }; renderStudy(); return;
     }
     var o = e.target.closest && e.target.closest('[data-opt]');
     if (o && round && round.picked === null) {
       round.picked = Number(o.getAttribute('data-opt'));
       var ok = round.cur.opts[round.picked] === round.cur.ans; if (ok) round.score++;
-      var s = stats(); var today = s.todayDate; s.total++; s.today++; if (ok) { s.correct++; s.streak++; } else s.streak = 0; s.last = today; save('dawaya-study-stats', s);
+      var s = stats(); var today = s.todayDate; s.total++; s.today++; if (ok) { s.correct++; s.streak++; } else s.streak = 0; s.last = today; s.hist = s.hist || {}; s.hist[today] = s.today; save('dawaya-study-stats', s);
       renderStudy(); return;
     }
-    if (e.target.closest && e.target.closest('[data-study-next]') && round) { round.i++; round.picked = null; if (round.i < round.n) round.cur = makeQuestion(buildPool()); renderStudy(); }
+    if (e.target.closest && e.target.closest('[data-study-next]') && round) { round.i++; round.picked = null; if (round.i < round.n) round.cur = makeQuestion(topicPool(buildPool())); renderStudy(); }
   });
 
   /* ================= wiring ================= */
