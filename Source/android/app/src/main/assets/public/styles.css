@@ -2333,3 +2333,23 @@ html[data-theme] .browse-toggle.is-open{background:var(--blue-light);color:var(-
 html[data-theme] .browse-toggle.is-open::after{transform:rotate(-135deg)}
 html[data-theme] .browse-toggle:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 html[data-theme] .browse-toggle:active{background:var(--blue-light)}
+
+/* r184: pregnancy page layout, photos button beside "View in browser" */
+.preg-search-panel{margin-top:6px;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--white)}
+.preg-search-panel h2{margin:0 0 6px;font-size:1.1rem}
+.preg-search-hint{margin:0 0 10px;font-size:.9rem;line-height:1.45}
+.preg-cats-panel{margin-top:14px}
+.preg-cats-panel h2{margin:0 0 10px;font-size:1.05rem;color:var(--ink)}
+.preg-cat-buttons{display:flex;flex-wrap:wrap;gap:8px}
+.preg-cat-btn{display:inline-flex;align-items:center;justify-content:center;min-width:52px;min-height:48px;padding:8px 14px;border:1px solid var(--line-strong);border-radius:14px;background:var(--white);color:var(--link);font-weight:700;font-size:1rem;cursor:pointer}
+.preg-cat-btn[aria-expanded="true"]{background:var(--blue-light);border-color:var(--blue)}
+.preg-cat-btn:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.preg-cat-detail{margin-top:12px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--white)}
+.preg-cat-detail h3{display:flex;gap:10px;align-items:center;margin:0 0 8px;font-size:1.02rem;color:var(--ink)}
+.preg-cat-detail p{margin:0 0 8px;color:var(--muted);line-height:1.6}
+.preg-cat-detail[hidden],.preg-cat-detail [hidden]{display:none}
+.commons-panel{margin-top:10px;padding-top:0;border-top:0}
+.medicine-image-tools .image-search-button{flex:1 1 auto}
+[data-theme="dark"] .preg-search-panel,[data-theme="dark"] .preg-cat-btn,[data-theme="dark"] .preg-cat-detail{background:#152a45;border-color:#2f4a70}
+[data-theme="dark"] .preg-cats-panel h2,[data-theme="dark"] .preg-cat-detail h3{color:#e6eef9}
+html[data-theme] .lab-specialties h2.browse-toggle{font-size:.8125rem;font-weight:700;letter-spacing:.06em;line-height:1.4}

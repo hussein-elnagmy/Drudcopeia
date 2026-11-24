@@ -22,7 +22,7 @@
   <meta name="description" content="Search medicines in Egypt by brand, generic name, manufacturer, or price. Simple pharmacology and medicine information.">
   <title>Drugcopeia — Egypt Medicine Guide</title>
   <script>(()=>{try{const saved=localStorage.getItem('dawaya-theme');document.documentElement.dataset.theme=saved==='dark'||(saved!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'}catch(_){document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}try{const scale=Number(localStorage.getItem('dawaya-type-scale'));if(Number.isFinite(scale)&&scale>=.9&&scale<=1.3)document.documentElement.style.setProperty('--type-scale',String(scale))}catch(_){}try{if(localStorage.getItem('dawaya-language')==='ar'){document.documentElement.lang='ar';document.documentElement.dir='rtl'}}catch(_){}})();</script>
-  <link rel="stylesheet" href="styles.css?v=183">
+  <link rel="stylesheet" href="styles.css?v=184">
 </head>
 <body data-view="home">
   <a class="skip-link" href="#mainContent" data-i18n="skipToContent">Skip to main content</a>
@@ -445,10 +445,50 @@
     </section>
 
     <section class="clinical-page pregnancy-page" id="pregnancyPage" data-main-page="pregnancy" hidden>
-      <button class="clinical-back" id="pregnancyBack" type="button" aria-label="Back to the previous page" data-i18n-aria="appBackAria"><svg class="app-back-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-back"></use></svg></button>
-      <span class="section-kicker" data-i18n="pregEyebrow">PREGNANCY &amp; BREASTFEEDING SAFETY</span>
-      <h1 data-i18n="pregTitle">Pregnancy &amp; breastfeeding</h1>
-      <p class="clinical-intro" data-i18n="pregIntro">Look up how medicine safety in pregnancy and lactation is described, then search a medicine to see curated, ingredient-by-ingredient educational summaries for the products listed in this directory.</p>
+      <h1 class="sr-only" data-i18n="pregTitle">Pregnancy &amp; breastfeeding</h1>
+      <div class="preg-search-panel">
+        <h2 data-i18n="pregSearchTitle">Search a medicine</h2>
+        <p class="preg-search-hint" data-i18n="pregSearchHintText">Type a brand name or an active ingredient.</p>
+        <div class="preg-search-row">
+          <label class="sr-only" for="pregSearch" data-i18n="pregSearchLabel">Medicine or active ingredient</label>
+          <input id="pregSearch" role="combobox" aria-controls="pregProductList" aria-expanded="false" aria-autocomplete="list" type="search" autocomplete="off" spellcheck="false" dir="auto" data-i18n-placeholder="pregSearchPlaceholder" placeholder="e.g. Panadol, warfarin, بنادول">
+          <button id="pregSearchClear" type="button" data-i18n="pregSearchClear">Clear</button>
+        </div>
+        <div id="pregStatus" class="clinical-status" role="status" aria-live="polite" hidden></div>
+        <div id="pregProductList" role="listbox" class="preg-product-list" hidden></div>
+        <div id="pregResults" class="preg-results" aria-live="polite" hidden></div>
+      </div>
+
+      <div class="preg-cats-panel">
+        <h2 data-i18n="pregCatsTitle">Pregnancy drug categories</h2>
+        <div class="preg-cat-buttons" role="group" data-i18n-aria="pregCatsTitle" aria-label="Pregnancy drug categories">
+          <button type="button" class="preg-cat-btn" data-preg-cat="A" aria-expanded="false"><span class="preg-cat preg-cat-a" aria-hidden="true">A</span><span class="sr-only">A</span></button>
+          <button type="button" class="preg-cat-btn" data-preg-cat="B" aria-expanded="false"><span class="preg-cat preg-cat-b" aria-hidden="true">B</span><span class="sr-only">B</span></button>
+          <button type="button" class="preg-cat-btn" data-preg-cat="C" aria-expanded="false"><span class="preg-cat preg-cat-c" aria-hidden="true">C</span><span class="sr-only">C</span></button>
+          <button type="button" class="preg-cat-btn" data-preg-cat="D" aria-expanded="false"><span class="preg-cat preg-cat-d" aria-hidden="true">D</span><span class="sr-only">D</span></button>
+          <button type="button" class="preg-cat-btn" data-preg-cat="X" aria-expanded="false"><span class="preg-cat preg-cat-x" aria-hidden="true">X</span><span class="sr-only">X</span></button>
+          <button type="button" class="preg-cat-btn preg-cat-btn-wide" data-preg-cat="PLLR" aria-expanded="false">PLLR</button>
+        </div>
+        <div class="preg-cat-detail" id="pregCatDetail" aria-live="polite" hidden>
+          <article data-preg-detail="A" hidden><h3><span class="preg-cat preg-cat-a" aria-hidden="true">A</span> <span data-i18n="pregCatTitleA">Category A</span></h3><p data-i18n="pregCatA">Controlled studies in pregnant women showed no risk to the fetus.</p></article>
+          <article data-preg-detail="B" hidden><h3><span class="preg-cat preg-cat-b" aria-hidden="true">B</span> <span data-i18n="pregCatTitleB">Category B</span></h3><p data-i18n="pregCatB">Animal studies showed no risk.</p></article>
+          <article data-preg-detail="C" hidden><h3><span class="preg-cat preg-cat-c" aria-hidden="true">C</span> <span data-i18n="pregCatTitleC">Category C</span></h3><p data-i18n="pregCatC">Animal studies showed a risk.</p></article>
+          <article data-preg-detail="D" hidden><h3><span class="preg-cat preg-cat-d" aria-hidden="true">D</span> <span data-i18n="pregCatTitleD">Category D</span></h3><p data-i18n="pregCatD">Positive evidence of human fetal risk.</p></article>
+          <article data-preg-detail="X" hidden><h3><span class="preg-cat preg-cat-x" aria-hidden="true">X</span> <span data-i18n="pregCatTitleX">Category X</span></h3><p data-i18n="pregCatX">Proven fetal abnormalities.</p></article>
+          <article data-preg-detail="PLLR" hidden>
+            <h3 data-i18n="pregPllrTitle">The modern system: PLLR narrative sections</h3>
+            <p data-i18n="pregPllrIntro">Since 30 June 2015 the FDA replaced letters with narrative sections:</p>
+            <ul class="preg-pllr-list">
+              <li><strong>8.1</strong><div><b data-i18n="pregPllr81Title">Pregnancy</b><span data-i18n="pregPllr81Text"></span></div></li>
+              <li><strong>8.2</strong><div><b data-i18n="pregPllr82Title">Lactation</b><span data-i18n="pregPllr82Text"></span></div></li>
+              <li><strong>8.3</strong><div><b data-i18n="pregPllr83Title">Females and males of reproductive potential</b><span data-i18n="pregPllr83Text"></span></div></li>
+            </ul>
+            <p class="preg-explain-note" data-i18n="pregPllrNote"></p>
+          </article>
+          <p class="preg-explain-note preg-legacy-note" id="pregLegacyNote" data-i18n="pregLegacyNote">A letter is historical context only.</p>
+        </div>
+      </div>
+
       <details class="dose-sources preg-sources">
         <summary data-i18n="pregSourcesTitle">Official references</summary>
         <p data-i18n="pregSourcesIntro">This page summarizes public information from these official sources:</p>
@@ -460,47 +500,6 @@
         </ul>
         <p data-i18n="pregSourcesNote">The curated summaries below are an educational preview written from these public references. They are not clinically reviewed, they are not verified against each product's current label, and they are not a basis for starting, stopping, or changing any medicine.</p>
       </details>
-
-      <div class="preg-explain">
-        <h2 data-i18n="pregExplainTitle">How pregnancy and lactation safety is described</h2>
-        <div class="preg-explain-grid">
-          <article class="preg-explain-card">
-            <h3 data-i18n="pregLegacyTitle">The old FDA letter categories (A · B · C · D · X)</h3>
-            <p data-i18n="pregLegacyIntro">From 1979, U.S. labels used a single letter to summarize pregnancy risk. The FDA phased the letters out on 30 June 2015 because they were oversimplified and often misread as a grading scale.</p>
-            <ul class="preg-cat-list">
-              <li><span class="preg-cat preg-cat-a" aria-hidden="true">A</span><span data-i18n="pregCatA">Controlled studies in pregnant women showed no risk to the fetus. The most reassuring letter, rarely assigned.</span></li>
-              <li><span class="preg-cat preg-cat-b" aria-hidden="true">B</span><span data-i18n="pregCatB">Animal studies showed no risk and human data are lacking, or animal risk was not confirmed in human studies.</span></li>
-              <li><span class="preg-cat preg-cat-c" aria-hidden="true">C</span><span data-i18n="pregCatC">Animal studies showed a risk, or no studies exist; human data are lacking. Use only if the benefit justifies the potential risk.</span></li>
-              <li><span class="preg-cat preg-cat-d" aria-hidden="true">D</span><span data-i18n="pregCatD">Positive evidence of human fetal risk, but benefits may still justify use in serious situations (for example life-threatening disease).</span></li>
-              <li><span class="preg-cat preg-cat-x" aria-hidden="true">X</span><span data-i18n="pregCatX">Proven fetal abnormalities; the risk clearly outweighs any benefit. Contraindicated in pregnancy.</span></li>
-            </ul>
-            <p class="preg-explain-note" data-i18n="pregLegacyNote">A letter is historical context only. It reflects data available decades ago, never the current label.</p>
-          </article>
-          <article class="preg-explain-card">
-            <h3 data-i18n="pregPllrTitle">The modern system: PLLR narrative sections</h3>
-            <p data-i18n="pregPllrIntro">Since 30 June 2015, the FDA's Pregnancy and Lactation Labeling Rule replaces letters with plain-language narratives in three label subsections:</p>
-            <ul class="preg-pllr-list">
-              <li><strong>8.1</strong><div><b data-i18n="pregPllr81Title">Pregnancy</b><span data-i18n="pregPllr81Text">Risk summary, clinical considerations, and human/animal data about exposure during pregnancy, including any pregnancy exposure registry.</span></div></li>
-              <li><strong>8.2</strong><div><b data-i18n="pregPllr82Title">Lactation</b><span data-i18n="pregPllr82Text">How much drug reaches milk, what is known about effects on the breastfed infant and on milk production, and how to minimize exposure.</span></div></li>
-              <li><strong>8.3</strong><div><b data-i18n="pregPllr83Title">Females and males of reproductive potential</b><span data-i18n="pregPllr83Text">When pregnancy testing, contraception, or infertility considerations apply before or during treatment.</span></div></li>
-            </ul>
-            <p class="preg-explain-note" data-i18n="pregPllrNote">Current labels use this narrative format. When a letter and a current label disagree, the current label wins.</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="preg-search-panel">
-        <h2 data-i18n="pregSearchTitle">Search a medicine</h2>
-        <p class="preg-search-hint" data-i18n="pregSearchHintText">Type a brand name (English or Arabic) or an active ingredient. If several products share the name, pick the exact product first so its ingredients are shown correctly.</p>
-        <div class="preg-search-row">
-          <label class="sr-only" for="pregSearch" data-i18n="pregSearchLabel">Medicine or active ingredient</label>
-          <input id="pregSearch" role="combobox" aria-controls="pregProductList" aria-expanded="false" aria-autocomplete="list" type="search" autocomplete="off" spellcheck="false" dir="auto" data-i18n-placeholder="pregSearchPlaceholder" placeholder="e.g. Panadol, warfarin, بنادول">
-          <button id="pregSearchClear" type="button" data-i18n="pregSearchClear">Clear</button>
-        </div>
-        <div id="pregStatus" class="clinical-status" role="status" aria-live="polite" hidden></div>
-        <div id="pregProductList" role="listbox" class="preg-product-list" hidden></div>
-        <div id="pregResults" class="preg-results" aria-live="polite" hidden></div>
-      </div>
 
       <aside class="clinical-disclaimer preg-disclaimer"><strong data-i18n="pregDisclaimerTitle">Educational preview, not a treatment guide</strong><p data-i18n="pregDisclaimer">The curated dataset behind this page is an educational summary compiled from public references. It has not been clinically reviewed, it is not verified against each product's current label, and it must never be used to start, stop, or switch a medicine. Pregnancy and breastfeeding decisions belong with your doctor or pharmacist, using the current product label.</p></aside>
     </section>
@@ -841,7 +840,11 @@
   <div class="modal-backdrop" id="modalBackdrop" hidden>
     <article class="drug-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal-close" id="modalClose" aria-label="Close" data-i18n-aria="closeAria">×</button>
-      <figure class="medicine-image-panel" id="modalImagePanel" hidden><div id="modalImage" class="modal-image"></div><div class="medicine-image-tools"><button type="button" class="image-search-button image-browser-button" id="modalImageSearch" data-i18n="viewInBrowser">View in browser</button></div><figcaption id="modalImageCaption">Drugcopeia medicine guide</figcaption></figure>
+      <figure class="medicine-image-panel" id="modalImagePanel" hidden><div id="modalImage" class="modal-image"></div><div class="medicine-image-tools"><button type="button" class="image-search-button image-browser-button" id="modalImageSearch" data-i18n="viewInBrowser">View in browser</button><button type="button" class="image-search-button" id="commonsToggle" aria-expanded="false" aria-controls="commonsGrid">Show photos</button></div><figcaption id="modalImageCaption">Drugcopeia medicine guide</figcaption></figure>
+      <section class="commons-panel" id="commonsPanel" hidden>
+        <div class="commons-grid" id="commonsGrid" role="group" aria-label="Photographs from Wikimedia Commons" data-i18n-aria="commonsGridAria" hidden></div>
+        <p class="image-gallery-status" id="commonsStatus" role="status" aria-live="polite" hidden></p>
+      </section>
       <div class="modal-topline"><span class="drug-type" id="modalClass">Medicine guide</span><span class="modal-brand" id="modalManufacturer"></span></div>
       <h2 id="modalTitle"></h2><p class="modal-english" id="modalEnglish"></p><p class="modal-arabic" id="modalArabic" lang="ar" dir="rtl"></p>
       <div class="detail-tools">
@@ -865,11 +868,7 @@
       <div class="detail-tabs"><button class="detail-tab active" data-panel="overview" data-i18n="tabOverview">Overview</button><button class="detail-tab" data-panel="use" data-i18n="tabUse">Use & side effects</button><button class="detail-tab" data-panel="caution" data-i18n="tabSafety">Safety</button></div>
       <div class="detail-panel" id="overviewPanel"></div><div class="detail-panel" id="usePanel" hidden></div><div class="detail-panel" id="cautionPanel" hidden></div>
       <div class="detail-sources" id="modalSources"></div>
-      <section class="commons-panel" id="commonsPanel" aria-labelledby="commonsTitle" hidden>
-        <div class="commons-head"><h3 id="commonsTitle" data-i18n="commonsTitle">Photos</h3><button type="button" class="image-search-button" id="commonsToggle" aria-expanded="false" aria-controls="commonsGrid">Show photos</button></div>
-        <div class="commons-grid" id="commonsGrid" role="group" aria-label="Photographs from Wikimedia Commons" data-i18n-aria="commonsGridAria" hidden></div>
-        <p class="image-gallery-status" id="commonsStatus" role="status" aria-live="polite" hidden></p>
-      </section>
+      
       <div class="modal-disclaimer" data-i18n="modalDisclaimer">Educational information only. Always check the product leaflet and consult a healthcare professional.</div>
     </article>
   </div>
@@ -972,29 +971,29 @@
 <a class="drawer-link" href="#about" data-app-nav="about"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-info"></use></svg><span data-i18n="navAbout">About Drugcopeia</span></a>
 <button class="drawer-link" type="button" data-app-nav="privacy"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-lock"></use></svg><span data-i18n="navPrivacy">Privacy</span></button>
 </nav><div class="drawer-bottom"><p class="drawer-safety-note" data-i18n="drawerSafetyNote">For information only. Ask a healthcare professional.</p><button class="drawer-settings" type="button" data-app-nav="settings"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-settings"></use></svg><span class="drawer-settings-copy"><strong data-i18n="navSettings">Settings</strong><small data-settings-summary>Follow system · 100%</small></span><span class="utility-chevron" aria-hidden="true">›</span></button></div></aside></div>
-  <script src="generated/privacy-config.js?v=183"></script>
-  <script src="net.js?v=183"></script>
-  <script src="ios-shell.js?v=183"></script>
-  <script src="core.js?v=183"></script>
-  <script src="lab-tests.js?v=183"></script>
-  <script src="clinical-tools.js?v=183"></script>
-  <script src="reading.js?v=183"></script>
-  <script src="news.js?v=183"></script>
-  <script src="app.js?v=183"></script>
-  <script src="alt-map.js?v=183"></script>
-  <script src="same-spec.js?v=183"></script>
-  <script src="features.js?v=183"></script>
-  <script src="ai/text.js?v=183"></script>
-  <script src="ai/search-index.js?v=183"></script>
-  <script src="ai/safety.js?v=183"></script>
-  <script src="ai/retrieval.js?v=183"></script>
-  <script src="ai/llm-bridge.js?v=183"></script>
-  <script src="ai/wasm-bridge.js?v=183"></script>
-  <script src="ai/model-manager.js?v=183"></script>
-  <script src="ai/pipeline.js?v=183"></script>
-  <script src="ai/secure-history.js?v=183"></script>
-  <script src="ai/photo-ask.js?v=183"></script>
-  <script src="ai/chat-ui.js?v=183"></script>
+  <script src="generated/privacy-config.js?v=184"></script>
+  <script src="net.js?v=184"></script>
+  <script src="ios-shell.js?v=184"></script>
+  <script src="core.js?v=184"></script>
+  <script src="lab-tests.js?v=184"></script>
+  <script src="clinical-tools.js?v=184"></script>
+  <script src="reading.js?v=184"></script>
+  <script src="news.js?v=184"></script>
+  <script src="app.js?v=184"></script>
+  <script src="alt-map.js?v=184"></script>
+  <script src="same-spec.js?v=184"></script>
+  <script src="features.js?v=184"></script>
+  <script src="ai/text.js?v=184"></script>
+  <script src="ai/search-index.js?v=184"></script>
+  <script src="ai/safety.js?v=184"></script>
+  <script src="ai/retrieval.js?v=184"></script>
+  <script src="ai/llm-bridge.js?v=184"></script>
+  <script src="ai/wasm-bridge.js?v=184"></script>
+  <script src="ai/model-manager.js?v=184"></script>
+  <script src="ai/pipeline.js?v=184"></script>
+  <script src="ai/secure-history.js?v=184"></script>
+  <script src="ai/photo-ask.js?v=184"></script>
+  <script src="ai/chat-ui.js?v=184"></script>
   <script>window.addEventListener('load',()=>{const start=()=>{if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)&&location.hostname!=='127.0.0.1'&&location.hostname!=='localhost')navigator.serviceWorker.register('./service-worker.js').catch(()=>{})};(window.requestIdleCallback||(fn=>setTimeout(fn,1500)))(start)});</script>
 </body>
 </html>
