@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/pages.yml'
+      - 'Source/www/**'
 permissions:
   contents: read
   pages: write
@@ -19,12 +20,8 @@ jobs:
       url: ${{ steps.d.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Extract web app from source archive
-        run: |
-          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
-          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6 /tmp/src.zip' | sha256sum -c -
-          unzip -qo /tmp/src.zip 'Source/www/*'
-          touch Source/www/.nojekyll
+      - name: Prepare web app
+        run: touch Source/www/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -9,12 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unpack source archive
-        run: |
-          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
-          # In-archive copy: the repository's build.yml carries the current archive hash.
-          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6  /tmp/src.zip' | sha256sum -c -
-          unzip -qo /tmp/src.zip
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -69,12 +63,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unpack source archive
-        run: |
-          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
-          # In-archive copy: the repository's build.yml carries the current archive hash.
-          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6  /tmp/src.zip' | sha256sum -c -
-          unzip -qo /tmp/src.zip
       - uses: actions/setup-go@v5
         with:
           go-version: '1.23'
@@ -102,12 +90,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unpack source archive
-        run: |
-          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
-          # In-archive copy: the repository's build.yml carries the current archive hash.
-          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6  /tmp/src.zip' | shasum -a 256 -c -
-          unzip -qo /tmp/src.zip
       - name: Build ad-hoc signed DMG
         working-directory: Source/macos
         run: ./build-macos.sh
@@ -121,11 +103,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unpack source archive
-        run: |
-          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
-          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6  /tmp/src.zip' | sha256sum -c -
-          unzip -qo /tmp/src.zip
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -148,12 +125,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unpack source archive
-        run: |
-          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > /tmp/src.zip
-          # In-archive copy: the repository's build.yml carries the current archive hash.
-          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6  /tmp/src.zip' | shasum -a 256 -c -
-          unzip -qo /tmp/src.zip
       - name: Build iOS app (unsigned, device)
         working-directory: Source/ios/App
         run: |
@@ -182,10 +153,8 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: dist
-      - name: Reassemble and verify full source archive
-        run: |
-          ls -- *Drugcopoeia-r181.zip.part* | sort -t. -k3 | xargs cat > Drugcopoeia-r181.zip
-          echo 'c7172ccbea14b1dcb731dbbb42fa69fd827a8b6f501b1c56404a411ec9e545e6  Drugcopoeia-r181.zip' | sha256sum -c -
+      - name: Zip source tree for release
+        run: zip -qr Drugcopoeia-r181.zip Source
       - name: Stage per-OS release files
         run: |
           set -euo pipefail
@@ -200,6 +169,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create r181 release/* \
+          gh release view r181 >/dev/null 2>&1 || gh release create r181 release/* \
             --title "Drugcopoeia r181" \
             --notes "Full app, all platforms, revision r181. android.apk for Android, windows.exe for Windows, macos.dmg for macOS, ios-unsigned.zip is the unsigned iOS build (sign and install locally with Xcode), source-web.zip is the full source including the web/PWA version."
