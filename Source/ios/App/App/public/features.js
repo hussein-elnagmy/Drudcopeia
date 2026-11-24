@@ -467,3 +467,41 @@
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
+
+/* Browse sections as buttons: each "Browse ... by" heading becomes a tappable
+ * button that shows or hides its list (letters, groups, body systems, types,
+ * test purposes, sample types). Only classes are toggled, so the lists keep
+ * rendering exactly as before. */
+(function () {
+  'use strict';
+  var FOLDS = [
+    ['[data-i18n="browseByLetter"]', ['#medicineAlphabet']],
+    ['#drugGroupHeading', ['#drugGroups']],
+    ['#conditionSystemsHeading', ['#conditionGroups']],
+    ['#conditionTypesHeading', ['#conditionTypes']],
+    ['#conditionLetterLabel', ['#conditionAlphabet']],
+    ['[data-i18n="labBrowseLetter"]', ['#labAlphabet']],
+    ['[data-i18n="labPurposeHeading"]', ['#labPurposes']],
+    ['[data-i18n="labSampleHeading"]', ['#labSamples']]
+  ];
+  function setOpen(btn, targets, open) {
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.classList.toggle('is-open', open);
+    targets.forEach(function (el) { el.classList.toggle('fold-collapsed', !open); });
+  }
+  function init() {
+    FOLDS.forEach(function (f) {
+      var btn = document.querySelector(f[0]);
+      var targets = f[1].map(function (s) { return document.querySelector(s); }).filter(Boolean);
+      if (!btn || !targets.length) return;
+      btn.classList.add('browse-toggle');
+      btn.setAttribute('role', 'button');
+      btn.setAttribute('tabindex', '0');
+      setOpen(btn, targets, false);
+      var flip = function () { setOpen(btn, targets, btn.getAttribute('aria-expanded') !== 'true'); };
+      btn.addEventListener('click', flip);
+      btn.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();

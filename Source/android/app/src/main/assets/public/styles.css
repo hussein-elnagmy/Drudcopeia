@@ -2174,14 +2174,14 @@ html[dir="rtl"] .app-back-icon{transform:scaleX(-1)}
 .preg-source-links a{color:var(--blue-dark);font-weight:600;text-decoration:none}
 .preg-source-links a:hover{text-decoration:underline}
 .preg-disclaimer{margin-top:28px}
-[data-theme="dark"] .preg-explain-card,[data-theme="dark"] .preg-card,[data-theme="dark"] .preg-product{background:#1B2A30;border-color:#2C4149}
-[data-theme="dark"] .preg-explain-card h3,[data-theme="dark"] .preg-card-head h3,[data-theme="dark"] .preg-explain h2,[data-theme="dark"] .preg-search-panel h2{color:#E7F1F0}
-[data-theme="dark"] .preg-selected{background:#123B3A;border-color:#0D9488}
-[data-theme="dark"] .preg-labelwins{background:#123B3A;color:#E7F1F0}
-[data-theme="dark"] .preg-badge{background:#123B3A;color:#7FD8CE}
-[data-theme="dark"] .preg-search-row input,[data-theme="dark"] .preg-search-row button{background:#1B2A30;color:#E7F1F0;border-color:#2C4149}
-[data-theme="dark"] .preg-product strong{color:#E7F1F0}
-[data-theme="dark"] .preg-block p{color:#DCE9E8}
+[data-theme="dark"] .preg-explain-card,[data-theme="dark"] .preg-card,[data-theme="dark"] .preg-product{background:#152a45;border-color:#2f4a70}
+[data-theme="dark"] .preg-explain-card h3,[data-theme="dark"] .preg-card-head h3,[data-theme="dark"] .preg-explain h2,[data-theme="dark"] .preg-search-panel h2{color:#e6eef9}
+[data-theme="dark"] .preg-selected{background:#14305a;border-color:#1b5fc2}
+[data-theme="dark"] .preg-labelwins{background:#14305a;color:#e6eef9}
+[data-theme="dark"] .preg-badge{background:#14305a;color:#8cc2ff}
+[data-theme="dark"] .preg-search-row input,[data-theme="dark"] .preg-search-row button{background:#152a45;color:#e6eef9;border-color:#2f4a70}
+[data-theme="dark"] .preg-product strong{color:#e6eef9}
+[data-theme="dark"] .preg-block p{color:#d6e2f2}
 
 /* ---------- Drugcopoeia clinician features ---------- */
 .feat-slot{margin:14px 0}
@@ -2201,12 +2201,12 @@ html[dir="rtl"] .app-back-icon{transform:scaleX(-1)}
 .feat-save,.feat-unit{grid-column:1/-1;font-size:.84rem}
 .feat-save{color:#0d7a4f;font-weight:700}
 .feat-unit{color:var(--muted)}
-.feat-badge{background:#0d9488;color:#fff;border-radius:999px;padding:1px 9px;font-size:.74rem;font-weight:700}
+.feat-badge{background:#1b5fc2;color:#fff;border-radius:999px;padding:1px 9px;font-size:.74rem;font-weight:700}
 .feat-na{font-style:normal;font-size:.74rem;color:#b45309}
 .feat-note,.feat-muted{font-size:.82rem;color:var(--muted);margin:10px 0 0;line-height:1.5}
 .feat-nodata{font-size:.9rem;padding:10px 12px;border-radius:12px;background:var(--blue-light);margin:6px 0}
 .feat-showall,.feat-link-btn,.feat-secondary{margin-top:10px;padding:9px 14px;border:1px solid var(--line);border-radius:12px;background:transparent;color:var(--ink);cursor:pointer;font:inherit}
-.feat-primary{padding:11px 20px;border:0;border-radius:14px;background:linear-gradient(135deg,#0d9488,#0369a1);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.feat-primary{padding:11px 20px;border:0;border-radius:14px;background:linear-gradient(135deg,#1b5fc2,#124a9c);color:#fff;font:inherit;font-weight:700;cursor:pointer}
 .feat-overlay{position:fixed;inset:0;z-index:80;background:rgba(10,20,30,.55);display:grid;place-items:center;padding:16px}
 .feat-overlay[hidden]{display:none}
 .feat-dialog{position:relative;width:min(640px,100%);max-height:88vh;overflow:auto;background:var(--white);color:var(--ink);border-radius:20px;padding:22px 20px;box-shadow:var(--shadow)}
@@ -2218,7 +2218,7 @@ html[dir="rtl"] .app-back-icon{transform:scaleX(-1)}
 .feat-links a{margin-inline-end:14px}
 .feat-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin:16px 0}
 .feat-tile{padding:18px 14px;border:1px solid var(--line);border-radius:18px;background:var(--white);color:var(--ink);font:inherit;font-weight:650;cursor:pointer;text-align:start;box-shadow:var(--shadow)}
-.feat-tile.active{border-color:#0d9488;outline:2px solid #0d948844}
+.feat-tile.active{border-color:#1b5fc2;outline:2px solid #1b5fc244}
 .feat-panel{margin:14px 0;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--white)}
 .feat-form{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .feat-field{display:grid;gap:4px}.feat-field label{font-size:.85rem;color:var(--muted)}
@@ -2228,7 +2228,7 @@ html[dir="rtl"] .app-back-icon{transform:scaleX(-1)}
 .feat-result{margin-top:14px}
 .feat-inputs{display:flex;flex-wrap:wrap;gap:8px;font-size:.84rem;color:var(--muted)}
 .feat-inputs span{padding:3px 10px;border-radius:999px;background:var(--paper)}
-.feat-value{font-size:1.9rem;font-weight:800;margin:8px 0;background:linear-gradient(135deg,#0d9488,#0369a1);-webkit-background-clip:text;background-clip:text;color:transparent}
+.feat-value{font-size:1.9rem;font-weight:800;margin:8px 0;background:linear-gradient(135deg,#1b5fc2,#124a9c);-webkit-background-clip:text;background-clip:text;color:transparent}
 .feat-ref{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-size:.88rem}
 .feat-ref code{display:block;white-space:normal;padding:8px 10px;border-radius:10px;background:var(--paper);margin-top:4px}
 .feat-hist ul{padding-inline-start:18px;font-size:.82rem;color:var(--muted)}
@@ -2264,8 +2264,8 @@ html[data-theme="dark"] .feat-save{color:#34d399}
 
 
 /* Drugcopoeia visual system, revision 175. Kept at the end for legacy compatibility. */
-:root{--branding-color:#087f79;--blue:#087f79;--blue-dark:#065f5b;--blue-light:#e2f3ef;--link:#08746f;--focus:#087f79;--ink:#173b39;--ink-soft:#375652;--muted:#5b726e;--faint:#6b807c;--paper:#f3f8f7;--white:#fff;--line:#dbe8e4;--line-strong:#bfd5ce;--surface-soft:#edf5f2;--shadow:0 18px 50px rgba(11,77,68,.09);--radius-card:20px}
-html[data-theme="dark"]{--branding-color:#5bd0bc;--blue:#29b8a4;--blue-dark:#5bd0bc;--blue-light:#163c36;--link:#6edbc9;--focus:#6edbc9;--ink:#edf7f4;--ink-soft:#d0e6de;--muted:#a6c4ba;--faint:#92ada4;--paper:#0e1e1c;--white:#162c28;--line:#2e4841;--line-strong:#48675e;--surface-soft:#1a3530;--shadow:0 18px 50px rgba(0,0,0,.25)}
+:root{--branding-color:#1b5fc2;--blue:#1b5fc2;--blue-dark:#124a9c;--blue-light:#e3eefc;--link:#1a56b0;--focus:#1b5fc2;--ink:#14294a;--ink-soft:#34507a;--muted:#5a6f8c;--faint:#6b7e99;--paper:#f2f6fc;--white:#fff;--line:#d9e4f3;--line-strong:#b9cce6;--surface-soft:#eaf1fb;--shadow:0 18px 50px rgba(20,60,130,.09);--radius-card:20px}
+html[data-theme="dark"]{--branding-color:#7db4ff;--blue:#3d86e8;--blue-dark:#7db4ff;--blue-light:#14305a;--link:#8cc2ff;--focus:#8cc2ff;--ink:#eaf2fd;--ink-soft:#cddcf2;--muted:#a3b9d6;--faint:#8ea6c6;--paper:#0b1626;--white:#12233b;--line:#2a4266;--line-strong:#43628f;--surface-soft:#172d4b;--shadow:0 18px 50px rgba(0,0,0,.25)}
 html[data-theme] body{background:var(--paper);color:var(--ink)}
 html[data-theme] body .topbar{background:var(--white);border-color:var(--line)}
 html[data-theme] .brand-mark{width:42px;height:42px;object-fit:contain;border-radius:12px;filter:none}
@@ -2281,7 +2281,7 @@ html[data-theme] .suggestion-meta{color:var(--muted)}
 html[data-theme] .suggestion-price,html[data-theme] .suggestion-icon{color:var(--link)}
 html[data-theme] .sidenav-link.is-active,html[data-theme] .group-chip.active,html[data-theme] .letter-chip.active,html[data-theme] .search-by-chip.is-active{background:var(--blue-light);color:var(--link);border-color:var(--line-strong)}
 html[data-theme] .search-btn,html[data-theme] .preg-search-row button,html[data-theme] .feat-primary{background:var(--blue);color:#fff}
-html[data-theme="dark"] .search-btn,html[data-theme="dark"] .preg-search-row button{color:#072e28}
+html[data-theme="dark"] .search-btn,html[data-theme="dark"] .preg-search-row button{color:#06182f}
 html[data-theme] .drug-card,html[data-theme] .clinical-card,html[data-theme] .preg-search-panel,html[data-theme] .preg-intro-card,html[data-theme] .feat-card{border-radius:20px;border-color:var(--line);background:var(--white)}
 html[data-theme] .search-heading h2{letter-spacing:-.04em;color:var(--ink)}
 html[data-theme] .nav-ai-badge{background:var(--blue-light);color:var(--link);box-shadow:none}
@@ -2295,7 +2295,7 @@ html[data-theme] .bottom-nav-item .nav-icon{width:24px;height:24px}
 html[data-theme] .bottom-nav-item .nav-ai-badge{width:33px;height:33px;border-radius:50%;padding:4px}
 html[data-theme] .bottom-nav-item:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
 body.searching #unifiedConditionSection,body.searching #unifiedLabSection{display:none!important}
-html[data-theme] ::selection{background:#a9e6d5;color:#0e3b31}
+html[data-theme] ::selection{background:#bcd7ff;color:#0b2a55}
 @media(max-width:1023px){html[data-theme] .bottom-nav{left:50%;right:auto;inset-inline:auto;transform:translateX(-50%);width:min(370px,calc(100% - 32px));bottom:calc(12px + env(safe-area-inset-bottom))}html[data-theme] body{padding-bottom:calc(100px + env(safe-area-inset-bottom))}html[data-theme] .search-heading h2{font-size:1.8rem}html[data-theme] .brand strong{font-size:1.08rem}}
 @media(min-width:1024px){html[data-theme] .app-sidenav{margin:20px 10px;border:1px solid var(--line);border-radius:22px;height:calc(100dvh - 110px);top:90px;padding:16px 10px}html[data-theme] .sidenav-link{border-radius:12px}html[data-theme] .search-top{padding-top:36px}html[data-theme] .bottom-nav{display:none}}
 @media(prefers-reduced-motion:no-preference){.suggestion,.sidenav-link,.bottom-nav-item{transition:background-color .16s,color .16s}}
@@ -2324,3 +2324,12 @@ html[data-theme="dark"] .medicine-picture.logo-picture img{content:url('assets/r
   .ai-composer,html[data-keyboard] .ai-composer{position:relative;bottom:auto;z-index:auto;margin-top:18px;}
   .ai-log{padding-bottom:16px;}
 }
+
+/* Browse sections as buttons */
+.fold-collapsed{display:none!important}
+html[data-theme] .browse-toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;box-sizing:border-box;min-height:48px;margin:10px 0 6px;padding:12px 16px;border:1px solid var(--line-strong);border-radius:14px;background:var(--white);color:var(--ink);font-size:.9375rem;font-weight:700;letter-spacing:0;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+html[data-theme] .browse-toggle::after{content:'';flex:none;width:9px;height:9px;border-right:2px solid var(--link);border-bottom:2px solid var(--link);transform:rotate(45deg);transition:transform .18s}
+html[data-theme] .browse-toggle.is-open{background:var(--blue-light);color:var(--link);border-color:var(--blue)}
+html[data-theme] .browse-toggle.is-open::after{transform:rotate(-135deg)}
+html[data-theme] .browse-toggle:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+html[data-theme] .browse-toggle:active{background:var(--blue-light)}
