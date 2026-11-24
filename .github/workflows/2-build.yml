@@ -154,21 +154,25 @@ jobs:
         with:
           path: dist
       - name: Zip source tree for release
-        run: zip -qr Drugcopoeia-r181.zip Source
+        run: |
+          R=$(tr -d '[:space:]' < Source/REVISION)
+          zip -qr "Drugcopoeia-r${R}.zip" Source
       - name: Stage per-OS release files
         run: |
           set -euo pipefail
+          R=$(tr -d '[:space:]' < Source/REVISION)
           mkdir -p release
-          find dist/Dawaya-android-apk -name '*.apk' -exec cp {} release/Drugcopoeia-r181-android.apk \;
-          find dist/Dawaya-windows-exe -name '*.exe' -exec cp {} release/Drugcopoeia-r181-windows.exe \;
-          find dist/Dawaya-macos-dmg -name '*.dmg' -exec cp {} release/Drugcopoeia-r181-macos.dmg \;
-          find dist/Dawaya-ios-simulator-unsigned -name '*.zip' -exec cp {} release/Drugcopoeia-r181-ios-unsigned.zip \;
-          cp Drugcopoeia-r181.zip release/Drugcopoeia-r181-source-web.zip
+          find dist/Dawaya-android-apk -name '*.apk' -exec cp {} "release/Drugcopoeia-r${R}-android.apk" \;
+          find dist/Dawaya-windows-exe -name '*.exe' -exec cp {} "release/Drugcopoeia-r${R}-windows.exe" \;
+          find dist/Dawaya-macos-dmg -name '*.dmg' -exec cp {} "release/Drugcopoeia-r${R}-macos.dmg" \;
+          find dist/Dawaya-ios-simulator-unsigned -name '*.zip' -exec cp {} "release/Drugcopoeia-r${R}-ios-unsigned.zip" \;
+          cp "Drugcopoeia-r${R}.zip" "release/Drugcopoeia-r${R}-source-web.zip"
           ls -la release
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release view r181 >/dev/null 2>&1 || gh release create r181 release/* \
-            --title "Drugcopoeia r181" \
-            --notes "Full app, all platforms, revision r181. android.apk for Android, windows.exe for Windows, macos.dmg for macOS, ios-unsigned.zip is the unsigned iOS build (sign and install locally with Xcode), source-web.zip is the full source including the web/PWA version."
+          R=$(tr -d '[:space:]' < Source/REVISION)
+          gh release view "r${R}" >/dev/null 2>&1 || gh release create "r${R}" release/* \
+            --title "Drugcopoeia r${R}" \
+            --notes "Full app, all platforms, revision r${R}. android.apk for Android, windows.exe for Windows, macos.dmg for macOS, ios-unsigned.zip is the unsigned iOS build (sign and install locally with Xcode), source-web.zip is the full source including the web/PWA version."
