@@ -134,17 +134,47 @@
       cancelGeneration: options => post('/cancelGeneration', options),
       /* The helper pushes tokens with server-sent events, which are relayed to the same hub. */
       watch: () => {
-        try {
-          const source = new global.EventSource(`${base}/stream`);
-          source.onmessage = message => {
+        /* EventSource is refused by the privacy gate (net.js blocks it as a transport), which
+           left the page without any download or token events. A same-origin fetch stream carries
+           the same server-sent events and is allowed; it reconnects if the socket drops. */
+        let stopped = false;
+        let controller = null;
+        const pump = async () => {
+          while (!stopped) {
             try {
-              emit(JSON.parse(message.data));
+              controller = typeof global.AbortController === 'function' ? new global.AbortController() : null;
+              const response = await global.fetch(`${base}/stream`, {
+                credentials: 'omit',
+                cache: 'no-store',
+                signal: controller ? controller.signal : undefined
+              });
+              if (!response.ok || !response.body) throw new Error('stream unavailable');
+              const reader = response.body.getReader();
+              const decoder = new global.TextDecoder();
+              let buffer = '';
+              for (;;) {
+                const { value, done } = await reader.read();
+                if (done) break;
+                buffer += decoder.decode(value, { stream: true });
+                let cut;
+                while ((cut = buffer.indexOf('\n\n')) >= 0) {
+                  const block = buffer.slice(0, cut);
+                  buffer = buffer.slice(cut + 2);
+                  for (const line of block.split('\n')) {
+                    if (line.indexOf('data:') !== 0) continue;
+                    try { emit(JSON.parse(line.slice(5).trim())); } catch (_) {}
+                  }
+                }
+              }
             } catch (_) {}
-          };
-          return () => source.close();
-        } catch (_) {
-          return () => {};
-        }
+            if (!stopped) await new Promise(resolve => global.setTimeout(resolve, 1500));
+          }
+        };
+        pump();
+        return () => {
+          stopped = true;
+          try { if (controller) controller.abort(); } catch (_) {}
+        };
       }
     };
     return { kind: 'windows-http', bridge };

@@ -810,7 +810,8 @@ public class DawayaLLMPlugin extends Plugin {
         if (host == null) return false;
         String value = host.toLowerCase();
         return value.equals("huggingface.co") || value.equals("hf.co") || value.endsWith(".hf.co")
-            || value.endsWith(".huggingface.co");
+            || value.endsWith(".huggingface.co") || value.equals("github.com")
+            || value.endsWith(".githubusercontent.com");
     }
 
     private static int freePort() throws Exception {

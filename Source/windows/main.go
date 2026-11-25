@@ -260,7 +260,7 @@ func withHeaders(next http.Handler) http.Handler {
 				"img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob: data:; "+
 				"connect-src 'self' https://www.who.int https://api.fda.gov https://eutils.ncbi.nlm.nih.gov "+
 				"https://commons.wikimedia.org https://thumb.wikimedia.org https://upload.wikimedia.org "+
-				"https://huggingface.co https://*.hf.co "+
+				"https://huggingface.co https://*.hf.co https://github.com https://*.githubusercontent.com "+
 				"http://127.0.0.1:* http://localhost:*; worker-src 'self' blob:; manifest-src 'self'; "+
 				"frame-ancestors 'none'")
 		if r.URL.Path == "/" || strings.HasSuffix(r.URL.Path, ".html") {

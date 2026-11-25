@@ -145,8 +145,8 @@ final class LlamaModelDownloader: NSObject, URLSessionDataDelegate {
         session = URLSession(configuration: config, delegate: self, delegateQueue: nil)
     }
 
-    static let allowedHosts = ["huggingface.co"]
-    static let allowedSuffixes = [".hf.co"]
+    static let allowedHosts = ["huggingface.co", "github.com"]
+    static let allowedSuffixes = [".hf.co", ".githubusercontent.com"]
 
     static func hostAllowed(_ host: String) -> Bool {
         let value = host.lowercased()

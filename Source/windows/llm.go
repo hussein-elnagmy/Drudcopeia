@@ -350,31 +350,93 @@ func (s *llmService) download() (string, error) {
 
 func (s *llmService) runDownload(ctx context.Context, id string) {
 	defer s.downloading.Store(false)
+	urls := []string{s.cfg.Model.URL}
+	for _, mirror := range s.cfg.Model.Mirrors {
+		if mirror != "" && mirror != s.cfg.Model.URL && isAllowedModelHost(mirror, s.cfg) {
+			urls = append(urls, mirror)
+		}
+	}
+	var lastErr error
+	for _, source := range urls {
+		done, err := s.downloadFrom(ctx, id, source)
+		if err == nil {
+			if done < 0 {
+				return /* paused or cancelled: the event was already sent */
+			}
+			s.writeState(map[string]any{"downloaded": true, "sizeBytes": done})
+			s.emit(map[string]any{"type": "download-completed", "id": id, "sizeBytes": done})
+			return
+		}
+		lastErr = err
+		if ctx.Err() != nil {
+			break
+		}
+		logger.Printf("download source failed, trying the next one: %v", err)
+	}
+	if s.paused.Load() {
+		s.emit(map[string]any{"type": "download-paused", "id": id})
+		return
+	}
+	if s.cancelled.Load() {
+		return
+	}
+	s.fail(id, lastErr)
+}
+
+/*
+ * downloadFrom fetches one source into the .part file, resuming where it stopped.
+ * It returns the final size, -1 when the reader paused, or an error. A connection that
+ * cannot be opened within 30s, or that delivers nothing for 45s, is an error rather than an
+ * endless "Downloading" state, so the next mirror gets its turn and the reader sees a reason.
+ */
+func (s *llmService) downloadFrom(parent context.Context, id, source string) (int64, error) {
+	ctx, cancel := context.WithCancel(parent)
+	defer cancel()
+	stalled := atomic.Bool{}
+	watchdog := time.AfterFunc(45*time.Second, func() { stalled.Store(true); cancel() })
+	defer watchdog.Stop()
+
 	part := s.partPath()
 	_ = os.Remove(s.modelPath())
 	var offset int64
 	if info, err := os.Stat(part); err == nil {
 		offset = info.Size()
 	}
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, s.cfg.Model.URL, nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, source, nil)
 	if err != nil {
-		s.fail(id, err)
-		return
+		return 0, err
 	}
 	req.Header.Set("User-Agent", downloadUserAgent)
 	req.Header.Set("Accept", "application/octet-stream")
 	if offset > 0 {
 		req.Header.Set("Range", fmt.Sprintf("bytes=%d-", offset))
 	}
-	client := &http.Client{Transport: &http.Transport{Proxy: nil}, Timeout: 0}
+	client := &http.Client{
+		Transport: &http.Transport{
+			Proxy:                 http.ProxyFromEnvironment,
+			DialContext:           (&net.Dialer{Timeout: 20 * time.Second}).DialContext,
+			TLSHandshakeTimeout:   20 * time.Second,
+			ResponseHeaderTimeout: 30 * time.Second,
+		},
+		CheckRedirect: func(r *http.Request, via []*http.Request) error {
+			if len(via) > 5 {
+				return errors.New("too many redirects")
+			}
+			if !isAllowedModelHost(r.URL.String(), s.cfg) {
+				return errors.New("redirect to a host that is not allowlisted")
+			}
+			return nil
+		},
+	}
 	response, err := client.Do(req)
 	if err != nil {
 		if s.paused.Load() {
-			s.emit(map[string]any{"type": "download-paused", "id": id})
-			return
+			return -1, nil
 		}
-		s.fail(id, err)
-		return
+		if stalled.Load() {
+			return 0, errors.New("connection timed out")
+		}
+		return 0, err
 	}
 	defer response.Body.Close()
 	if response.StatusCode == http.StatusOK && offset > 0 {
@@ -383,8 +445,7 @@ func (s *llmService) runDownload(ctx context.Context, id string) {
 		_ = os.Remove(part)
 	}
 	if response.StatusCode != http.StatusOK && response.StatusCode != http.StatusPartialContent {
-		s.fail(id, fmt.Errorf("download failed: %d", response.StatusCode))
-		return
+		return 0, fmt.Errorf("download failed: %d", response.StatusCode)
 	}
 	mode := os.O_CREATE | os.O_WRONLY
 	if offset > 0 {
@@ -394,8 +455,7 @@ func (s *llmService) runDownload(ctx context.Context, id string) {
 	}
 	file, err := os.OpenFile(part, mode, 0o644)
 	if err != nil {
-		s.fail(id, err)
-		return
+		return 0, err
 	}
 	defer file.Close()
 
@@ -409,25 +469,24 @@ func (s *llmService) runDownload(ctx context.Context, id string) {
 	buf := make([]byte, 262144)
 	for {
 		if s.paused.Load() {
-			s.emit(map[string]any{"type": "download-paused", "id": id})
-			return
+			return -1, nil
 		}
 		n, readErr := response.Body.Read(buf)
 		if n > 0 {
+			watchdog.Reset(45 * time.Second)
 			if _, writeErr := file.Write(buf[:n]); writeErr != nil {
-				s.fail(id, writeErr)
-				return
+				return 0, writeErr
 			}
 			done += int64(n)
 			if time.Since(lastEmit) > 400*time.Millisecond {
 				lastEmit = time.Now()
 				rate := float64(done-offset) / time.Since(started).Seconds()
 				s.emit(map[string]any{
-					"type":             "download-progress",
-					"id":               id,
-					"downloadedBytes":  done,
-					"totalBytes":       total,
-					"bytesPerSecond":   int64(rate),
+					"type":            "download-progress",
+					"id":              id,
+					"downloadedBytes": done,
+					"totalBytes":      total,
+					"bytesPerSecond":  int64(rate),
 				})
 			}
 		}
@@ -436,23 +495,24 @@ func (s *llmService) runDownload(ctx context.Context, id string) {
 				break
 			}
 			if s.paused.Load() {
-				s.emit(map[string]any{"type": "download-paused", "id": id})
-				return
+				return -1, nil
 			}
-			s.fail(id, readErr)
-			return
+			if stalled.Load() {
+				return 0, errors.New("connection stalled")
+			}
+			return 0, readErr
 		}
 	}
 	if err := file.Close(); err != nil {
-		s.fail(id, err)
-		return
+		return 0, err
+	}
+	if total > 0 && done != total {
+		return 0, fmt.Errorf("download incomplete: %d of %d bytes", done, total)
 	}
 	if err := os.Rename(part, s.modelPath()); err != nil {
-		s.fail(id, err)
-		return
+		return 0, err
 	}
-	s.writeState(map[string]any{"downloaded": true, "sizeBytes": done})
-	s.emit(map[string]any{"type": "download-completed", "id": id, "sizeBytes": done})
+	return done, nil
 }
 
 func (s *llmService) pause(id string) {
@@ -995,7 +1055,7 @@ func isAllowedModelHost(rawURL string, cfg aiConfig) bool {
 		return false
 	}
 	host := strings.ToLower(parsed.Hostname())
-	for _, allowed := range []string{"huggingface.co", "hf.co"} {
+	for _, allowed := range []string{"huggingface.co", "hf.co", "github.com", "githubusercontent.com"} {
 		if host == allowed || strings.HasSuffix(host, "."+allowed) {
 			return true
 		}

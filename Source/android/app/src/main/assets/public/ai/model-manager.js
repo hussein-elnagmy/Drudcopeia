@@ -195,8 +195,13 @@
 
   function downloadOptions(extra) {
     const model = (config && config.model) || {};
+    /* Native shells fetch the GitHub release copy (reachable where the Hugging Face CDN is
+       not); the browser build needs CORS, which only Hugging Face sends. */
+    const rt = global.DawayaAIRuntime;
+    const web = rt && rt.kind === 'web-wasm';
     return {
-      url: model.url,
+      url: web && model.webUrl ? model.webUrl : model.url,
+      mirrorUrls: model.mirrorUrls,
       fileName: model.fileName,
       sha256: model.sha256,
       sizeBytes: model.sizeBytes,
