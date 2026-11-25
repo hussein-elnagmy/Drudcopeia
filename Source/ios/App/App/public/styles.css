@@ -2384,3 +2384,10 @@ html[data-theme] body .modal-arabic{font-size:1.375rem;line-height:1.7;font-weig
 .modal-image{height:120px;max-width:260px}
 @media(max-width:760px){.modal-image{height:96px}.medicine-image-panel{margin-bottom:10px}}
 .feat-tile .calc-ic{display:inline-grid;place-items:center;min-width:44px;height:30px;padding:0 10px;border-radius:15px;background:#e3f0fb;color:#1b5fc2;font-size:.8125rem;font-weight:700;justify-self:start}html[data-theme=dark] .feat-tile .calc-ic{background:#16324a;color:#8cc4f0}
+
+/* Sourced monograph blocks (official label sections) */
+.monograph-block h3 .monograph-tag{display:block;font-size:.72em;font-weight:600;opacity:.75;letter-spacing:.02em;margin-top:2px}
+.monograph-boxed{border-inline-start:3px solid #b91c1c;padding-inline-start:12px}
+.monograph-note{font-size:.84em;opacity:.85;margin:14px 0 4px}
+.monograph-source{font-size:.84em;margin:4px 0 0}
+.monograph-source .monograph-date{opacity:.7;font-size:.92em}

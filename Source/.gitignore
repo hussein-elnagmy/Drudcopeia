@@ -15,3 +15,6 @@ xcuserdata/
 .tools/
 .DS_Store
 Thumbs.db
+tools/monographs/cache/
+tools/labs/__pycache__/
+__pycache__/
