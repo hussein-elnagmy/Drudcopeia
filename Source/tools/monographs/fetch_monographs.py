@@ -267,6 +267,26 @@ def trim(text: str, cap: int) -> str:
     return cut + " …"
 
 
+
+XR_LABEL_RE = re.compile(
+    r"\b(XR|ER|SR|CR|XL|DR)\b|EXTENDED[- ]?RELEASE|MODIFIED[- ]?RELEASE"
+    r"|SUSTAINED[- ]?RELEASE|PROLONGED[- ]?RELEASE|RETARD",
+    re.I,
+)
+STRENGTH_RE = re.compile(r"(\d+(?:\.\d+)?)\s*(mg|mcg|g|ml|iu|%|units?)\b", re.I)
+
+
+def label_strengths(*texts: str) -> list[str]:
+    out: list[str] = []
+    for text in texts:
+        for m in STRENGTH_RE.finditer(text or ""):
+            pair = f"{m.group(1)} {m.group(2).lower().rstrip('s')}"
+            if pair not in out:
+                out.append(pair)
+            if len(out) >= 20:
+                return out
+    return out
+
 def extract(label: dict) -> dict:
     sections = {}
     for out_key, (field, cap) in SECTIONS.items():
@@ -281,6 +301,9 @@ def extract(label: dict) -> dict:
     of = label.get("openfda", {})
     set_id = (of.get("spl_set_id") or [""])[0]
     date = str(label.get("effective_time") or "")
+    brands = of.get("brand_name") or []
+    ai_text = (label.get("active_ingredient") or [""])[0]
+    dfs_text = (label.get("dosage_forms_and_strengths") or [""])[0]
     return {
         "sections": sections,
         "source": {
@@ -288,15 +311,22 @@ def extract(label: dict) -> dict:
             "dailymed": f"https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid={set_id}" if set_id else "",
             "openfda": "https://open.fda.gov/apis/drug/label/",
             "label_date": f"{date[:4]}-{date[4:6]}-{date[6:8]}" if len(date) == 8 else "",
-            "us_brand": (of.get("brand_name") or [""])[0],
+            "us_brand": brands[0] if brands else "",
+            "us_brands": brands[:6],
             "manufacturer": (of.get("manufacturer_name") or [""])[0],
+            "product_type": (of.get("product_type") or [""])[0],
+            "routes": (of.get("route") or [])[:6],
+            "strengths": label_strengths(ai_text, dfs_text),
+            "extended_release": bool(
+                XR_LABEL_RE.search(" ".join(brands)) or XR_LABEL_RE.search((dfs_text or "")[:400])
+            ),
         },
     }
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--top", type=int, default=400)
+    ap.add_argument("--top", type=int, default=600)
     ap.add_argument("--workers", type=int, default=6)
     args = ap.parse_args()
 

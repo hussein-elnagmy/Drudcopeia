@@ -2391,3 +2391,7 @@ html[data-theme] body .modal-arabic{font-size:1.375rem;line-height:1.7;font-weig
 .monograph-note{font-size:.84em;opacity:.85;margin:14px 0 4px}
 .monograph-source{font-size:.84em;margin:4px 0 0}
 .monograph-source .monograph-date{opacity:.7;font-size:.92em}
+
+.monograph-reference{border:1px solid var(--line,rgba(120,120,120,.35));border-radius:12px;padding:10px 12px;margin:14px 0;background:var(--soft,rgba(120,120,120,.06))}
+.monograph-ref-head{margin:0 0 4px}
+.monograph-caption{font-size:.78rem;opacity:.72;margin:6px 0 0}
