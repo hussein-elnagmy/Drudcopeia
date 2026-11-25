@@ -199,7 +199,7 @@
       "host": "github.com",
       "suffix": "",
       "scheme": "https",
-      "purpose": "Serves the model file pinned as a release asset of the app's own repository (hussein-elnagmy/Drugcopeia, tag model-v2) and redirects it to GitHub's asset CDN."
+      "purpose": "Serves the model file pinned as a release asset of the app's own repository (hussein-elnagmy/Drugcopeia, tag model-v3) and redirects it to GitHub's asset CDN."
     },
     {
       "host": "",

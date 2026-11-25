@@ -1118,10 +1118,10 @@ async function main() {
 
   /* A 3 GB phone (iPhone X, XR, SE 2) clears minRamMB but not recommendedRamMB, so the same file
      runs with half the context and a shorter answer instead of being refused. */
-  await test('a 3 GB phone is supported and runs the low-memory profile', async () => {
+  await test('a 4 GB phone is supported and runs the low-memory profile (1.5B model)', async () => {
     mock.reset();
     mock.state.answerText = PANADOL_ANSWER;
-    mock.state.capabilities = { ...mock.state.capabilities, totalRamBytes: Math.round(3.0 * 1024 * 1024 * 1024), freeRamBytes: 1024 * 1024 * 1024 };
+    mock.state.capabilities = { ...mock.state.capabilities, totalRamBytes: Math.round(4.0 * 1024 * 1024 * 1024), freeRamBytes: 1024 * 1024 * 1024 };
     RUNTIME.useAdapter(mock.adapter);
     reloadModel({ downloaded: true, checksumVerified: true, modelVersion: modelConfig.model.version });
     configureAssistant();
@@ -1234,8 +1234,8 @@ async function main() {
   await test('the configured model is small enough for an old phone', () => {
     const MB = 1024 * 1024;
     assert(modelConfig.model.sizeBytes > 50 * MB, 'the model file has a real size');
-    assert(modelConfig.model.sizeBytes <= 600 * MB, 'the model file fits an old phone');
-    assert(Number(modelConfig.device.minRamMB) <= 3000, 'a 3 GB phone is not refused the assistant');
+    assert(modelConfig.model.sizeBytes <= 1200 * MB, 'the model file stays within the 1.5B size');
+    assert(Number(modelConfig.device.minRamMB) <= 3700, 'a 4 GB phone is not refused the assistant (the 1.5B model needs about 4 GB)');
     assert(Number(modelConfig.device.minDiskMB) * MB >= modelConfig.model.sizeBytes * Number(modelConfig.download.requiresFreeSpaceMultipleOfModelSize), 'the disk floor covers the download');
     equal(modelConfig.model.chatTemplate, 'chatml', 'the template the native shells wrap prompts with');
   });

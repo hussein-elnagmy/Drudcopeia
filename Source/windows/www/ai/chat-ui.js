@@ -353,7 +353,7 @@
 
   function modelSize() {
     const assistant = global.DawayaAIAssistant;
-    return Number(assistant && assistant.assets && assistant.assets.modelConfig.model.sizeBytes) || 491400032;
+    return Number(assistant && assistant.assets && assistant.assets.modelConfig.model.sizeBytes) || 1117320736;
   }
 
   function fileName() {

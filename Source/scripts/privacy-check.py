@@ -423,12 +423,12 @@ def check_assistant_stack():
     MB = 1024 * 1024
     device_cfg = model.get("device") or {}
     generation_cfg = model.get("generation") or {}
-    if size > 600 * MB:
+    if size > 1200 * MB:
         add("model-old-phone", model_path, 0,
-            "the pinned model file is %d MB; a phone from the iPhone 11 era cannot hold it" % (size // MB))
-    if int(device_cfg.get("minRamMB") or 0) > 3000:
+            "the pinned model file is %d MB; the owner approved the 1.5B model (1.1 GB) in November 2026, nothing larger" % (size // MB))
+    if int(device_cfg.get("minRamMB") or 0) > 3700:
         add("model-old-phone", model_path, 0,
-            "device.minRamMB is above 3000 MB; a 3 GB phone is refused the assistant")
+            "device.minRamMB is above 3700 MB; a 4 GB phone is refused the assistant")
     if int(device_cfg.get("minDiskMB") or 0) * MB < size * max(
             float((model.get("download") or {}).get("requiresFreeSpaceMultipleOfModelSize") or 1), 1):
         add("model-old-phone", model_path, 0,
