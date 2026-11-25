@@ -2411,3 +2411,7 @@ html[data-theme] body .app-drawer .drawer-kicker{margin-top:10px;font-size:.75re
 .lab-tests-search.unified-search>#labTestSearchButton svg{width:20px;height:20px;display:block}
 .lab-tests-search.unified-search>#labTestSearchClear{display:none}
 .bottom-nav-ai .nav-ai-badge{width:36px;height:36px}.bottom-nav-ai .nav-ai-badge .nav-icon{width:28px;height:28px}
+
+/* r191: AI tab icon sized like the other tab icons, no circle badge behind it */
+.bottom-nav-ai .nav-ai-badge,html[data-theme] .bottom-nav-item .nav-ai-badge,html[data-theme] .nav-ai-badge,html[data-theme="dark"] .bottom-nav-ai .nav-ai-badge,.bottom-nav-ai.is-active .nav-ai-badge{width:auto;height:auto;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.bottom-nav-ai .nav-ai-badge .nav-icon,html[data-theme] .bottom-nav-item.bottom-nav-ai .nav-ai-badge .nav-icon{width:24px;height:24px;margin:0}
