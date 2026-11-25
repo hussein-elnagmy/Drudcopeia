@@ -56,29 +56,23 @@
     return err;
   }
 
-  // Online mode is the default. The bundled dataset still answers every
-  // search without a connection; online only controls the user-initiated
-  // official links and the one-time model download. The switch is stored on
-  // this device and is never sent anywhere.
+  // The manual offline-mode switch was removed (r189): privacy comes from the
+  // allow-list gate below, not from a toggle. Any flag a reader stored while
+  // the switch existed is cleared so nobody stays blocked with no way back.
+  // The bundled dataset still answers every search without a connection.
   function isOffline() {
     var cfg = config();
     var key = (cfg && cfg.offlineKey) || OFFLINE_KEY;
     var store = storage();
-    if (!store) return false;
-    var value = null;
-    try { value = store.getItem(key); } catch (_) { return false; }
-    return value === 'on';
+    if (store) {
+      try { if (store.getItem(key) !== null) store.removeItem(key); } catch (_) {}
+    }
+    return false;
   }
 
   function setOffline(enabled) {
-    var cfg = config();
-    var key = (cfg && cfg.offlineKey) || OFFLINE_KEY;
-    var store = storage();
-    if (store) {
-      try { store.setItem(key, enabled ? 'on' : 'off'); } catch (_) {}
-    }
-    notifyNativeOfflineMode(enabled);
-    return enabled;
+    notifyNativeOfflineMode(false);
+    return false;
   }
 
   function notifyNativeOfflineMode(enabled) {
