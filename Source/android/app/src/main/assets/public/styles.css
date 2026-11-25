@@ -126,10 +126,10 @@ body[data-view="condition-list"] .hero,body[data-view="condition-list"] [data-ma
 
 .medicine-image-open{display:block;margin:10px auto 0;border:1px solid #cfe2ef;border-radius:9px;background:#f2f8fc;color:#2874a4;padding:9px 16px;font:600 .6875rem 'DM Sans',sans-serif;cursor:pointer}.medicine-image-open:hover{background:#e7f3fb;border-color:#a9cde2}
 
-html[data-theme="dark"]{color-scheme:dark;--ink:#F5F7FA;--muted:#A7B3C2;--blue:#0A84FF;--blue-dark:#409CFF;--blue-light:#182B42;--line:#34383E;--paper:#000;--white:#1C1C1E;--shadow:0 18px 60px rgba(0,0,0,.45)}html[data-theme="dark"] body,html[data-theme="dark"] .topbar{background:#000;color:var(--ink)}html[data-theme="dark"] .topbar{border-color:#282a2f}html[data-theme="dark"] .top-note,html[data-theme="dark"] .db-count,html[data-theme="dark"] ,html[data-theme="dark"] .search-hint,html[data-theme="dark"] .suggestion-meta,html[data-theme="dark"] .drug-generic,html[data-theme="dark"] .condition-source-note,html[data-theme="dark"] .condition-detail-alias{color:#9ba9b8}html[data-theme="dark"] .search-composer,html[data-theme="dark"] .suggestions,html[data-theme="dark"] .suggestion,html[data-theme="dark"] .drug-card,html[data-theme="dark"] .condition-search,html[data-theme="dark"] .app-drawer,html[data-theme="dark"] .drug-modal,html[data-theme="dark"] .art-card,html[data-theme="dark"] .art-dot,html[data-theme="dark"] .condition-inline-summary,html[data-theme="dark"] .condition-disclaimer,html[data-theme="dark"] .source-link{background:#1c1c1e;color:var(--ink);border-color:#383b42}html[data-theme="dark"] .search-box input,html[data-theme="dark"] .search-by select,html[data-theme="dark"] .search-by label,html[data-theme="dark"] .results-head h3,html[data-theme="dark"] .drug-name,html[data-theme="dark"] .modal-topline,html[data-theme="dark"] .detail-panel,html[data-theme="dark"] .condition-detail-body{color:var(--ink)}html[data-theme="dark"] .search-by,html[data-theme="dark"] .detail-tabs,html[data-theme="dark"] .modal-facts{border-color:#383b42}html[data-theme="dark"] .suggestion:hover,html[data-theme="dark"] .suggestion.active,html[data-theme="dark"] .drug-card:hover,html[data-theme="dark"] .load-more:hover,html[data-theme="dark"] .drawer-nav button:hover,html[data-theme="dark"] .drawer-nav a:hover{background:#24272c}html[data-theme="dark"] .drug-avatar,html[data-theme="dark"] .suggestion-icon,html[data-theme="dark"] .condition-result-icon,html[data-theme="dark"] .search-icon,html[data-theme="dark"] .group-chip{background:#202b38;color:#7bb7ff}html[data-theme="dark"] .hero-art .art-card.card-back{background:#25394d}html[data-theme="dark"] .art-lines b{background:#3a4149}html[data-theme="dark"] .art-halo{background:#13273a}html[data-theme="dark"] .about-copy p,html[data-theme="dark"] .condition-overview-summary,html[data-theme="dark"] .condition-inline-summary-body{color:#b1bbc7}html[data-theme="dark"] .modal-close,html[data-theme="dark"] .drawer-head button{background:#25282d;color:#e6edf4}html[data-theme="dark"] .medicine-image-open,html[data-theme="dark"] .condition-image-button{background:#172b40;color:#82bdff;border-color:#30475d}html[data-theme="dark"] .disclaimer-strip{background:#172b40}html[data-theme="dark"] .safety-section{background:#28231b;border-color:#4d402c}html[data-theme="dark"] .footer-brand .brand-mark{background:#fff}html[data-theme="dark"] .brand-mark,html[data-theme="dark"] .footer-brand .brand-mark{background:transparent}
+html[data-theme="dark"]{color-scheme:dark;--ink:#E4E6EB;--muted:#B0B3B8;--blue:#0A84FF;--blue-dark:#409CFF;--blue-light:#3A3B3C;--line:#3E4042;--paper:#18191A;--white:#242526;--shadow:0 18px 60px rgba(0,0,0,.45)}html[data-theme="dark"] body,html[data-theme="dark"] .topbar{background:#18191A;color:var(--ink)}html[data-theme="dark"] .topbar{border-color:#3E4042}html[data-theme="dark"] .top-note,html[data-theme="dark"] .db-count,html[data-theme="dark"] ,html[data-theme="dark"] .search-hint,html[data-theme="dark"] .suggestion-meta,html[data-theme="dark"] .drug-generic,html[data-theme="dark"] .condition-source-note,html[data-theme="dark"] .condition-detail-alias{color:#B0B3B8}html[data-theme="dark"] .search-composer,html[data-theme="dark"] .suggestions,html[data-theme="dark"] .suggestion,html[data-theme="dark"] .drug-card,html[data-theme="dark"] .condition-search,html[data-theme="dark"] .app-drawer,html[data-theme="dark"] .drug-modal,html[data-theme="dark"] .art-card,html[data-theme="dark"] .art-dot,html[data-theme="dark"] .condition-inline-summary,html[data-theme="dark"] .condition-disclaimer,html[data-theme="dark"] .source-link{background:#242526;color:var(--ink);border-color:#3E4042}html[data-theme="dark"] .search-box input,html[data-theme="dark"] .search-by select,html[data-theme="dark"] .search-by label,html[data-theme="dark"] .results-head h3,html[data-theme="dark"] .drug-name,html[data-theme="dark"] .modal-topline,html[data-theme="dark"] .detail-panel,html[data-theme="dark"] .condition-detail-body{color:var(--ink)}html[data-theme="dark"] .search-by,html[data-theme="dark"] .detail-tabs,html[data-theme="dark"] .modal-facts{border-color:#3E4042}html[data-theme="dark"] .suggestion:hover,html[data-theme="dark"] .suggestion.active,html[data-theme="dark"] .drug-card:hover,html[data-theme="dark"] .load-more:hover,html[data-theme="dark"] .drawer-nav button:hover,html[data-theme="dark"] .drawer-nav a:hover{background:#3A3B3C}html[data-theme="dark"] .drug-avatar,html[data-theme="dark"] .suggestion-icon,html[data-theme="dark"] .condition-result-icon,html[data-theme="dark"] .search-icon,html[data-theme="dark"] .group-chip{background:#3A3B3C;color:#7bb7ff}html[data-theme="dark"] .hero-art .art-card.card-back{background:#3A3B3C}html[data-theme="dark"] .art-lines b{background:#3a4149}html[data-theme="dark"] .art-halo{background:#242526}html[data-theme="dark"] .about-copy p,html[data-theme="dark"] .condition-overview-summary,html[data-theme="dark"] .condition-inline-summary-body{color:#b1bbc7}html[data-theme="dark"] .modal-close,html[data-theme="dark"] .drawer-head button{background:#25282d;color:#e6edf4}html[data-theme="dark"] .medicine-image-open,html[data-theme="dark"] .condition-image-button{background:#2E2F31;color:#82bdff;border-color:#4E4F50}html[data-theme="dark"] .disclaimer-strip{background:#2E2F31}html[data-theme="dark"] .safety-section{background:#28231b;border-color:#4d402c}html[data-theme="dark"] .footer-brand .brand-mark{background:#fff}html[data-theme="dark"] .brand-mark,html[data-theme="dark"] .footer-brand .brand-mark{background:transparent}
 html[data-theme="dark"] .drawer-nav button,html[data-theme="dark"] .drawer-nav a{background:transparent;color:#e6edf4}
-html[data-theme="dark"] .drawer-nav small{color:#a7b3c2}
-html[data-theme="dark"] .drawer-bottom{border-color:#383b42}html[data-theme="dark"] .theme-icon-toggle{color:#c2c9d1;border-color:#4a4e55}html[data-theme="dark"] .theme-icon-toggle:hover{background:#25282d}
+html[data-theme="dark"] .drawer-nav small{color:#B0B3B8}
+html[data-theme="dark"] .drawer-bottom{border-color:#3E4042}html[data-theme="dark"] .theme-icon-toggle{color:#c2c9d1;border-color:#4a4e55}html[data-theme="dark"] .theme-icon-toggle:hover{background:#25282d}
 
 /* Fluid typography and cards for narrow phones through resizable Mac windows. */
 .results-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,390px),1fr));}
@@ -165,15 +165,15 @@ html[data-theme="dark"] .drawer-bottom{border-color:#383b42}html[data-theme="dar
   [dir="rtl"] .modal-close{right:auto;left:12px}
 }
 /* Lift dark surfaces above pure black while retaining readable contrast. */
-html[data-theme="dark"]{--paper:#17191D;--white:#24272C;--line:#3A3F47;--shadow:0 18px 60px rgba(0,0,0,.32)}
-html[data-theme="dark"] body,html[data-theme="dark"] .topbar{background:#17191D}
-html[data-theme="dark"] .drug-card,html[data-theme="dark"] .condition-card,html[data-theme="dark"] .suggestions,html[data-theme="dark"] .search-composer,html[data-theme="dark"] .app-drawer,html[data-theme="dark"] .drug-modal{background:#24272C;border-color:#3A3F47}
-html[data-theme="dark"] .suggestion,html[data-theme="dark"] .page-nav,html[data-theme="dark"] .page-tab.active,html[data-theme="dark"] .group-chip,html[data-theme="dark"] .letter-chip{background:#2B3036;border-color:#424952}
-html[data-theme="dark"] .modal-close{background:#30363D;color:#F2F5F8;border-color:#4A535D}
+html[data-theme="dark"]{--paper:#18191A;--white:#3A3B3C;--line:#3E4042;--shadow:0 18px 60px rgba(0,0,0,.32)}
+html[data-theme="dark"] body,html[data-theme="dark"] .topbar{background:#18191A}
+html[data-theme="dark"] .drug-card,html[data-theme="dark"] .condition-card,html[data-theme="dark"] .suggestions,html[data-theme="dark"] .search-composer,html[data-theme="dark"] .app-drawer,html[data-theme="dark"] .drug-modal{background:#242526;border-color:#3E4042}
+html[data-theme="dark"] .suggestion,html[data-theme="dark"] .page-nav,html[data-theme="dark"] .page-tab.active,html[data-theme="dark"] .group-chip,html[data-theme="dark"] .letter-chip{background:#2E2F31;border-color:#4E4F50}
+html[data-theme="dark"] .modal-close{background:#3A3B3C;color:#F2F5F8;border-color:#4E4F50}
 html[data-theme="dark"] .brand-mark,html[data-theme="dark"] .footer-brand .brand-mark{background:transparent}
 
 /* Facebook-like dark palette with stronger contrast for medical information. */
-html[data-theme="dark"]{color-scheme:dark;--branding-color:#4C9AFF;--paper:#121212;--white:#2C2C2E;--ink:#F5F5F7;--ink-soft:#D5D7DC;--muted:#AEB4BE;--faint:#9BA1AA;--line:#3A3A3C;--line-strong:#4E4E52;--blue:#0A6FD1;--blue-dark:#0A84FF;--blue-light:#1B2F44;--link:#8CC5FF;--surface-soft:#242426;--success:#2ECC71;--success-ink:#57D98A;--danger:#E74C3C;--danger-ink:#FF8A80;--focus:#8CC5FF;--shadow:0 18px 55px rgba(0,0,0,.42)}
+html[data-theme="dark"]{color-scheme:dark;--branding-color:#4C9AFF;--paper:#18191A;--white:#242526;--ink:#E4E6EB;--ink-soft:#D5D7DC;--muted:#B0B3B8;--faint:#9BA1AA;--line:#3E4042;--line-strong:#4E4F50;--blue:#0A6FD1;--blue-dark:#0A84FF;--blue-light:#3A3B3C;--link:#8CC5FF;--surface-soft:#2E2F31;--success:#2ECC71;--success-ink:#57D98A;--danger:#E74C3C;--danger-ink:#FF8A80;--focus:#8CC5FF;--shadow:0 18px 55px rgba(0,0,0,.42)}
 html[data-theme="dark"] body,html[data-theme="dark"] .topbar{background:var(--paper);color:var(--ink)}
 html[data-theme="dark"] .drug-card,html[data-theme="dark"] .condition-card,html[data-theme="dark"] .search-composer,html[data-theme="dark"] .suggestions,html[data-theme="dark"] .app-drawer,html[data-theme="dark"] .drug-modal{background:var(--white);border-color:var(--line);color:var(--ink)}
 html[data-theme="dark"] .suggestion,html[data-theme="dark"] .page-nav,html[data-theme="dark"] .page-tab.active,html[data-theme="dark"] .group-chip,html[data-theme="dark"] .letter-chip,html[data-theme="dark"] .fact,html[data-theme="dark"] .safety-section{background:var(--surface-soft);border-color:var(--line-strong);color:var(--ink)}
@@ -189,7 +189,7 @@ html[data-theme="dark"] .search-btn{width:44px;min-width:44px;padding:0;display:
 html[data-theme="dark"] .search-btn{background:#2D88FF}
 /* Keep the medicine mechanism callout readable against its dark modal surface. */
 html[data-theme="dark"] .detail-panel h3{color:#8CC8FF}
-html[data-theme="dark"] .detail-panel .detail-lead{background:#263951;color:#F2F6FA;border-color:#79B8F2}
+html[data-theme="dark"] .detail-panel .detail-lead{background:#3A3B3C;color:#F2F6FA;border-color:#79B8F2}
 html[data-theme="dark"] .detail-panel .no-clinical{background:#30343A;color:#E4E6EB;border-color:#697783}
 html[data-theme="dark"] .drug-group-trail{color:#AAB7C4}
 html[data-theme="dark"] .drug-group-trail button{color:#8CC8FF}
@@ -205,7 +205,7 @@ html[data-theme="dark"] .drug-group-info .drug-group-info-note{border-color:#3E4
 .about-notices .disclaimer-strip{margin:0 0 12px}
 .about-notices .safety-section{margin:0}
 .drawer-safety-note{margin:0 0 13px;padding:10px 11px;border-radius:9px;background:#f2f7fb;color:#60798d;font-size:.625rem;line-height:1.55}
-html[data-theme="dark"] .drawer-safety-note{background:#30363D;color:#E4E6EB}
+html[data-theme="dark"] .drawer-safety-note{background:#3A3B3C;color:#E4E6EB}
 @media(max-width:760px){.about-notices .disclaimer-strip{margin-bottom:10px}}
 .suggestions-page{max-width:760px;margin:30px auto 55px;padding:0 20px 38px}
 .suggestions-page h1{margin:8px 0 7px;color:var(--ink);font-size:clamp(1.5625rem,4vw,2.125rem);line-height:1.25}
@@ -223,7 +223,7 @@ html[data-theme="dark"] .drawer-safety-note{background:#30363D;color:#E4E6EB}
 .suggestion-fallback button,.suggestion-fallback a{display:inline-block;margin:4px 8px 0 0;border:0;border-radius:7px;background:var(--blue);color:#fff;padding:8px 12px;font:600 .75rem 'DM Sans',sans-serif;text-decoration:none;cursor:pointer}
 .suggestion-fallback #suggestionCopyStatus{display:block;margin-top:8px;color:var(--muted)}
 html[data-theme="dark"] .suggestion-form input,html[data-theme="dark"] .suggestion-form textarea{background:#18191A;color:#E4E6EB;border-color:#4A4B4D}
-html[data-theme="dark"] .suggestion-form input:focus,html[data-theme="dark"] .suggestion-form textarea:focus{border-color:#4599FF;box-shadow:0 0 0 3px #263951}
+html[data-theme="dark"] .suggestion-form input:focus,html[data-theme="dark"] .suggestion-form textarea:focus{border-color:#4599FF;box-shadow:0 0 0 3px #3A3B3C}
 @media(max-width:620px){.suggestions-page{margin-top:22px;padding:0 4px 32px}.suggestion-form{padding:15px}}
 .new-medicine-cta{display:flex;justify-content:flex-start;margin-top:9px}
 .new-medicine-button{display:inline-flex;align-items:center;gap:9px;min-height:38px;padding-block:7px;padding-inline:8px 13px;border:1px solid var(--line-strong);border-radius:10px;background:var(--white);color:var(--link);font:600 .8125rem var(--font-ui);cursor:pointer;transition:background .18s,border-color .18s}
@@ -303,10 +303,10 @@ html[data-theme="dark"] .wiki-summary{color:#B0B3B8}
 html[data-theme="dark"] .wiki-summary h4{color:#8CC8FF}
 html[data-theme="dark"] .wiki-summary .wiki-sections{border-color:#3E4042}
 html[data-theme="dark"] .wiki-summary .wiki-sections section+section{border-color:#3E4042}
-html[data-theme="dark"] .wiki-summary .wiki-source-note{color:#9BA9B8}
+html[data-theme="dark"] .wiki-summary .wiki-source-note{color:#B0B3B8}
 html[data-theme="dark"] .detail-sources{border-color:#3E4042}
 html[data-theme="dark"] .detail-sources h3{color:#9DD2FF}
-html[data-theme="dark"] .detail-links a{background:#172b40;color:#82bdff;border-color:#30475d}
+html[data-theme="dark"] .detail-links a{background:#2E2F31;color:#82bdff;border-color:#4E4F50}
 
 /* Lab detail: quick facts, encyclopedia and sources. */
 .lab-detail-meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 15px}
@@ -325,14 +325,14 @@ html[data-theme="dark"] .detail-links a{background:#172b40;color:#82bdff;border-
 /* Detail reading: condition encyclopedia link, medicine sources, lab wiki notes. */
 .condition-overview-summary .wiki-article-link{display:inline-block;margin-top:8px;color:#2678ae;font-size:.6875rem;text-decoration:none}
 .condition-overview-summary .wiki-article-link:hover{text-decoration:underline}
-html[data-theme="dark"] .condition-overview-summary{background:#172b40;border-color:#30475d}
+html[data-theme="dark"] .condition-overview-summary{background:#2E2F31;border-color:#4E4F50}
 html[data-theme="dark"] .condition-overview-summary>h3{color:#9DD2FF}
 html[data-theme="dark"] .condition-overview-summary h4{color:#8CC8FF}
-html[data-theme="dark"] .condition-overview-summary section{border-color:#30475d}
+html[data-theme="dark"] .condition-overview-summary section{border-color:#4E4F50}
 html[data-theme="dark"] .condition-overview-summary .wiki-article-link{color:#82bdff}
 #modalSources{margin-top:16px}
 #modalSources .wiki-source-note{margin:8px 0 0;color:#8193a3;font-size:.5625rem;line-height:1.6}
-html[data-theme="dark"] #modalSources .wiki-source-note{color:#9BA9B8}
+html[data-theme="dark"] #modalSources .wiki-source-note{color:#B0B3B8}
 .lab-test-detail .lab-reference .wiki-article-link{display:inline-block;margin-top:7px;color:var(--blue);font-size:.6875rem;text-decoration:none}
 .lab-test-detail .lab-reference .wiki-source-note{color:var(--muted);font-size:.625rem;line-height:1.6}
 .lab-test-detail .lab-reference section+section{border-top:1px solid var(--line);padding-top:4px;margin-top:6px}
@@ -377,7 +377,7 @@ html[data-theme="dark"] .condition-sources-heading{color:#8CC8FF}
 .related-sort select:focus-visible{border-color:#70add9;box-shadow:0 0 0 3px #dceefa}
 .related-sort-chevron{position:absolute;top:50%;inset-inline-end:10px;transform:translateY(-50%);color:var(--muted);font-size:.9375rem;line-height:1;pointer-events:none}
 html[dir="rtl"] .related-sort select{padding:0 11px 0 30px}
-html[data-theme="dark"] .related-sort select:focus-visible{border-color:#4599FF;box-shadow:0 0 0 3px #263951}
+html[data-theme="dark"] .related-sort select:focus-visible{border-color:#4599FF;box-shadow:0 0 0 3px #3A3B3C}
 .related-status{font-size:.625rem;color:#8194a4;line-height:1.5}
 .related-list{display:grid;gap:7px}
 .related-card{width:100%;display:flex;align-items:center;gap:12px;border:1px solid #dde9f2;border-radius:11px;background:#fff;padding:10px 12px;color:inherit;font:inherit;text-align:start;cursor:pointer;transition:border-color .16s,background .16s,box-shadow .16s}
@@ -398,28 +398,28 @@ html[dir="rtl"] .related-card-arrow{transform:scaleX(-1)}
 html[dir="rtl"] .related-filter input{text-align:right}
 html[data-theme="dark"] .related-panel{background:#242526;border-color:#3E4042;color:#E4E6EB}
 html[data-theme="dark"] .related-head{border-color:#3E4042}
-html[data-theme="dark"] .related-close{background:#30363D;border-color:#4A535D;color:#F2F5F8}
-html[data-theme="dark"] .related-kicker{background:#172b40;color:#82bdff}
-html[data-theme="dark"] .related-current,html[data-theme="dark"] .related-status,html[data-theme="dark"] .related-card-meta{color:#9BA9B8}
+html[data-theme="dark"] .related-close{background:#3A3B3C;border-color:#4E4F50;color:#F2F5F8}
+html[data-theme="dark"] .related-kicker{background:#2E2F31;color:#82bdff}
+html[data-theme="dark"] .related-current,html[data-theme="dark"] .related-status,html[data-theme="dark"] .related-card-meta{color:#B0B3B8}
 html[data-theme="dark"] .related-panel h2,html[data-theme="dark"] .related-card-name{color:#F2F5F8}
 html[data-theme="dark"] .related-intro{color:#C7CFD8}
 html[data-theme="dark"] .related-note{background:#26323d;border-color:#4d7a97;color:#C7D4DF}
 html[data-theme="dark"] .related-filter input{background:#18191A;border-color:#4A4B4D;color:#E4E6EB}
-html[data-theme="dark"] .related-filter input::placeholder{color:#9BA9B8}
-html[data-theme="dark"] .related-filter input:focus{border-color:#4599FF;box-shadow:0 0 0 3px #263951}
-html[data-theme="dark"] .related-card{background:#2B3036;border-color:#424952}
+html[data-theme="dark"] .related-filter input::placeholder{color:#B0B3B8}
+html[data-theme="dark"] .related-filter input:focus{border-color:#4599FF;box-shadow:0 0 0 3px #3A3B3C}
+html[data-theme="dark"] .related-card{background:#2E2F31;border-color:#4E4F50}
 html[data-theme="dark"] .related-card:hover{background:#32383F;border-color:#5a6d7e;box-shadow:0 4px 12px #00000033}
 html[data-theme="dark"] .related-card-ingredient{color:#B0B3B8}
 html[data-theme="dark"] .related-card-side b{color:#8CC8FF}
-html[data-theme="dark"] .related-empty{border-color:#424952;color:#9BA9B8}
+html[data-theme="dark"] .related-empty{border-color:#4E4F50;color:#B0B3B8}
 html[data-theme="dark"] .related-disclaimer{border-color:#3E4042;color:#C7B299}
-html[data-theme="dark"] .related-action{background:#2B3036;border-color:#424952;color:#E4E6EB}
+html[data-theme="dark"] .related-action{background:#2E2F31;border-color:#4E4F50;color:#E4E6EB}
 html[data-theme="dark"] .related-action:hover:not(:disabled){background:#32383F;border-color:#5a6d7e}
 html[data-theme="dark"] .related-action:disabled{background:#262a2f;opacity:.6}
 html[data-theme="dark"] .related-action-label{color:#8CC8FF}
-html[data-theme="dark"] .related-action-count{background:#172b40;color:#82bdff}
+html[data-theme="dark"] .related-action-count{background:#2E2F31;color:#82bdff}
 html[data-theme="dark"] .related-action-hint{color:#B0B3B8}
-html[data-theme="dark"] #relatedMore{background:transparent;border-color:#4A535D;color:#8CC8FF}
+html[data-theme="dark"] #relatedMore{background:transparent;border-color:#4E4F50;color:#8CC8FF}
 @media(max-width:760px){
   .related-panel{width:100%;max-height:92dvh;border-radius:18px 18px 0 0;border:0}
   .related-head{padding:11px 16px 8px}
@@ -475,11 +475,11 @@ html[data-theme="dark"] .drug-group-wiki>h4,html[data-theme="dark"] .drug-group-
 html[data-theme="dark"] .drug-group-wiki .wiki-sections{border-color:#3E4042}
 html[data-theme="dark"] .drug-group-wiki .wiki-sections section+section{border-color:#3E4042}
 html[data-theme="dark"] .drug-group-wiki .wiki-article-link{color:#82bdff}
-html[data-theme="dark"] .drug-group-wiki .wiki-source-note,html[data-theme="dark"] .drug-group-wiki .wiki-loading{color:#9BA9B8}
+html[data-theme="dark"] .drug-group-wiki .wiki-source-note,html[data-theme="dark"] .drug-group-wiki .wiki-loading{color:#B0B3B8}
 html[data-theme="dark"] .drug-group-sources{border-color:#3E4042}
-html[data-theme="dark"] .condition-images{background:#172b40;border-color:#30475d}
+html[data-theme="dark"] .condition-images{background:#2E2F31;border-color:#4E4F50}
 html[data-theme="dark"] .condition-images h3{color:#9DD2FF}
-html[data-theme="dark"] .condition-images .wiki-source-note{color:#9BA9B8}
+html[data-theme="dark"] .condition-images .wiki-source-note{color:#B0B3B8}
 html[dir="rtl"] .drug-group-wiki,html[dir="rtl"] .drug-group-sources,html[dir="rtl"] .condition-images{text-align:right}
 @media(max-width:600px){
   .condition-images .medical-image-result img,.lab-images .medical-image-result img{height:96px}
@@ -490,7 +490,7 @@ html[dir="rtl"] .drug-group-wiki,html[dir="rtl"] .drug-group-sources,html[dir="r
 /* Wildcard search hint: * or a space replaces forgotten letters. */
 .wildcard-hint{margin:7px 2px 0;color:#7f93a5;font-size:.625rem;line-height:1.6;text-align:start}
 .condition-search-wrap+.wildcard-hint{margin:9px 2px 0}
-html[data-theme="dark"] .wildcard-hint{color:#9BA9B8}
+html[data-theme="dark"] .wildcard-hint{color:#B0B3B8}
 
 /* Medicine cards and details use the Dawaya mark instead of product illustrations. */
 .medicine-picture.logo-picture{background:linear-gradient(145deg,#f7fbff,#e9f3fb);border-color:#dceaf4}
@@ -498,9 +498,9 @@ html[data-theme="dark"] .wildcard-hint{color:#9BA9B8}
 .medicine-thumbnail .logo-picture img{width:38px;height:38px;border-radius:9px;box-shadow:none}
 .modal-image .logo-picture{background:linear-gradient(145deg,#eff8fe,#e4f0f9)}
 .modal-image .logo-picture img{width:94px;height:94px;border-radius:20px;box-shadow:0 7px 20px #1b547526}
-html[data-theme="dark"] .medicine-picture.logo-picture{background:#000;border-color:#3A3A3C}
-html[data-theme="dark"] .modal-image .logo-picture{background:#000}
-html[data-theme="dark"] .modal-image .logo-picture img,html[data-theme="dark"] .medicine-picture.logo-picture img{background:#000;box-shadow:none}
+html[data-theme="dark"] .medicine-picture.logo-picture{background:#18191A;border-color:#3E4042}
+html[data-theme="dark"] .modal-image .logo-picture{background:#18191A}
+html[data-theme="dark"] .modal-image .logo-picture img,html[data-theme="dark"] .medicine-picture.logo-picture img{background:#18191A;box-shadow:none}
 
 /* Responsive read-more previews for automatically loaded details */
 .read-more{--read-more-lines:10;--read-more-fade:#fbfdff}
@@ -514,7 +514,7 @@ html[data-theme="dark"] .modal-image .logo-picture img,html[data-theme="dark"] .
 .condition-overview-summary.read-more{--read-more-fade:#f8fbfd}
 html[dir="rtl"] .read-more-toggle{font-family:'Noto Naskh Arabic','DM Sans',sans-serif}
 html[data-theme="dark"] .read-more{--read-more-fade:#242526}
-html[data-theme="dark"] .condition-overview-summary.read-more{--read-more-fade:#172b40}
+html[data-theme="dark"] .condition-overview-summary.read-more{--read-more-fade:#2E2F31}
 html[data-theme="dark"] .read-more-toggle{background:#2b3a48;border-color:#405464;color:#9dd2ff}
 html[data-theme="dark"] .read-more-toggle:hover{background:#334658;border-color:#54708a}
 @media(min-width:720px){.read-more{--read-more-lines:13}}
@@ -1159,7 +1159,7 @@ html[data-theme] body .search-top .search-composer{width:100%}
 .bottom-nav-item .nav-icon{width:21px;height:21px;margin-bottom:1px}
 .bottom-nav-ai{color:var(--link)}
 .bottom-nav-ai .nav-ai-badge{display:grid;place-items:center;width:32px;height:32px;margin:-4px 0 1px;border-radius:999px;background:var(--blue-light);color:var(--link);border:1px solid var(--line);box-shadow:0 4px 10px rgba(0,90,190,.12)}
-html[data-theme="dark"] .bottom-nav-ai .nav-ai-badge{border-color:#2C4F76;color:#9CCBFF}
+html[data-theme="dark"] .bottom-nav-ai .nav-ai-badge{border-color:#4E4F50;color:#9CCBFF}
 .bottom-nav-ai .nav-ai-badge .nav-icon{width:22px;height:22px;margin:0}
 .bottom-nav-ai.is-active .nav-ai-badge{box-shadow:0 0 0 2px var(--white),0 0 0 4px var(--blue-light)}
 .bottom-nav-item.is-active{background:var(--blue-light);color:var(--link)}
@@ -1347,7 +1347,7 @@ html[data-theme="dark"] .clinical-status[data-state="warning"]{border-color:#6D5
 
 /* Medication reminder timeline: mobile feed + desktop table from one schedule state. */
 .reminders-page{--rem-upcoming-ink:#52606D;--rem-upcoming-bg:#F1F3F5;--rem-upcoming-border:#D5DBE2;--rem-due-ink:#0B5FAE;--rem-due-bg:#EAF2FB;--rem-due-border:#B8D6EF;--rem-taken-ink:#137A43;--rem-taken-bg:#EAF7F0;--rem-taken-border:#B6E2C8;--rem-overdue-ink:#A8291F;--rem-overdue-bg:#FDF0EF;--rem-overdue-border:#EFC3BF}
-html[data-theme="dark"] .reminders-page{--rem-upcoming-ink:#C3CBD4;--rem-upcoming-bg:#2B3036;--rem-upcoming-border:#4A525C;--rem-due-ink:#8CC5FF;--rem-due-bg:#1B2F44;--rem-due-border:#37536B;--rem-taken-ink:#7FDCA6;--rem-taken-bg:#17301F;--rem-taken-border:#2F6047;--rem-overdue-ink:#FF9E94;--rem-overdue-bg:#341C1A;--rem-overdue-border:#6E3A3A}
+html[data-theme="dark"] .reminders-page{--rem-upcoming-ink:#C3CBD4;--rem-upcoming-bg:#2E2F31;--rem-upcoming-border:#4A525C;--rem-due-ink:#8CC5FF;--rem-due-bg:#3A3B3C;--rem-due-border:#37536B;--rem-taken-ink:#7FDCA6;--rem-taken-bg:#17301F;--rem-taken-border:#2F6047;--rem-overdue-ink:#FF9E94;--rem-overdue-bg:#341C1A;--rem-overdue-border:#6E3A3A}
 .reminders-layout{display:grid;gap:18px;margin-top:18px;min-width:0}
 .reminders-main{display:grid;gap:13px;min-width:0}
 .reminders-page .clinical-back{margin-bottom:12px}
@@ -1590,7 +1590,7 @@ html[data-theme] body .search-by{display:block;height:auto;min-height:0;padding:
 .search-by-chip{appearance:none;-webkit-appearance:none;border:1px solid var(--line-strong);background:var(--white);color:var(--muted);border-radius:999px;padding:7px 12px;min-height:36px;display:inline-flex;align-items:center;font-family:var(--font-ui);font-size:.6875rem;font-weight:600;line-height:1.25;cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
 .search-by-chip:hover{border-color:var(--link);color:var(--link)}
 .search-by-chip.is-active{background:var(--blue);border-color:var(--blue);color:#fff}
-html[data-theme="dark"] .search-by-chip{background:#20252c;border-color:#3a3f47;color:#c7d0da}
+html[data-theme="dark"] .search-by-chip{background:#20252c;border-color:#3E4042;color:#c7d0da}
 html[data-theme="dark"] .search-by-chip.is-active{background:var(--blue);border-color:var(--blue);color:#fff}
 @media(max-width:760px){.search-by-chip{min-height:40px;padding:8px 13px}}
 /* Rows inside the search-by menu. */
@@ -1598,7 +1598,7 @@ html[data-theme="dark"] .search-by-chip.is-active{background:var(--blue);border-
 .search-by-chips .search-by-chip:hover{background:var(--blue-light);border-color:transparent;color:var(--link)}
 .search-by-chips .search-by-chip.is-active{background:var(--blue);border-color:var(--blue);color:#fff}
 .search-by-chips .search-by-chip.is-active:after{content:'✓';margin-inline-start:auto;font-weight:700}
-html[data-theme="dark"] .search-by-toggle,html[data-theme="dark"] .search-by-chips{background:#20252c;border-color:#3a3f47}
+html[data-theme="dark"] .search-by-toggle,html[data-theme="dark"] .search-by-chips{background:#20252c;border-color:#3E4042}
 html[data-theme="dark"] .search-by-toggle.is-open{background:#243040;border-color:var(--link)}
 html[data-theme="dark"] .search-by-chips .search-by-chip{background:transparent;border-color:transparent;color:#c7d0da}
 html[data-theme="dark"] .search-by-chips .search-by-chip:hover{background:#2a3644;color:#e6edf4}
@@ -1657,12 +1657,12 @@ body[data-view="home"] .search-by{display:none!important}
 .image-browser-button{flex:0 1 auto;color:var(--link)}
 .image-gallery-status{margin:8px auto 0;max-width:390px;font-size:.6875rem;line-height:1.55;color:var(--muted,#5f7d92)}
 .image-gallery-status[hidden]{display:none}
-html[data-theme="dark"] .image-search-button{background:#172b40;border-color:#30475d;color:#82bdff}
+html[data-theme="dark"] .image-search-button{background:#2E2F31;border-color:#4E4F50;color:#82bdff}
 
 /* Visible voice-search feedback under the search composer. */
 .voice-status-line{display:none;position:absolute;left:12px;right:12px;top:calc(100% + 7px);z-index:30;background:var(--white,#fff);border:1px solid var(--line,#dae7f1);border-radius:10px;box-shadow:0 10px 24px #193f5d1f;padding:9px 12px;font-size:.75rem;line-height:1.45;color:var(--ink,#27445c)}
 .voice-status-line:not(:empty){display:block}
-html[data-theme="dark"] .voice-status-line{background:#1c1c1e;border-color:#383b42;color:#e6edf4}
+html[data-theme="dark"] .voice-status-line{background:#242526;border-color:#3E4042;color:#e6edf4}
 @media(max-width:600px){.voice-status-line{left:6px;right:6px;font-size:.8125rem}}
 
 /* Second-level browsing on the conditions and laboratory pages. */
@@ -1795,6 +1795,7 @@ html[data-theme="dark"] .privacy-history-remove[data-armed="true"]{background:#b
 .privacy-switch-track::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s ease}
 .privacy-switch input:checked+.privacy-switch-track{background:var(--blue)}
 .privacy-switch input:checked+.privacy-switch-track::after{transform:translateX(20px)}
+html[dir="rtl"] .privacy-switch-track::after{left:auto;right:3px}
 html[dir="rtl"] .privacy-switch input:checked+.privacy-switch-track::after{transform:translateX(-20px)}
 .privacy-switch input:focus-visible+.privacy-switch-track{outline:3px solid var(--focus);outline-offset:2px}
 .privacy-switch-label{color:var(--ink);font-size:.9375rem;font-weight:600}
@@ -1864,7 +1865,7 @@ html[dir="rtl"] .settings-link span{transform:scaleX(-1)}
 .assistant-head-top{display:flex;align-items:flex-start;gap:14px}
 .assistant-head-copy{flex:1 1 auto;min-width:0;max-width:620px}
 .assistant-brand{flex:none;display:grid;place-items:center;width:50px;height:50px;border-radius:16px;background:var(--blue-light);color:var(--link);border:1px solid var(--line);box-shadow:0 6px 16px rgba(0,90,190,.1)}
-html[data-theme="dark"] .assistant-brand{border-color:#2C4F76;color:#9CCBFF}
+html[data-theme="dark"] .assistant-brand{border-color:#4E4F50;color:#9CCBFF}
 .assistant-brand svg{display:block;width:32px;height:32px}
 .assistant-head h2{margin:6px 0 8px;color:var(--ink);font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.22;letter-spacing:-.02em}
 .assistant-head p{margin:0;color:var(--muted);font-size:.875rem;line-height:1.7}
@@ -1961,7 +1962,7 @@ html[dir="rtl"][data-theme] body .ai-menu-settings[aria-expanded="true"]{box-sha
 html[dir="rtl"] .ai-msg-user .ai-bubble{border-radius:16px 16px 16px 6px}
 .ai-msg-bot{align-items:flex-start}
 .ai-avatar{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--blue-light);color:var(--link);border:1px solid var(--line);font-size:1rem;font-weight:700;margin-top:2px}
-html[data-theme="dark"] .ai-avatar{border-color:#2C4F76;color:#9CCBFF}
+html[data-theme="dark"] .ai-avatar{border-color:#4E4F50;color:#9CCBFF}
 .ai-avatar svg{display:block;width:20px;height:20px}
 .ai-bubble{min-width:0;max-width:calc(100% - 42px);padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:var(--white);color:var(--ink);font-size:.875rem;line-height:1.75}
 .ai-msg-bot .ai-bubble{border-start-start-radius:6px}
@@ -2174,13 +2175,13 @@ html[dir="rtl"] .app-back-icon{transform:scaleX(-1)}
 .preg-source-links a{color:var(--blue-dark);font-weight:600;text-decoration:none}
 .preg-source-links a:hover{text-decoration:underline}
 .preg-disclaimer{margin-top:28px}
-[data-theme="dark"] .preg-explain-card,[data-theme="dark"] .preg-card,[data-theme="dark"] .preg-product{background:#152a45;border-color:#2f4a70}
-[data-theme="dark"] .preg-explain-card h3,[data-theme="dark"] .preg-card-head h3,[data-theme="dark"] .preg-explain h2,[data-theme="dark"] .preg-search-panel h2{color:#e6eef9}
-[data-theme="dark"] .preg-selected{background:#14305a;border-color:#1b5fc2}
-[data-theme="dark"] .preg-labelwins{background:#14305a;color:#e6eef9}
-[data-theme="dark"] .preg-badge{background:#14305a;color:#8cc2ff}
-[data-theme="dark"] .preg-search-row input,[data-theme="dark"] .preg-search-row button{background:#152a45;color:#e6eef9;border-color:#2f4a70}
-[data-theme="dark"] .preg-product strong{color:#e6eef9}
+[data-theme="dark"] .preg-explain-card,[data-theme="dark"] .preg-card,[data-theme="dark"] .preg-product{background:#2E2F31;border-color:#4E4F50}
+[data-theme="dark"] .preg-explain-card h3,[data-theme="dark"] .preg-card-head h3,[data-theme="dark"] .preg-explain h2,[data-theme="dark"] .preg-search-panel h2{color:#E4E6EB}
+[data-theme="dark"] .preg-selected{background:#3A3B3C;border-color:#1b5fc2}
+[data-theme="dark"] .preg-labelwins{background:#3A3B3C;color:#E4E6EB}
+[data-theme="dark"] .preg-badge{background:#3A3B3C;color:#8cc2ff}
+[data-theme="dark"] .preg-search-row input,[data-theme="dark"] .preg-search-row button{background:#2E2F31;color:#E4E6EB;border-color:#4E4F50}
+[data-theme="dark"] .preg-product strong{color:#E4E6EB}
 [data-theme="dark"] .preg-block p{color:#d6e2f2}
 
 /* ---------- Drugcopeia clinician features ---------- */
@@ -2265,7 +2266,7 @@ html[data-theme="dark"] .feat-save{color:#34d399}
 
 /* Drugcopeia visual system, revision 175. Kept at the end for legacy compatibility. */
 :root{--branding-color:#1b5fc2;--blue:#1b5fc2;--blue-dark:#124a9c;--blue-light:#e3eefc;--link:#1a56b0;--focus:#1b5fc2;--ink:#14294a;--ink-soft:#34507a;--muted:#5a6f8c;--faint:#6b7e99;--paper:#f2f6fc;--white:#fff;--line:#d9e4f3;--line-strong:#b9cce6;--surface-soft:#eaf1fb;--shadow:0 18px 50px rgba(20,60,130,.09);--radius-card:20px}
-html[data-theme="dark"]{--branding-color:#7db4ff;--blue:#3d86e8;--blue-dark:#7db4ff;--blue-light:#14305a;--link:#8cc2ff;--focus:#8cc2ff;--ink:#eaf2fd;--ink-soft:#cddcf2;--muted:#a3b9d6;--faint:#8ea6c6;--paper:#0b1626;--white:#12233b;--line:#2a4266;--line-strong:#43628f;--surface-soft:#172d4b;--shadow:0 18px 50px rgba(0,0,0,.25)}
+html[data-theme="dark"]{--branding-color:#7db4ff;--blue:#3d86e8;--blue-dark:#7db4ff;--blue-light:#3A3B3C;--link:#8cc2ff;--focus:#8cc2ff;--ink:#E4E6EB;--ink-soft:#D5D7DC;--muted:#B0B3B8;--faint:#9BA1AA;--paper:#18191A;--white:#242526;--line:#3E4042;--line-strong:#4E4F50;--surface-soft:#2E2F31;--shadow:0 18px 50px rgba(0,0,0,.25)}
 html[data-theme] body{background:var(--paper);color:var(--ink)}
 html[data-theme] body .topbar{background:var(--white);border-color:var(--line)}
 html[data-theme] .brand-mark{width:42px;height:42px;object-fit:contain;border-radius:12px;filter:none}
@@ -2313,7 +2314,7 @@ html[data-theme] .preg-product-list button>*{display:block;min-width:0;max-width
 html[data-theme] .preg-product-list button .preg-product-sci{margin-top:6px}
 html[data-theme] .drug-search-logo{display:inline-flex;flex:0 0 44px;width:44px;height:44px;align-items:center;justify-content:center;border-radius:10px;overflow:hidden;background:#fff}
 html[data-theme] .drug-search-logo img{display:block;width:44px;height:44px;object-fit:contain}
-html[data-theme="dark"] .drug-search-logo{background:#000}
+html[data-theme="dark"] .drug-search-logo{background:#18191A}
 html[data-theme="dark"] .drug-search-logo img{content:url('assets/red-crescent-rx-dark-96.png')}
 html[data-theme] .preg-product-list button>.drug-search-logo{float:inline-start;margin-inline-end:10px;margin-bottom:4px;width:40px;height:40px}
 html[data-theme] .preg-product-list button>.drug-search-logo img{width:40px;height:40px}
@@ -2350,9 +2351,9 @@ html[data-theme] .browse-toggle:active{background:var(--blue-light)}
 .preg-cat-detail[hidden],.preg-cat-detail [hidden]{display:none}
 .commons-panel{margin-top:10px;padding-top:0;border-top:0}
 .medicine-image-tools .image-search-button{flex:1 1 auto}
-[data-theme="dark"] .preg-search-panel,[data-theme="dark"] .preg-cat-btn,[data-theme="dark"] .preg-cat-detail{background:#152a45;border-color:#2f4a70}
-[data-theme="dark"] .preg-cats-panel h2,[data-theme="dark"] .preg-cat-detail h3{color:#e6eef9}
-html[data-theme] .lab-specialties h2.browse-toggle{font-size:.8125rem;font-weight:700;letter-spacing:.06em;line-height:1.4}
+[data-theme="dark"] .preg-search-panel,[data-theme="dark"] .preg-cat-btn,[data-theme="dark"] .preg-cat-detail{background:#2E2F31;border-color:#4E4F50}
+[data-theme="dark"] .preg-cats-panel h2,[data-theme="dark"] .preg-cat-detail h3{color:#E4E6EB}
+html[data-theme] .lab-specialties h2.browse-toggle{color:var(--muted);font-size:.75rem;font-weight:700;letter-spacing:.06em;line-height:1.4}
 
 /* r185: home shortcuts, labelled bottom bar */
 .home-shortcuts{gap:8px;overflow-x:auto;margin:0 0 12px;padding:2px 2px 6px;scrollbar-width:none}
@@ -2361,7 +2362,7 @@ html[data-theme] .lab-specialties h2.browse-toggle{font-size:.8125rem;font-weigh
 .home-shortcut{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:8px 14px;border:1px solid var(--line-strong);border-radius:999px;background:var(--white);color:var(--link);font:600 .8125rem/1.2 var(--font-ui);cursor:pointer;white-space:nowrap}
 .home-shortcut .nav-icon{width:18px;height:18px}
 .home-shortcut:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
-[data-theme="dark"] .home-shortcut{background:#152a45;border-color:#2f4a70}
+[data-theme="dark"] .home-shortcut{background:#2E2F31;border-color:#4E4F50}
 html[data-theme] .bottom-nav-item>span:not(.nav-ai-badge){position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;font:600 .625rem/1.1 var(--font-ui);padding:0}
 html[data-theme] .bottom-nav-item{min-height:52px;padding:6px 4px;gap:2px;border-radius:20px}
 html[data-theme] .bottom-nav-item .nav-icon{width:22px;height:22px}
@@ -2377,7 +2378,7 @@ html[data-theme] .bottom-nav-item .nav-ai-badge{width:26px;height:26px;padding:3
 .study-topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
 .study-topic{padding:8px 12px;border:1px solid var(--line-strong);border-radius:999px;background:var(--white);color:var(--link);font:600 .8125rem/1.2 var(--font-ui);cursor:pointer}
 .study-topic.is-on{background:var(--blue-light);border-color:var(--blue)}
-[data-theme="dark"] .study-topic{background:#152a45;border-color:#2f4a70}
+[data-theme="dark"] .study-topic{background:#2E2F31;border-color:#4E4F50}
 
 .feat-tile{display:grid;gap:4px}.feat-tile .calc-ic{font-size:1.5rem;line-height:1}.feat-tile .calc-d{font-weight:400;font-size:.8125rem;color:var(--ink-soft,#5b7488)}
 html[data-theme] body .modal-arabic{font-size:1.375rem;line-height:1.7;font-weight:600;color:var(--ink)}

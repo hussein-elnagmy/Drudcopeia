@@ -347,7 +347,7 @@ def check_web_network():
         ("host-not-allowlisted", "unknown hosts are refused"),
         ("XMLHttpRequest = blockedTransport", "XHR is blocked"),
         ("sendBeacon = blockedTransport", "sendBeacon is blocked"),
-        ("value === 'on'", "online is the default"),
+        ("    return false;\n  }\n\n  function setOffline", "online is the default and no stored switch can block the app"),
     ]
     for needle, why in required:
         if needle not in net:
@@ -1111,12 +1111,12 @@ def check_drift():
 def check_bundle():
     index_path = os.path.join(WEBAPP, "index.html")
     index = read(index_path)
-    for marker in ("id=\"privacyPage\"", "id=\"privacyOffline\"", "id=\"privacyWipe\"",
+    for marker in ("id=\"privacyPage\"", "id=\"privacyWipe\"",
                    "id=\"privacyHistory\"", "id=\"privacyHistoryList\"", "id=\"privacyHistoryClear\"",
                    "id=\"settingsHistory\"", "data-main-page=\"privacy\""):
         if marker not in index:
             add("privacy-screen", index_path, 0, "Privacy screen is missing %s" % marker)
-    for key in ("navPrivacy", "privacyTitle", "privacyCollectValue", "privacyOfflineTitle", "privacyWipe",
+    for key in ("navPrivacy", "privacyTitle", "privacyCollectValue", "privacyWipe",
                 "privacyHistoryTitle", "privacyHistoryOn", "privacyHistoryDelete",
                 "privacyHistoryClear", "privacyHistoryEmpty"):
         if read(os.path.join(WEBAPP, "app.js")).count(key + ":") < 2:

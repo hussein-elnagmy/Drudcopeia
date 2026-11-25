@@ -1528,14 +1528,14 @@ async function main() {
     (gallery[0].match(/fetchWithTimeout\([^\n]*\)/g) || []).forEach(call =>
       assert(/userInitiated:true/.test(call), `a commons request is not user-initiated: ${call.slice(0, 64)}`));
     assert(/action=query&generator=search&gsrnamespace=6&gsrsearch=\$\{encodeURIComponent\(term\)\}/.test(gallery[0]), 'the search is not scoped to the file namespace');
-    assert(/iiurlwidth=400&format=json/.test(gallery[0]), 'the thumbnail width or the reply format drifted');
+    assert(/iiurlwidth=400&cllimit=50&format=json/.test(gallery[0]), 'the thumbnail width or the reply format drifted');
     assert(/window\.DawayaNet\?\.isOffline\?\.\(\)/.test(gallery[0]), 'the gallery runs in offline mode');
     assert(/function commonsFile\(url\)\{[^}]*split\('\?'\)\[0\]/.test(app), 'a commons address keeps its query string');
     const rows = /function commonsRows\(payload,term\)\{[\s\S]*?\n  \}/.exec(app);
     assert(rows, 'commonsRows is missing');
     assert(/COMMONS_FILE_URL\.test\(original\)/.test(rows[0]) && /COMMONS_FILE_URL\.test\(preview\)/.test(rows[0]), 'Commons can hand back a host nobody allowed');
     assert(rows[0].indexOf('if(!/^image\\/') >= 0, 'a video or PDF could be rendered as a photo');
-    assert(/return rows\.slice\(0,8\)/.test(rows[0]) && /clean\(name\)\.indexOf\(lead\)<0/.test(rows[0]), 'the grid is uncapped, or admits files that are not this product');
+    assert(/return rows\.slice\(0,8\)/.test(rows[0]) && /title\.indexOf\(lead\)!==0/.test(rows[0]), 'the grid is uncapped, or admits files that are not this product');
     const hide = /function hideCommonsPhotos\(\)\{[\s\S]*?\n  \}/.exec(app);
     assert(hide && /revokeObjectURL/.test(hide[0]) && /closePhotoViewer\(\)/.test(hide[0]), 'hiding photos leaves the pictures in memory');
     assert(/hideCommonsPhotos\(\);\n    \$\('#commonsPanel'\)\.hidden=isCustom;/.test(app), 'the section is not reset, or stays open on a hand-added record');
