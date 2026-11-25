@@ -2636,7 +2636,7 @@ const CONDITION_SUBGROUPS={
       [`https://www.drugs.com/search.php?searchterm=${encodeURIComponent(searchTerm)}`,t('searchDrugsCom')],
       ['https://www.edaegypt.gov.eg/',t('sourceEda')]
     ];
-    $('#modalSources').innerHTML=`<h3>${esc(t('officialSourcesTitle'))}</h3><div class="detail-links">${officialSources.map(([href,label])=>`<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join('')}</div><p class="wiki-source-note">${esc(t('officialProductAdvice'))}</p>`;
+    $('#modalSources').innerHTML=`<details class="sources-box"><summary class="sources-toggle">${esc(t('officialSourcesTitle'))}</summary><div class="detail-links">${officialSources.map(([href,label])=>`<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join('')}</div><p class="wiki-source-note">${esc(t('officialProductAdvice'))}</p></details>`;
     document.querySelectorAll('.detail-tab').forEach(tab=>tab.classList.toggle('active',tab.dataset.panel==='overview'));
     ['overview','use','caution'].forEach(panel=>$('#'+panel+'Panel').hidden=panel!=='overview');
     const drugModal=modal.querySelector('.drug-modal');if(drugModal)drugModal.scrollTop=0;

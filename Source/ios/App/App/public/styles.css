@@ -2396,3 +2396,12 @@ html[data-theme] body .modal-arabic{font-size:1.375rem;line-height:1.7;font-weig
 .monograph-reference{border:1px solid var(--line,rgba(120,120,120,.35));border-radius:12px;padding:10px 12px;margin:14px 0;background:var(--soft,rgba(120,120,120,.06))}
 .monograph-ref-head{margin:0 0 4px}
 .monograph-caption{font-size:.78rem;opacity:.72;margin:6px 0 0}
+
+.sources-box{margin:0}
+.sources-toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--white);color:var(--link,#0b66c3);font:600 .9375rem/1.3 inherit;cursor:pointer;list-style:none}
+.sources-toggle::-webkit-details-marker{display:none}
+.sources-toggle::after{content:'▾';font-size:.9rem;transition:transform .16s}
+.sources-box[open] .sources-toggle::after{transform:rotate(180deg)}
+.sources-box .detail-links{margin-top:10px}
+html[data-theme] body .app-drawer .drawer-separator{height:2px;margin:14px 10px 10px}
+html[data-theme] body .app-drawer .drawer-kicker{margin-top:10px;font-size:.75rem;color:var(--muted)}

@@ -94,8 +94,8 @@
   function comparisonHtml(drug) {
     var c = SS.compare(drug, index());
     var h = '<section class="detail-block feat-compare" id="featCompare"><h3>' + esc(L('Price comparison of same-spec products', 'مقارنة أسعار المستحضرات المطابقة')) + '</h3>';
-    var note = L('Products compared match on active ingredient, strength, route, dosage form and release type. This is a price comparison only. Any change of medicine goes through the pharmacist or the prescriber.',
-      'المقارنة بين مستحضرات مطابقة في المادة الفعالة والتركيز وطريقة الاستعمال والشكل الدوائي ونوع الإطلاق. هي مقارنة أسعار فقط. أي تغيير في الدواء يكون عن طريق الصيدلي أو الطبيب.');
+    var note = L('Same ingredient, strength and form. Price comparison only. Ask a pharmacist or doctor before any change.',
+      'نفس المادة والتركيز والشكل الدوائي. مقارنة أسعار فقط. استشر الصيدلي أو الطبيب قبل أي تغيير.');
     if (c.status === 'unparsed') {
       var why = {
         strength: L('the strength is not stated in the product name', 'التركيز غير مذكور في اسم المنتج'),
