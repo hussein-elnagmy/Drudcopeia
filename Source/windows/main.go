@@ -18,8 +18,11 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"sync/atomic"
 	"time"
 )
+
+var lastRequest atomic.Int64
 
 //go:embed all:www
 var content embed.FS
@@ -141,6 +144,16 @@ func main() {
 		select {}
 	}
 
+	// Preferred: a real desktop window in this process (WebView2). Closing it
+	// ends the program. Falls back to an Edge/Chrome app window when the
+	// WebView2 runtime is not installed.
+	if err := runNativeWindow(a.url, a.dataDir); err == nil {
+		logger.Printf("native window closed; shutting down")
+		return
+	} else {
+		logger.Printf("native window unavailable, using browser app window: %v", err)
+	}
+
 	if reused {
 		if _, err := a.openWindow(); err != nil {
 			logger.Printf("could not open an app window: %v", err)
@@ -158,8 +171,19 @@ func main() {
 		os.Exit(1)
 	}
 
+	started := time.Now()
 	if err := cmd.Wait(); err != nil {
 		logger.Printf("app window finished: %v", err)
+	}
+	if time.Since(started) < 15*time.Second {
+		// The browser handed the window to another process and exited at once.
+		// Keep the local server alive while the window is still in use.
+		for {
+			time.Sleep(5 * time.Second)
+			if time.Since(time.Unix(0, lastRequest.Load())) > 2*time.Minute {
+				break
+			}
+		}
 	}
 	logger.Printf("window closed; shutting down")
 }
@@ -220,6 +244,7 @@ func (a *app) serve(ln net.Listener) {
 
 func withHeaders(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		lastRequest.Store(time.Now().UnixNano())
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		w.Header().Set("Referrer-Policy", "no-referrer")
 		// Same policy as the <meta> tag in webapp/index.html: self plus the
