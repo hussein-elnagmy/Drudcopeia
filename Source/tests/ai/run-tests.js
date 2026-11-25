@@ -993,26 +993,34 @@ async function main() {
      refusal when nothing supports it - the model never fills a gap from its own unverified
      knowledge, so the general-knowledge route is disabled by policy and these questions go
      to the no-data reply with the recognised official links instead. */
-  await test('a medicine nobody knows about is refused, never answered from general knowledge', async () => {
-    await readySetup('موضوع زوكسبلوميد مش موجود في قاعدة بيانات التطبيق، والأرجح إنه يسبب نعاس أو دوخة، فيستحسن يسأل الطبيب أو الصيدلي قبل ما ياخده مع أي دواء تاني');
+  /* November 2026: the owner asked for natural conversational answers, so a health question the
+     data cannot cover is answered as labelled general information, with the reference links and
+     the doctor note attached by code. Doses are still never shown. */
+  await test('a question the data cannot cover gets a labelled general answer with sources', async () => {
+    await readySetup('زوكسبلوميد ممكن يسبب نعاس أو دوخة عند بعض الناس، فيستحسن تسأل الطبيب أو الصيدلي قبل ما تاخده مع أي دواء تاني');
     const result = await ASSISTANT.ask('ما أعراض دواء زوكسبلوميد');
-    equal(result.type, 'noData', `type ${result.type} ${JSON.stringify(result.steps)}`);
-    equal(result.text, messagesAr.noData.body, 'fixed no-data message');
-    equal(result.modelCalled, false, 'the model was not asked to invent an answer');
-    equal(mock.answerGenerations().length, 0, 'no generation ran');
-    assert(result.steps.includes('general:skipped'), `the general route was skipped by policy: ${JSON.stringify(result.steps)}`);
+    equal(result.type, 'general', `type ${result.type} ${JSON.stringify(result.steps)}`);
+    equal(result.modelCalled, true, 'the model answered');
+    assert(result.label && result.note, 'the answer is labelled as general information');
     assert((result.links || []).length >= 4, `reference links ${JSON.stringify((result.links || []).map(link => link.url))}`);
     equal(result.disclaimer, messagesAr.disclaimer, 'disclaimer');
   });
 
-  await test('an unsourced dose is never shown, because the general route stays off', async () => {
+  await test('an unsourced dose is never shown, even on the general route', async () => {
     await readySetup('زوكسبلوميد جرعته قرص 500 ملجم مرتين يوميا ويسبب نعاس');
     const result = await ASSISTANT.ask('ما أعراض دواء زوكسبلوميد');
     equal(result.type, 'noData', `type ${result.type} ${JSON.stringify(result.steps)}`);
     equal(result.text, messagesAr.noData.body, 'fixed no-data message');
     assert(!String(result.text).includes('500'), 'the invented dose leaked into the reply');
-    equal(mock.answerGenerations().length, 0, 'the model was never asked');
     equal(result.disclaimer, messagesAr.disclaimer, 'disclaimer on the no-data reply');
+  });
+
+  await test('a general answer keeps its safe sentences and drops the one carrying a dose', async () => {
+    await readySetup('الصداع له أسباب كثيرة مثل قلة النوم والتوتر. خذ 500 ملجم كل 8 ساعات. إذا استمر الصداع فاستشر الطبيب.');
+    const result = await ASSISTANT.ask('ما أسباب الصداع عند الأطفال');
+    equal(result.type, 'general', `type ${result.type} ${JSON.stringify(result.steps)}`);
+    assert(!/500|ملجم/.test(result.text), `dose leaked: ${result.text}`);
+    assert(result.text.includes('قلة النوم') && result.text.includes('الطبيب'), `safe sentences kept: ${result.text}`);
   });
 
   /* The complaint names neither a medicine nor a condition, and the fuzzy rows it used to pull

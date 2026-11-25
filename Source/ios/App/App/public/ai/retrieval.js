@@ -45,7 +45,9 @@
       'كحة', 'سعال', 'برد', 'التهاب', 'عدوي', 'عدوى', 'سخونه', 'سخونة', 'اسهال', 'إسهال',
       'امساك', 'إمساك', 'غثيان', 'قيء', 'دوخه', 'دوخة',
       'ملجم', 'مجم', 'جم', 'جرام', 'مل', 'لتر', 'قرص', 'اقراص', 'كبسوله', 'كبسولات',
-      'امبول', 'حقنه', 'شراب', 'مرهم', 'كريم', 'قطره', 'بخاخ', 'نقط', 'اكياس', 'تحاميل'
+      'امبول', 'حقنه', 'شراب', 'مرهم', 'كريم', 'قطره', 'بخاخ', 'نقط', 'اكياس', 'تحاميل',
+      'بيشتغل', 'يشتغل', 'جوه', 'جوا', 'داخل', 'الجسم', 'جسم', 'طريقه', 'عمل', 'اشرح', 'اشرحلي',
+      'ازاي', 'كيف', 'ليه', 'هل', 'بتاثر', 'بيعمل'
     ],
     en: [
       'what', 'whats', 'is', 'are', 'was', 'were', 'the', 'of', 'for', 'to', 'in', 'on', 'about',
@@ -54,7 +56,8 @@
       'price', 'prices', 'cost', 'costs', 'how', 'much', 'many', 'where', 'when', 'why', 'which',
       'medicine', 'medicines', 'medication', 'drug', 'drugs', 'tablet', 'tablets', 'tab', 'tabs',
       'mg', 'ml', 'gm', 'gram', 'grams', 'dose', 'dosage', 'ingredient', 'ingredients', 'active',
-      'brand', 'name', 'product', 'detail', 'details'
+      'brand', 'name', 'product', 'detail', 'details', 'body', 'work', 'works', 'working', 'inside',
+      'mechanism', 'action', 'explain', 'describe', 'it', 'its', 'this', 'that', 'take', 'taking', 'long'
     ]
   };
 
@@ -633,6 +636,7 @@
       if (!hit) return null;
       return {
         id: hit.id,
+        field: hit.field,
         nameEn: hit.record.commercial_name_en || '',
         nameAr: hit.record.commercial_name_ar || ''
       };

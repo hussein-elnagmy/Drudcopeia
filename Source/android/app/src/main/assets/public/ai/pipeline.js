@@ -288,14 +288,21 @@
         timings
       });
     }
-    const answer = String((generation && generation.text) || '').trim();
+    const answer = tidy(String((generation && generation.text) || '').trim());
     if (!generation || generation.error || !answer) {
       note('general:failed', (generation && generation.error) || 'empty');
       return null;
     }
-    const guard = context.safety.guardGeneralOutput(answer, { language });
+    let guard = context.safety.guardGeneralOutput(answer, { language });
     note('generalguard', guard.ok ? 'accepted' : guard.reasons.map(reason => reason.code).join(','));
-    if (!guard.ok) return null;
+    let shownAnswer = answer;
+    if (!guard.ok) {
+      const kept = salvage(answer, template, sentence => context.safety.guardGeneralOutput(sentence, { language, partial: true }));
+      if (!kept) return null;
+      note('generalguard:salvaged', kept.dropped);
+      guard = kept.guard;
+      shownAnswer = kept.text;
+    }
 
     const measuredTokens = Number(generation.tokens || 0);
     const elapsedMs = Number(generation.milliseconds || (context.now() - generateStartedAt));
@@ -303,7 +310,7 @@
     return withDisclaimer({
       type: 'general',
       mode: 'general',
-      text: answer,
+      text: shownAnswer,
       label: messageIn(language, 'general.label'),
       note: messageIn(language, 'general.note'),
       links,
@@ -320,6 +327,55 @@
       steps: result.stages,
       timings
     });
+  }
+
+
+  /*
+   * A small model is usually right in most of an answer and wrong in one sentence. Rather than
+   * throwing the whole reply away, each sentence is checked on its own: a sentence that carries
+   * an unverified name, number, dose, diagnosis or stop-order - or that is a line copied out of
+   * the instructions - is cut, and what is left is checked again as a whole by the same guard.
+   * Nothing is rewritten and nothing is added; the guard still has the last word.
+   */
+  /* Collapse what a small model does when it loops: list numbering, repeated sentences. */
+  function tidy(text) {
+    const seen = new Set();
+    const out = [];
+    for (const raw of String(text || '').match(/[^.!?؟۔\n]+[.!?؟۔]*/g) || []) {
+      const sentence = raw.replace(/^\s*(?:\d+[.)]|[-*•])\s*/, '').trim();
+      if (!sentence) continue;
+      /* A small model sometimes starts talking as itself or as the medicine; that is not an answer. */
+      /* Chinese, Japanese or Korean characters inside an Arabic or English answer mean the model lost the thread. */
+      if (/[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/.test(sentence)) continue;
+      if (/^(?:أنا|انا|I am|I'm|I’m)\s/i.test(sentence) || /مساعد صحي|health assistant/i.test(sentence)) continue;
+      const key = T().normalize(sentence).replace(/[.!?؟۔]+$/, '');
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(sentence);
+    }
+    return out.join(' ');
+  }
+
+  const SALVAGE_BAD = new Set(['fabricatedName', 'fabricatedNumber', 'fabricatedUnit', 'diagnosis', 'dose', 'stop']);
+
+  function salvage(text, promptText, check) {
+    const sentences = String(text || '').match(/[^.!?؟۔\n]+[.!?؟۔]*/g) || [];
+    const template = T().normalize(String(promptText || ''));
+    const kept = [];
+    let dropped = 0;
+    for (const raw of sentences) {
+      const sentence = raw.trim();
+      if (!sentence) continue;
+      const folded = T().normalize(sentence);
+      const copied = folded.length >= 20 && template.includes(folded.replace(/[.!?؟۔]+$/, '').trim());
+      const bad = copied || check(sentence).reasons.some(reason => SALVAGE_BAD.has(reason.code));
+      if (bad) dropped += 1;
+      else kept.push(sentence);
+    }
+    if (!dropped || !kept.length) return null;
+    const joined = kept.join(' ');
+    const verdict = check(joined);
+    return verdict.ok ? { text: joined, dropped, guard: verdict } : null;
   }
 
   /* An attached picture only counts when it read something the directory recognises. */
@@ -448,9 +504,24 @@
        of being dressed up as a card. Asking for a medicine by name keeps normal retrieval. */
     const complaintOnly = Boolean(gate.signals && gate.signals.symptomHits > 0 && !gate.signals.conditions
       && !gate.signals.knownNames && !gate.signals.healthHits);
-    const retrieval = complaintOnly
+    let retrieval = complaintOnly
       ? { found: false, records: [] }
       : context.retrieval.retrieve(askedText, { question: result.question, documentsOnly });
+    /* "Why does my throat hurt in the morning" must not be answered from MORNING hair serum: when
+       every word that reached a pack name is an everyday word, and no reference document matched,
+       nothing was actually named, so the question goes to the general route like any other. */
+    if (retrieval.found && !documentsOnly && typeof context.safety.isCommonWord === 'function'
+      && retrieval.records.length && retrieval.records.every(record => record.kind !== 'document' && !record.title)) {
+      const words = (String(askedText).toLowerCase().match(/[\p{L}]{4,}/gu) || []);
+      const named = words.filter(word => {
+        const hit = context.retrieval.entities && context.retrieval.entities.lookupName ? context.retrieval.entities.lookupName(word) : null;
+        return Boolean(hit);
+      });
+      if (named.length && named.every(word => context.safety.isCommonWord(word) || (typeof context.safety.isStopword === 'function' && context.safety.isStopword(word)))) {
+        note('retrieve:common-words-only');
+        retrieval = { found: false, records: [] };
+      }
+    }
     mark('retrieve');
     note('retrieve', { found: retrieval.found, records: retrieval.records.length });
     if (!retrieval.found) {
@@ -581,9 +652,19 @@
     }
 
     /* step 6 - output guard */
-    const guard = context.safety.guardOutput(generation.text, pack, { language: answerIn });
+    generation.text = tidy(generation.text);
+    let guard = context.safety.guardOutput(generation.text, pack, { language: answerIn });
     mark('guard');
     note('guard', guard.ok ? 'accepted' : guard.reasons.map(reason => reason.code).join(','));
+    let groundedText = String(generation.text).trim();
+    if (!guard.ok) {
+      const kept = salvage(generation.text, prompt, sentence => context.safety.guardOutput(sentence, pack, { language: answerIn, partial: true }));
+      if (kept) {
+        note('guard:salvaged', kept.dropped);
+        guard = kept.guard;
+        groundedText = kept.text;
+      }
+    }
     if (!guard.ok) {
       card.guardReasons = guard.reasons;
       return withDisclaimer({
@@ -608,7 +689,7 @@
     return withDisclaimer({
       type: 'answer',
       mode: 'grounded',
-      text: String(generation.text).trim(),
+      text: groundedText,
       label: message('answer.generatedLabel'),
       pack: { contextChars: pack.contextText.length, records: pack.records.length },
       flags: pack.flags,

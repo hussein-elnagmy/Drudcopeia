@@ -454,7 +454,7 @@
     /* An ordinary English word is not a brand claim, however long it is: Egyptian pack
        names collide with common words ("before" reaches BEFORE-S), and without this the
        guard throws away correct answers for carrying everyday vocabulary. */
-    if (isStopword(token)) return false;
+    if (isStopword(token) || isCommonWord(token)) return false;
     return T().arabicRatio(token) > 0 ? true : token.length >= 6;
   }
 
@@ -536,6 +536,8 @@
         checked.add(token);
         const hit = entities.lookupName(token);
         if (!hit) continue;
+        /* An English word that only rhymes with a pack name (same consonants, a typo away) is not a claim about that medicine. */
+        if (T().arabicRatio(token) === 0 && (hit.field === 'fuzzy' || hit.field === 'skeleton')) continue;
         if (contextTokens.has(token) || contextCompact.includes(T().compact(hit.nameEn || '')) || contextCompact.includes(T().compact(hit.nameAr || ''))) continue;
         const skeleton = T().nameSkeleton(token);
         if (skeleton.length >= 4 && contextSkeletons.has(skeleton)) continue;
@@ -617,6 +619,8 @@
 
   const api = {
     configure,
+    isCommonWord,
+    isStopword,
     sanitize,
     detectEmergency,
     gateSignals,
