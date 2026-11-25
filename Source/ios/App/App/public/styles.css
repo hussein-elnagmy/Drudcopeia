@@ -2405,3 +2405,9 @@ html[data-theme] body .modal-arabic{font-size:1.375rem;line-height:1.7;font-weig
 .sources-box .detail-links{margin-top:10px}
 html[data-theme] body .app-drawer .drawer-separator{height:2px;margin:14px 10px 10px}
 html[data-theme] body .app-drawer .drawer-kicker{margin-top:10px;font-size:.75rem;color:var(--muted)}
+
+.lab-tests-search.unified-search>#labTestSearchButton{display:grid;place-items:center;flex:none;width:42px;min-width:42px;height:42px;padding:0;border:0;border-radius:11px;background:var(--blue);color:#fff;font-size:0;cursor:pointer}
+.lab-tests-search.unified-search>#labTestSearchButton:hover{background:var(--blue-dark,var(--blue));color:#fff}
+.lab-tests-search.unified-search>#labTestSearchButton svg{width:20px;height:20px;display:block}
+.lab-tests-search.unified-search>#labTestSearchClear{display:none}
+.bottom-nav-ai .nav-ai-badge{width:36px;height:36px}.bottom-nav-ai .nav-ai-badge .nav-icon{width:28px;height:28px}
