@@ -212,6 +212,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           R=$(tr -d '[:space:]' < Source/REVISION)
-          gh release view "r${R}" >/dev/null 2>&1 || gh release create "r${R}" release/* \
+          # Always recreate so rebuilt assets replace stale ones.
+          gh release delete "r${R}" -y >/dev/null 2>&1 || true
+          gh release create "r${R}" release/* \
             --title "Drugcopeia r${R}" \
             --notes "Full app, all platforms, revision r${R}. android.apk for Android, windows.exe for Windows, macos.dmg for macOS, ios-unsigned.zip is the unsigned iOS build (sign and install locally with Xcode), source-web.zip is the full source including the web/PWA version."
