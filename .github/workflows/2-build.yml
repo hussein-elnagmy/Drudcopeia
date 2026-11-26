@@ -63,6 +63,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: iOS project checks
+        working-directory: Source
+        run: node scripts/verify-project.mjs
       - uses: actions/setup-go@v5
         with:
           go-version: '1.23'
