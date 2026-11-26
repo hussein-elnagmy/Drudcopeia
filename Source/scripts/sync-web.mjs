@@ -19,6 +19,8 @@ const requiredSourceFiles = [
   'core.js',
   'lab-tests.js',
   'clinical-tools.js',
+  'boot-theme.js',
+  'sw-register.js',
   'app.js',
   'manifest.webmanifest',
   'service-worker.js',

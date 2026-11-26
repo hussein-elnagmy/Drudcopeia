@@ -258,12 +258,12 @@ func withHeaders(next http.Handler) http.Handler {
 		// web fallback when the loopback helper is absent.
 		w.Header().Set("Content-Security-Policy",
 			"default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; "+
-				"form-action 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; "+
+				"form-action 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; style-src-attr 'unsafe-inline'; "+
 				"img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob: data:; "+
 				"connect-src 'self' https://www.who.int https://api.fda.gov https://eutils.ncbi.nlm.nih.gov "+
 				"https://commons.wikimedia.org https://thumb.wikimedia.org https://upload.wikimedia.org "+
-				"https://huggingface.co https://*.hf.co https://github.com https://*.githubusercontent.com "+
-				"http://127.0.0.1:* http://localhost:*; worker-src 'self' blob:; manifest-src 'self'; "+
+				"https://huggingface.co https://*.hf.co https://github.com https://release-assets.githubusercontent.com "+
+				"https://objects.githubusercontent.com; worker-src 'self' blob:; manifest-src 'self'; "+
 				"frame-ancestors 'none'")
 		if r.URL.Path == "/" || strings.HasSuffix(r.URL.Path, ".html") {
 			w.Header().Set("Cache-Control", "no-cache")
