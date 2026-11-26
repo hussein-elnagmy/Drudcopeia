@@ -23,8 +23,17 @@ parties.
 
 The app talks to the network only for user-initiated actions, and only to the hosts
 allowlisted in `privacy.config.json`: the World Health Organization, the US FDA and
-NCBI services for news and reference updates, and loopback (127.0.0.1 / localhost) for
-the on-device model server. A runtime gate in `webapp/net.js` replaces `fetch`,
+NCBI services for news and reference updates. The only other download is the optional
+on-device assistant model, fetched once after you turn Offline mode off and press
+Download, from the app's own GitHub release (`github.com`, which redirects to
+`release-assets.githubusercontent.com` and `objects.githubusercontent.com`) or from
+Hugging Face as a mirror, and checked against a pinned SHA-256 before use. On Windows
+the model runs in a local helper that accepts requests only from the app itself
+(Origin, Sec-Fetch-Site and Host checks). The content security policy has no inline
+scripts, no wildcard GitHub host and no loopback entry, and the service worker caches
+only complete same-origin responses. For pregnancy, breastfeeding, interaction, kidney,
+child-dose and dose questions the assistant answers only from retrieved sources or says
+it has no data. A runtime gate in `webapp/net.js` replaces `fetch`,
 `XMLHttpRequest`, `WebSocket`, `EventSource` and `sendBeacon` so nothing else can leave
 the device. An offline mode switch blocks even the allowlisted hosts. Reference links
 (such as MedlinePlus, NHS, WHO, FDA, EDA, MoHP, DailyMed, PubMed, NCBI and doi.org)

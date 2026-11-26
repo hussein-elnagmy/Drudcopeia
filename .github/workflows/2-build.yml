@@ -112,6 +112,15 @@ jobs:
       - name: Privacy gate
         working-directory: Source
         run: python3 scripts/privacy-check.py
+      - name: All web copies agree on the revision
+        working-directory: Source
+        run: node scripts/sync-all.mjs --check
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: Source/windows/go.mod
+      - name: Windows helper origin guard
+        working-directory: Source/windows
+        run: go test -run TestLocalOnly .
       - name: Vendored wllama runtime matches its pinned hashes
         working-directory: Source/webapp/ai/vendor/wllama
         run: |
