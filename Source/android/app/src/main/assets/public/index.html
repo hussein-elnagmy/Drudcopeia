@@ -20,8 +20,8 @@
   <link rel="icon" href="assets/red-crescent-rx-192.png" type="image/png">
   <meta name="description" content="Search medicines in Egypt by brand, generic name, manufacturer, or price. Simple pharmacology and medicine information.">
   <title>Drugcopeia — Egypt Medicine Guide</title>
-  <script src="boot-theme.js?v=203"></script>
-  <link rel="stylesheet" href="styles.css?v=203">
+  <script src="boot-theme.js?v=204"></script>
+  <link rel="stylesheet" href="styles.css?v=204">
 </head>
 <body data-view="home">
   <a class="skip-link" href="#mainContent" data-i18n="skipToContent">Skip to main content</a>
@@ -145,6 +145,7 @@
           <button type="button" class="search-by-chip" data-reading-filter="article" aria-pressed="false" data-i18n="readingTabArticles">Articles</button>
         </div>
         <p class="reading-status" id="readingStatus" role="status" aria-live="polite" hidden></p>
+        <button class="clinical-secondary" id="readingRefresh" type="button" data-i18n="newsRefresh">Update news now</button>
       </div>
       <div class="reading-list" id="readingList" aria-live="polite"></div>
       <p class="reading-note" data-i18n="readingDisclaimer">Educational information only. It does not replace the product leaflet or advice from a doctor or pharmacist.</p>
@@ -232,6 +233,7 @@
             <label for="doseConcentration" data-i18n="doseConcentrationLabel">Liquid concentration (mg per 5 mL, optional)</label>
             <input id="doseConcentration" class="clinical-input" type="number" inputmode="decimal" min="1" max="1000" step="0.1" placeholder="120" dir="ltr" aria-describedby="doseStatus">
             <small class="clinical-help" data-i18n="doseConcentrationHint">Copy the concentration from the bottle to convert the milligram dose into millilitres. Always use the dosing syringe or cup supplied with the product.</small>
+            <div class="dose-concentration-presets"><span data-i18n="doseConcentrationPresets">Common concentrations (mg per 5 mL) — check your bottle:</span><button type="button" class="search-by-chip" data-dose-conc="100">100</button><button type="button" class="search-by-chip" data-dose-conc="120">120</button><button type="button" class="search-by-chip" data-dose-conc="125">125</button><button type="button" class="search-by-chip" data-dose-conc="200">200</button><button type="button" class="search-by-chip" data-dose-conc="250">250</button><button type="button" class="search-by-chip" data-dose-conc="400">400</button></div>
           </div>
           <div class="clinical-actions clinical-span-2">
             <button class="clinical-primary" type="submit" data-i18n="doseCalculate">Calculate reference dose</button>
@@ -275,6 +277,16 @@
               <div class="clinical-picker-list" id="interactionBList" role="listbox" aria-label="Medicine options" data-i18n-aria="clinicalPickerListAria" hidden></div>
             </div>
             <small id="interactionBExamples" class="clinical-help clinical-picker-hint" aria-live="polite"></small>
+          </div>
+          <div class="clinical-field">
+            <label for="interactionC" data-i18n="interactionThirdLabel">Third medicine or active ingredient (optional)</label>
+            <div class="clinical-picker">
+              <span class="clinical-picker-icon search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg></span>
+              <input id="interactionC" class="clinical-input clinical-picker-input" type="text" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="interactionCList" aria-describedby="interactionCExamples interactionStatus" autocomplete="off" spellcheck="false" dir="auto" placeholder="Search a medicine or active ingredient" data-i18n-placeholder="clinicalPickerPlaceholder">
+              <button class="clinical-picker-toggle" id="interactionCToggle" type="button" tabindex="-1" aria-label="Show medicine list" title="Show medicine list" data-i18n-aria="clinicalPickerToggleAria" data-i18n-title="clinicalPickerToggleAria" aria-controls="interactionCList" aria-expanded="false"><span aria-hidden="true">⌄</span></button>
+              <div class="clinical-picker-list" id="interactionCList" role="listbox" aria-label="Medicine options" data-i18n-aria="clinicalPickerListAria" hidden></div>
+            </div>
+            <small id="interactionCExamples" class="clinical-help clinical-picker-hint" aria-live="polite"></small>
           </div>
         </div>
         <div class="clinical-actions">
@@ -377,6 +389,8 @@
             <p id="reminderFormHint" class="clinical-help" data-i18n="reminderFormHint">Repeats daily. Confirm the dose with your pharmacist.</p>
             <div class="clinical-actions">
               <button class="clinical-primary" type="submit" data-i18n="reminderAdd">Add reminder</button>
+              <button class="clinical-secondary" id="reminderExport" type="button" data-i18n="reminderExport">Export reminders</button>
+              <button class="clinical-secondary" id="reminderDeleteAll" type="button" data-i18n="reminderDeleteAll">Delete all reminders</button>
             </div>
             <p id="reminderFormStatus" class="clinical-status" role="status" aria-live="polite" hidden></p>
             <p class="reminder-limit" id="reminderLimit" data-i18n="reminderLimitNote">Up to 20 reminders can be saved on this device.</p>
@@ -820,7 +834,7 @@
       </div>
     </aside>
 
-    <footer><a class="brand footer-brand" href="#"><img class="brand-mark" src="assets/red-crescent-rx-96.png" srcset="assets/red-crescent-rx-96.png 1x, assets/red-crescent-rx-192.png 2x" alt=""><span><strong class="footer-brand-name">Drugcopeia</strong><small class="footer-brand-subtitle">EGYPT MEDICINE GUIDE</small></span></a><span data-i18n="footerText">Built for learning, not diagnosis or treatment.</span><span data-i18n="footerSource">Medicine listings: CC0 · GitHub source</span></footer>
+    <footer><a class="brand footer-brand" href="#"><img class="brand-mark" src="assets/red-crescent-rx-96.png" srcset="assets/red-crescent-rx-96.png 1x, assets/red-crescent-rx-192.png 2x" alt=""><span><strong class="footer-brand-name">Drugcopeia</strong><small class="footer-brand-subtitle">EGYPT MEDICINE GUIDE</small></span></a><span data-i18n="footerText">Built for learning, not diagnosis or treatment.</span><span data-i18n="footerSource">Medicine listings: CC0 · GitHub source</span><span id="datasetStamp" class="footer-dataset-stamp"></span></footer>
   </div>
 
   <nav class="bottom-nav" aria-label="Quick navigation" data-i18n-aria="quickNavAria">
@@ -967,29 +981,29 @@
 <a class="drawer-link" href="#about" data-app-nav="about"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-info"></use></svg><span data-i18n="navAbout">About Drugcopeia</span></a>
 <button class="drawer-link" type="button" data-app-nav="privacy"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-lock"></use></svg><span data-i18n="navPrivacy">Privacy</span></button>
 </nav><div class="drawer-bottom"><p class="drawer-safety-note" data-i18n="drawerSafetyNote">For information only. Ask a healthcare professional.</p><button class="drawer-settings" type="button" data-app-nav="settings"><svg class="nav-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-settings"></use></svg><span class="drawer-settings-copy"><strong data-i18n="navSettings">Settings</strong><small data-settings-summary>Follow system · 100%</small></span><span class="utility-chevron" aria-hidden="true">›</span></button></div></aside></div>
-  <script src="generated/privacy-config.js?v=203"></script>
-  <script src="net.js?v=203"></script>
-  <script src="ios-shell.js?v=203"></script>
-  <script src="core.js?v=203"></script>
-  <script src="lab-tests.js?v=203"></script>
-  <script src="clinical-tools.js?v=203"></script>
-  <script src="reading.js?v=203"></script>
-  <script src="news.js?v=203"></script>
-  <script src="app.js?v=203"></script>
-  <script src="alt-map.js?v=203"></script>
-  <script src="same-spec.js?v=203"></script>
-  <script src="features.js?v=203"></script>
-  <script src="ai/text.js?v=203"></script>
-  <script src="ai/search-index.js?v=203"></script>
-  <script src="ai/safety.js?v=203"></script>
-  <script src="ai/retrieval.js?v=203"></script>
-  <script src="ai/llm-bridge.js?v=203"></script>
-  <script src="ai/wasm-bridge.js?v=203"></script>
-  <script src="ai/model-manager.js?v=203"></script>
-  <script src="ai/pipeline.js?v=203"></script>
-  <script src="ai/secure-history.js?v=203"></script>
-  <script src="ai/photo-ask.js?v=203"></script>
-  <script src="ai/chat-ui.js?v=203"></script>
-  <script src="sw-register.js?v=203"></script>
+  <script src="generated/privacy-config.js?v=204"></script>
+  <script src="net.js?v=204"></script>
+  <script src="ios-shell.js?v=204"></script>
+  <script src="core.js?v=204"></script>
+  <script src="lab-tests.js?v=204"></script>
+  <script src="clinical-tools.js?v=204"></script>
+  <script src="reading.js?v=204"></script>
+  <script src="news.js?v=204"></script>
+  <script src="app.js?v=204"></script>
+  <script src="alt-map.js?v=204"></script>
+  <script src="same-spec.js?v=204"></script>
+  <script src="features.js?v=204"></script>
+  <script src="ai/text.js?v=204"></script>
+  <script src="ai/search-index.js?v=204"></script>
+  <script src="ai/safety.js?v=204"></script>
+  <script src="ai/retrieval.js?v=204"></script>
+  <script src="ai/llm-bridge.js?v=204"></script>
+  <script src="ai/wasm-bridge.js?v=204"></script>
+  <script src="ai/model-manager.js?v=204"></script>
+  <script src="ai/pipeline.js?v=204"></script>
+  <script src="ai/secure-history.js?v=204"></script>
+  <script src="ai/photo-ask.js?v=204"></script>
+  <script src="ai/chat-ui.js?v=204"></script>
+  <script src="sw-register.js?v=204"></script>
 </body>
 </html>
