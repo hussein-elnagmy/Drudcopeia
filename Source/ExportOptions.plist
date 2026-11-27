@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
   Export options for App Store Connect / TestFlight.
-  Replace YOUR_TEAM_ID with your Apple Developer Team ID (10 characters).
+  Team ID: 68RXRDNMG8 (Hussein's Apple Developer Team ID).
   Xcode 15.3 or newer uses "app-store-connect"; Xcode 15.2 and earlier: "app-store".
   With automatic signing, xcodebuild creates/downloads the App Store profile.
 -->
@@ -15,7 +15,7 @@
 	<key>signingStyle</key>
 	<string>automatic</string>
 	<key>teamID</key>
-	<string>YOUR_TEAM_ID</string>
+	<string>68RXRDNMG8</string>
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>uploadSymbols</key>
