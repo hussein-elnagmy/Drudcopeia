@@ -209,6 +209,19 @@
       dosePerDay:'Total per day',
       doseMaxPerDay:'Maximum per day',
       doseMaxPerDose:'Maximum per dose: {max} mg',
+      doseDailyCapWarning:'Daily maximum applied: without the cap, the daily total would have been {planned} mg/day, above the daily maximum of {cap} mg/day. The dose shown is capped at that maximum — do not exceed it without clinical advice.',
+      doseReviewUnreviewed:'Not clinically reviewed — check the product leaflet',
+      doseReviewReviewed:'Clinically reviewed by {reviewer} on {date}',
+      doseConcentrationPresets:'Common concentrations (mg per 5 mL) — check your bottle:',
+      interactionThirdLabel:'Third medicine or active ingredient (optional)',
+      reminderExport:'Export reminders',
+      reminderExportDone:'Reminders exported as a file.',
+      reminderExportEmpty:'No reminders to export yet.',
+      reminderDeleteAll:'Delete all reminders',
+      reminderDeleteAllConfirm:'Tap again to delete all reminders',
+      reminderDeleteAllDone:'All reminders deleted.',
+      datasetStamp:'{count} medicines · Egyptian market listing (MIT) · dataset date unknown — freshness cannot be verified',
+      newsRefresh:'Update news now',
       doseDosesPerDay:'Up to {count} doses in 24 hours',
       doseInterval:'Usual interval: {interval}',
       doseVolume:'Volume per dose: {low}–{high} mL',
@@ -230,7 +243,7 @@
       doseMg:'mg',
       interactionEyebrow:'DRUG INTERACTION REFERENCE',
       interactionTitle:'Drug interaction checker',
-      interactionIntro:'Choose two active ingredients to review a key interaction from this curated guide, or browse the list below.',
+      interactionIntro:'Choose two or three active ingredients to review key interactions from this curated guide, or browse the list below.',
       interactionFirstLabel:'First medicine or active ingredient',
       interactionSecondLabel:'Second medicine or active ingredient',
       interactionMatchedIngredients:'Matched guide ingredient(s): {ingredients}',
@@ -345,6 +358,19 @@
       dosePerDay:'الإجمالي اليومي',
       doseMaxPerDay:'الحد الأقصى اليومي',
       doseMaxPerDose:'الحد الأقصى للجرعة الواحدة: {max} مجم',
+      doseDailyCapWarning:'تم تطبيق الحد اليومي: بدون الحد كان الإجمالي اليومي {planned} مجم/يوم، فوق الحد الأقصى اليومي {cap} مجم/يوم. الجرعة المعروضة محددة بهذا الحد — لا تتجاوزه دون استشارة طبية.',
+      doseReviewUnreviewed:'غير مراجَع سريريًا — تحقق من نشرة الدواء',
+      doseReviewReviewed:'تمت المراجعة سريريًا بواسطة {reviewer} بتاريخ {date}',
+      doseConcentrationPresets:'تركيزات شائعة (مجم لكل 5 مل) — تحقق من عبوتك:',
+      interactionThirdLabel:'الدواء أو المادة الفعالة الثالثة (اختياري)',
+      reminderExport:'تصدير التذكيرات',
+      reminderExportDone:'تم تصدير التذكيرات في ملف.',
+      reminderExportEmpty:'لا توجد تذكيرات للتصدير بعد.',
+      reminderDeleteAll:'حذف كل التذكيرات',
+      reminderDeleteAllConfirm:'اضغط مرة أخرى لحذف كل التذكيرات',
+      reminderDeleteAllDone:'تم حذف كل التذكيرات.',
+      datasetStamp:'{count} دواءً · قائمة الأدوية المصرية (MIT) · تاريخ مجموعة البيانات غير معروف — لا يمكن التحقق من حداثتها',
+      newsRefresh:'حدّث الأخبار الآن',
       doseDosesPerDay:'حتى {count} جرعات خلال 24 ساعة',
       doseInterval:'الفاصل المعتاد: {interval}',
       doseVolume:'حجم الجرعة: {low}–{high} مل',
@@ -366,7 +392,7 @@
       doseMg:'مجم',
       interactionEyebrow:'مرجع التداخلات الدوائية',
       interactionTitle:'فاحص التداخلات الدوائية',
-      interactionIntro:'اختر مادتين فعالتين لمراجعة تداخل مهم من هذا الدليل المنسق، أو تصفح التداخلات أدناه.',
+      interactionIntro:'اختر مادتين أو ثلاث مواد فعالة لمراجعة التداخلات المهمة من هذا الدليل المنسق، أو تصفح التداخلات أدناه.',
       interactionFirstLabel:'الدواء أو المادة الفعالة الأولى',
       interactionSecondLabel:'الدواء أو المادة الفعالة الثانية',
       interactionMatchedIngredients:'المواد المطابقة في الدليل: {ingredients}',
@@ -1689,6 +1715,7 @@ const CONDITION_SUBGROUPS={
     $('#conditionSuggestions')?.setAttribute('aria-label',isArabic?'اقتراحات الحالات':'Condition suggestions');
     updateMenuToggleLabel();
     $('#dbStatus').textContent=loadFailed?t('databaseUnavailable'):drugs.length?`${drugs.length.toLocaleString(isArabic?'ar-EG':'en-US')} ${t('indexed')}`:t('connectDatabase');
+    const stamp=$('#datasetStamp');if(stamp&&drugs.length)stamp.textContent=tf('datasetStamp',{count:drugs.length.toLocaleString(isArabic?'ar-EG':'en-US')});
     $('#dbCount').textContent=loadFailed?t('connectionRequired'):drugs.length?t('updatedDataset'):'Live database';
     syncSearchModeChips();
     document.title=isArabic?'Drugcopeia — دليل الأدوية المصري':'Drugcopeia — Egypt Medicine Guide';
@@ -3790,7 +3817,7 @@ const CONDITION_SUBGROUPS={
     renderHint();
     return picker;
   }
-  let dosePicker=null,interactionPickerA=null,interactionPickerB=null;
+  let dosePicker=null,interactionPickerA=null,interactionPickerB=null,interactionPickerC=null;
   function renderDoseSources(){
     renderClinicalSourceLinks($('#doseSources'),doseMedicines.flatMap(medicine=>medicine.sources||[]));
   }
@@ -3857,6 +3884,23 @@ const CONDITION_SUBGROUPS={
     }
     const dosesPerDay=medicine.dosesPerDay||medicine.maxDoses||1;
     let perDose=null,daily=null,phases=[];
+    /* r204: detect when the uncapped daily total would exceed the daily
+       maximum, so the result can say so instead of silently capping it.
+       Dose numbers themselves are unchanged. */
+    let dailyCap=null,plannedDaily=null,dailyCapped=false;
+    if(medicine.type==='perDose'&&medicine.maxDailyPerKg&&medicine.maxDaily){
+      plannedDaily=weight*medicine.perDose[1]*dosesPerDay;
+      dailyCap=Math.min(weight*medicine.maxDailyPerKg,medicine.maxDaily);
+      dailyCapped=plannedDaily>dailyCap;
+    }else if(medicine.type==='perDay'&&medicine.maxDaily){
+      plannedDaily=weight*medicine.perDay[1];
+      dailyCap=medicine.maxDaily;
+      dailyCapped=plannedDaily>dailyCap;
+    }else if(medicine.type==='phases'){
+      plannedDaily=Math.max(...medicine.phases.map(phase=>weight*phase.mgPerKg));
+      dailyCap=Math.max(...medicine.phases.map(phase=>phase.maxMg));
+      dailyCapped=plannedDaily>dailyCap;
+    }
     if(medicine.type==='perDose'){
       perDose=[Math.min(weight*medicine.perDose[0],medicine.maxPerDose),Math.min(weight*medicine.perDose[1],medicine.maxPerDose)];
       daily={max:Math.min(weight*medicine.maxDailyPerKg,medicine.maxDaily,perDose[1]*dosesPerDay)};
@@ -3890,6 +3934,8 @@ const CONDITION_SUBGROUPS={
     const html=`<article class="dose-result-card clinical-card">
       <header class="dose-result-head"><div><span class="clinical-kicker">${esc(t('doseResultHeading'))}</span><h2>${esc(clinicalLocale(medicine))}</h2><p>${esc(tf('doseResultFor',{weight:clinicalNumber(weight,weight%1?1:0)}))} · ${esc(ageNote)}</p></div></header>
       ${productLine}
+      ${dailyCapped?`<section class="dose-age-caveat"><strong>${esc(t('doseMaxPerDay'))}</strong><p>${esc(tf('doseDailyCapWarning',{planned:clinicalNumber(Math.round(plannedDaily)),cap:clinicalNumber(dailyCap)}))}</p></section>`:''}
+      <p class="dose-review-badge">${esc(medicine.review&&medicine.review.status==='reviewed'?tf('doseReviewReviewed',{reviewer:medicine.review.reviewer||'',date:medicine.review.reviewedOn||''}):t('doseReviewUnreviewed'))}</p>
       <div class="dose-metrics">${metrics.join('')}</div>
       ${concentration?`<p class="dose-concentration">${esc(tf('doseConcentrationUsed',{conc:clinicalNumber(concentration,concentration%1?1:0)}))}</p>`:''}
       ${meta.length?`<div class="dose-meta">${meta.map(item=>`<span>${esc(item)}</span>`).join('')}</div>`:''}
@@ -4081,8 +4127,9 @@ const CONDITION_SUBGROUPS={
   function checkInteraction(silent=false){
     const box=$('#interactionResult');
     if(!box||!interactionPickerA||!interactionPickerB)return;
-    [interactionPickerA.input,interactionPickerB.input].forEach(input=>input?.removeAttribute('aria-invalid'));
+    [interactionPickerA.input,interactionPickerB.input,interactionPickerC?.input].forEach(input=>input?.removeAttribute('aria-invalid'));
     const a=interactionSideFromPicker(interactionPickerA),b=interactionSideFromPicker(interactionPickerB);
+    const c=interactionPickerC?interactionSideFromPicker(interactionPickerC):null;
     if(!a||!b){
       const missing=!a?interactionPickerA:interactionPickerB,typed=Boolean(missing.value().trim());
       setInteractionStatus(typed?t('clinicalPickerChooseOne'):t('interactionChooseTwo'),'error');
@@ -4090,28 +4137,41 @@ const CONDITION_SUBGROUPS={
       if(typed){missing.input.setAttribute('aria-invalid','true');missing.focus();missing.open()}
       return;
     }
+    const sides=c?[a,b,c]:[a,b];
     const setA=new Set(a.agentIds),setB=new Set(b.agentIds);
     if(setA.size&&setA.size===setB.size&&[...setA].every(id=>setB.has(id))){
       setInteractionStatus(t('interactionSame'),'error');
       clearInteractionResult();
       return;
     }
-    const pairs=[],skipped=[];
-    for(const entry of flagInteractionPairs(a,b)){
-      const key=[entry.aId,entry.bId].sort().join('|');
-      if(clinicalAbsorptionPairs.has(key)){
-        const blocked=[a,b].filter(side=>side.drug&&side.route!=='oral');
-        if(blocked.length){skipped.push({...entry,blocked});continue}
+    const pairs=[],skipped=[],noDataPairs=[];
+    /* r204: check every unordered pair when a third medicine is given.
+       The pair table itself needs no change: flagInteractionPairs already
+       dedupes by sorted key and sorts by severity. */
+    for(let i=0;i<sides.length;i++)for(let j=i+1;j<sides.length;j++){
+      const sideA=sides[i],sideB=sides[j];
+      let found=false;
+      for(const entry of flagInteractionPairs(sideA,sideB)){
+        found=true;
+        const key=[entry.aId,entry.bId].sort().join('|');
+        if(clinicalAbsorptionPairs.has(key)){
+          const blocked=[sideA,sideB].filter(side=>side.drug&&side.route!=='oral');
+          if(blocked.length){skipped.push({...entry,blocked});continue}
+        }
+        pairs.push(entry);
       }
-      pairs.push(entry);
+      if(!found)noDataPairs.push([sideA,sideB]);
     }
-    const unsupported=interactionUnsupportedMessages([a,b]),cautions=interactionCautionMessages([a,b]),cards=[];
-    const context=interactionContextHtml([a,b]);if(context)cards.push(context);
+    const unsupported=interactionUnsupportedMessages(sides),cautions=interactionCautionMessages(sides),cards=[];
+    const context=interactionContextHtml(sides);if(context)cards.push(context);
     const caution=interactionCautionsHtml(cautions);if(caution)cards.push(caution);
     pairs.forEach((entry,index)=>{const html=interactionPairCardHtml(entry,index);if(html)cards.push(html)});
     const notApplicable=interactionNotApplicableHtml(skipped);if(notApplicable)cards.push(notApplicable);
     if(unsupported.length)cards.push(interactionUnsupportedHtml(a,b,unsupported));
-    if(!pairs.length&&!skipped.length&&!unsupported.length)cards.push(interactionNoPairHtml(a,b));
+    /* r204: a pair with no curated data gets its own card saying so —
+       absence of data is not proof of safety. With 3 medicines this is
+       per-pair; with 2 it is the same single card as before. */
+    if(!unsupported.length)noDataPairs.forEach(pair=>cards.push(interactionNoPairHtml(pair[0],pair[1])));
     setInteractionStatus('');
     box.innerHTML=cards.join('');
     box.querySelectorAll('[data-interaction-sources]').forEach(container=>{
@@ -4125,6 +4185,7 @@ const CONDITION_SUBGROUPS={
   function resetInteractionChecker(){
     interactionPickerA?.reset({silent:true});
     interactionPickerB?.reset({silent:true});
+    interactionPickerC?.reset({silent:true});
     setInteractionStatus('');
     clearInteractionResult();
     interactionPickerA?.focus();
@@ -4432,6 +4493,12 @@ const CONDITION_SUBGROUPS={
       onSelect:()=>{setInteractionStatus('');clearInteractionResult()},
       onClear:()=>{setInteractionStatus('');clearInteractionResult()}
     });
+    if(!interactionPickerC)interactionPickerC=createClinicalPicker({
+      picker:$('#interactionC')?.closest('.clinical-picker'),
+      input:'#interactionC',toggle:'#interactionCToggle',list:'#interactionCList',hint:'#interactionCExamples',mode:'interactions',
+      onSelect:()=>{setInteractionStatus('');clearInteractionResult()},
+      onClear:()=>{setInteractionStatus('');clearInteractionResult()}
+    });
     renderInteractionSources();
     renderInteractionExamples();
     renderInteractionList();
@@ -4604,6 +4671,32 @@ const CONDITION_SUBGROUPS={
     }
     return {supported,schedule,requestPermission:()=>requestPermission().then(()=>{schedule();return permission()})};
   })();
+  function exportReminders(){
+    if(!reminderStore)return;
+    const items=reminderStore.list();
+    const status=$('#remindersStatus');
+    if(!items.length){if(status){status.hidden=false;status.textContent=t('reminderExportEmpty');status.dataset.state='';}return}
+    const payload={app:'Drugcopeia',exportedAt:new Date().toISOString(),count:items.length,reminders:items.map(item=>({name:item.name,dose:item.dose||'',time:item.time}))};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const link=document.createElement('a');
+    link.href=url;link.download=`drugcopeia-reminders-${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(link);link.click();link.remove();
+    window.setTimeout(()=>URL.revokeObjectURL(url),5000);
+    if(status){status.hidden=false;status.textContent=t('reminderExportDone');status.dataset.state='';}
+  }
+  let reminderDeleteAllArmed=0;
+  function deleteAllReminders(button){
+    const status=$('#remindersStatus');
+    if(!reminderDeleteAllArmed){
+      reminderDeleteAllArmed=window.setTimeout(()=>{reminderDeleteAllArmed=0;if(button){button.textContent=t('reminderDeleteAll');}},6000);
+      if(button)button.textContent=t('reminderDeleteAllConfirm');
+      return;
+    }
+    window.clearTimeout(reminderDeleteAllArmed);reminderDeleteAllArmed=0;
+    if(button)button.textContent=t('reminderDeleteAll');
+    if(reminderStore?.clearAll()){renderReminders();if(status){status.hidden=false;status.textContent=t('reminderDeleteAllDone');status.dataset.state='';}}
+  }
   function renderReminders(){
     if(!reminderStore)return;
     const schedule=reminderStore.schedule(new Date());
@@ -4860,17 +4953,25 @@ const CONDITION_SUBGROUPS={
     if(interactionResultActive)checkInteraction(true);
   });
   $('#doseForm')?.addEventListener('submit',event=>{event.preventDefault();calculateDose()});
+  $('#reminderExport')?.addEventListener('click',exportReminders);
+  $('#reminderDeleteAll')?.addEventListener('click',event=>deleteAllReminders(event.currentTarget));
   $('#doseReset')?.addEventListener('click',resetDoseForm);
   $('#doseMedicine')?.addEventListener('input',()=>{
     const status=$('#doseStatus');
     if(status?.dataset.state==='error')clearDoseStatus();
   });
+  document.querySelectorAll('[data-dose-conc]').forEach(button=>button.addEventListener('click',()=>{
+    const field=$('#doseConcentration');if(!field)return;
+    field.value=button.dataset.doseConc;field.removeAttribute('aria-invalid');
+    if(doseResultActive)calculateDose(true);
+  }));
   ['#doseWeight','#doseAge','#doseConcentration','#doseAgeUnit'].forEach(selector=>{
     const field=$(selector);if(!field)return;
     field.addEventListener('input',invalidateDoseResult);
     field.addEventListener('change',invalidateDoseResult);
   });
   $('#interactionCheck')?.addEventListener('click',()=>checkInteraction());
+  $('#readingRefresh')?.addEventListener('click',()=>refreshReading(true));
   $('#interactionReset')?.addEventListener('click',resetInteractionChecker);
   function swapInteractionSides(){
     if(!interactionPickerA||!interactionPickerB)return;
@@ -4885,7 +4986,7 @@ const CONDITION_SUBGROUPS={
     if(interactionResultActive)checkInteraction(true);else clearInteractionResult();
   }
   $('#interactionSwap')?.addEventListener('click',swapInteractionSides);
-  ['#interactionA','#interactionB'].forEach(selector=>$(selector)?.addEventListener('input',()=>setInteractionStatus('')));
+  ['#interactionA','#interactionB','#interactionC'].forEach(selector=>$(selector)?.addEventListener('input',()=>setInteractionStatus('')));
   $('#interactionSearch')?.addEventListener('input',()=>renderInteractionList(true));
   $('#interactionSeverity')?.addEventListener('change',()=>renderInteractionList(true));
   $('#interactionMore')?.addEventListener('click',()=>{interactionBrowseShown+=8;renderInteractionList()});
@@ -5056,8 +5157,10 @@ const CONDITION_SUBGROUPS={
     if(state==='refreshing'){status.textContent=t('readingRefreshing');status.dataset.state='busy';return}
     if(state==='failed'){status.textContent=t('readingRefreshFailed');status.dataset.state='error';return}
     if(state==='offline'){status.textContent=t('readingUpdateOffline');status.dataset.state='error';return}
-    status.dataset.state='';
-    status.textContent=when?tf('readingUpdated',{date:when}):'';
+    /* r204: show freshness against the 6-hour TTL instead of a bare date. */
+    const ageMs=stamp?Date.now()-Date.parse(stamp):NaN;
+    status.dataset.state=Number.isFinite(ageMs)&&ageMs>6*60*60*1000?'error':'';
+    status.textContent=when?(Number.isFinite(ageMs)&&ageMs>6*60*60*1000?tf('readingStale',{date:when}):tf('readingFresh',{date:when})):'';
     status.hidden=!status.textContent;
   }
   /* The home page updates its own headlines. The snapshot bundled with the app

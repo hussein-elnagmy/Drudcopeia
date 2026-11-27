@@ -937,6 +937,10 @@ html[dir="rtl"] .dose-metric strong{letter-spacing:normal}
 .dose-meta{display:flex;flex-wrap:wrap;gap:5px 14px;margin:10px 0;font-size:.78125rem;line-height:1.6;color:var(--muted)}
 .dose-rule{margin:8px 0 0;font-size:.8125rem;line-height:1.7;color:var(--ink-soft)}
 .dose-age-caveat{margin:14px 0 0;padding:11px 13px;border:1px solid #E4C98F;border-radius:10px;background:#FFF8E9;color:#6B4E24}
+.dose-review-badge{display:inline-block;margin:10px 0 0;padding:5px 10px;border:1px solid var(--line-strong);border-radius:999px;font-size:.75rem;font-weight:600;line-height:1.5;color:var(--muted)}
+.dose-concentration-presets{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px;font-size:.78125rem;color:var(--muted)}
+.dose-concentration-presets .search-by-chip{min-height:32px;padding:4px 12px}
+.footer-dataset-stamp{display:block;font-size:.75rem;color:var(--muted)}
 .dose-age-caveat strong{display:block;margin-bottom:3px;font-size:.78125rem}
 .dose-age-caveat p{margin:0;font-size:.78125rem;line-height:1.65}
 .dose-safety{margin:16px 0 0;padding-top:13px;border-top:1px solid var(--line)}
