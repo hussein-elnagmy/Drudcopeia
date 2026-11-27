@@ -1121,6 +1121,45 @@ async function main() {
     equal(ASSISTANT.capability().smartSearchOnly, true, 'smart search only');
   });
 
+  /* The no-model reply answers from the app's own data, and only the part asked for:
+     a uses question shows the uses note alone, not the whole card. */
+  await test('without a runtime a uses question is answered with the uses note only', async () => {
+    RUNTIME.useAdapter(null);
+    RETRIEVAL.build({ ...provider, clinicalNotes: [{ keys: ['PARACETAMOL'], mechanism: 'Central prostaglandin signalling.', uses: 'For pain and fever, from the app notes.', effects: 'Nausea can occur.', safety: 'Liver disease needs advice first.', sources: [{ nameEn: 'App clinical note', nameAr: 'ملاحظة التطبيق السريرية' }] }] });
+    configureAssistant();
+    const result = await ASSISTANT.ask('ما هي استخدامات بنادول؟');
+    equal(result.type, 'card', `type ${result.type}`);
+    equal(result.mode, 'smart-search', 'smart search mode');
+    equal(result.card.focus, 'uses', 'uses focus');
+    equal(result.card.focusLabel, messagesAr.answer.usesLabel, 'the asked aspect is the heading');
+    const med = result.card.medicines[0];
+    assert(med, 'a medicine on the card');
+    equal(med.notes && med.notes.uses, 'For pain and fever, from the app notes.', 'the uses note is the answer');
+    equal(med.notes && med.notes.mechanism, undefined, 'mechanism stays out');
+    equal(med.notes && med.notes.effects, undefined, 'effects stay out');
+    equal((med.interactions || []).length, 0, 'interactions stay out');
+    equal(mock.counts('generate'), 0, 'nothing generated');
+    RETRIEVAL.build(provider);
+    RUNTIME.useAdapter(mock.adapter);
+  });
+
+  /* Same rule for a condition: "what are the symptoms of asthma" shows the Symptoms section
+     of the MedlinePlus page, not the overview and causes passages that also matched. */
+  await test('without a runtime a symptoms question is answered with the symptoms section only', async () => {
+    RUNTIME.useAdapter(null);
+    RETRIEVAL.build(provider);
+    configureAssistant();
+    const result = await ASSISTANT.ask('ما هي أعراض الربو؟');
+    equal(result.type, 'card', `type ${result.type}`);
+    equal(result.mode, 'smart-search', 'smart search mode');
+    const docs = (result.card && result.card.documents) || [];
+    assert(docs.length >= 1, 'a symptoms passage on the card');
+    assert(docs.every(doc => doc.section === 'Symptoms'), `only symptoms passages, got ${docs.map(doc => doc.section).join(', ')}`);
+    equal(result.card.focusLabel, messagesAr.answer.sections.Symptoms, 'the section is the heading');
+    equal(mock.counts('generate'), 0, 'nothing generated');
+    RUNTIME.useAdapter(mock.adapter);
+  });
+
   /* A 4 GB phone reports about 3.7 GB. The model file fits, but the file plus the app's own copy
      of the medicine index is what pushes that class past what the OS leaves it, so it runs the
      lean profile: the same download, half the context and a shorter answer. */

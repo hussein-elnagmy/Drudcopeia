@@ -573,6 +573,7 @@
     /* no model on this device or build: smart search answers with the card, never a guess */
     const highRiskAsk = context.safety.highRiskIntent(askedText);
     if (!modelUsable() || !context.runtime.available() || highRiskAsk) {
+      await applyFocus(card, askedText, retrieval.records, answerIn);
       mark('smartSearch');
       note('generate:skipped', highRiskAsk ? 'high-risk-intent' : 'no-model');
       return withDisclaimer({
@@ -595,6 +596,7 @@
     mark('loadModel');
     if (!loaded.ok) {
       note('load:failed', loaded.error);
+      await applyFocus(card, askedText, retrieval.records, answerIn);
       return withDisclaimer({
         type: 'card',
         mode: 'fallback',
@@ -802,6 +804,47 @@
       loaded: Boolean(model && model.loaded),
       smartSearchOnly: !modelUsable()
     };
+  }
+
+  /* The no-model reply answers from the app's own data, and only the part asked for:
+     a uses or side-effects question shows that note of the card alone, and a condition
+     or test question that names a section ("أعراض الربو") shows that section of the
+     official page alone. When nothing of it is on the card, the card stays whole. */
+  async function applyFocus(card, askedText, records, language) {
+    const R = context.retrieval;
+    if (!R || !card) return;
+    if (Array.isArray(card.documents) && card.documents.length && typeof R.intentSection === 'function') {
+      const wantedSection = R.intentSection(askedText);
+      if (wantedSection) {
+        const matching = card.documents.filter(doc => doc.section === wantedSection);
+        if (matching.length) {
+          card.documents = matching;
+          card.focus = card.focus || 'section';
+          const sectionLabel = message(`answer.sections.${wantedSection}`);
+          card.focusLabel = sectionLabel === `answer.sections.${wantedSection}` ? message('answer.docCardLabel') : sectionLabel;
+        }
+      }
+    }
+    const focus = typeof R.intentFocus === 'function' ? R.intentFocus(askedText) : '';
+    if (!focus || !Array.isArray(card.medicines)) return;
+    card.focus = focus;
+    if (focus === 'uses' || focus === 'effects') {
+      const key = focus;
+      card.focusLabel = message(focus === 'uses' ? 'answer.usesLabel' : 'answer.effectsLabel');
+      let any = false;
+      const monos = focus === 'uses' && typeof R.monographsFor === 'function' ? await R.monographsFor(records) : new Map();
+      card.medicines = card.medicines.map(med => {
+        const kept = med.notes && med.notes[key] ? { [key]: med.notes[key] } : null;
+        const monoUses = focus === 'uses'
+          ? (monos.get(med.id) || [])
+              .map(item => ({ title: (item.names || [])[0] || '', text: item.sections && item.sections.indications, source: item.source }))
+              .filter(block => block.text)
+          : [];
+        if (kept || monoUses.length) any = true;
+        return Object.assign({}, med, { notes: kept, interactions: [], monoUses });
+      });
+      if (!any) card.focusEmpty = message(focus === 'uses' ? 'answer.noUses' : 'answer.noEffects');
+    }
   }
 
   const api = {

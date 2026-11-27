@@ -82,7 +82,22 @@
     "searchMedicine": "Open medicine cards in Dawaya",
     "smartSearchBody": "No on-device model is available. These are matching product/reference records, not a single clinical answer. Brand names may cover different ingredients and strengths: pick the exact product and verify its current label. Prices are saved database values, not live quotes.",
     "verifyHeader": "Official sources to verify",
-    "highRiskBody": "These are matching records, not a single clinical answer. This question touches pregnancy, breastfeeding, interactions, kidney or liver disease, children or a dose, so no generated summary is shown. Read the records and the official sources, use the matching tool in the menu, and confirm with a pharmacist or doctor."
+    "highRiskBody": "These are matching records, not a single clinical answer. This question touches pregnancy, breastfeeding, interactions, kidney or liver disease, children or a dose, so no generated summary is shown. Read the records and the official sources, use the matching tool in the menu, and confirm with a pharmacist or doctor.",
+    "usesLabel": "Uses from the app references",
+    "noUses": "No uses information for this medicine in the app references. Check the current product leaflet or ask the pharmacist.",
+    "effectsLabel": "Side effects from the app references",
+    "noEffects": "No side-effect information for this medicine in the app references; that does not mean there are none. Check the current leaflet and ask the pharmacist.",
+    "sections": {
+      "Symptoms": "Symptoms",
+      "Diagnosis": "Diagnosis and tests",
+      "Treatment": "Treatment",
+      "Causes": "Causes and risk factors",
+      "Prevention": "Prevention",
+      "Complications": "Complications",
+      "Outlook": "Outlook and recovery",
+      "When to seek care": "When to see a doctor",
+      "Overview": "Overview"
+    }
   },
   "refusal": {
     "offTopic": "I cannot help with that one - medicines and health are my specialty. Ask me about a medicine, an ingredient, a symptom or a lab test and I am all ears.",

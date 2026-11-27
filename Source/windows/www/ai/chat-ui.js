@@ -707,8 +707,14 @@
     wrapper.className = 'ai-card';
     const heading = document.createElement('h4');
     const documentsOnly = (card.documents || []).length > 0 && !(card.medicines || []).length;
-    heading.textContent = text(documentsOnly ? 'answer.docCardLabel' : 'answer.cardLabel');
+    heading.textContent = card.focusLabel || text(documentsOnly ? 'answer.docCardLabel' : 'answer.cardLabel');
     wrapper.append(heading);
+    if (card.focusEmpty) {
+      const empty = document.createElement('p');
+      empty.className = 'ai-card-note';
+      empty.textContent = card.focusEmpty;
+      wrapper.append(empty);
+    }
     for (const med of card.medicines || []) {
       const block = document.createElement('div');
       block.className = 'ai-card-med';
@@ -741,6 +747,23 @@
           p.className = 'ai-card-note';
           p.textContent = med.notes[key];
           block.append(p);
+        }
+      }
+      for (const use of med.monoUses || []) {
+        const p = document.createElement('p');
+        p.className = 'ai-card-note';
+        p.textContent = `${use.title ? use.title + ' — ' : ''}${use.text || ''}`;
+        block.append(p);
+        if (use.source && use.source.dailymed) {
+          const source = document.createElement('p');
+          source.className = 'ai-card-source';
+          const link = document.createElement('a');
+          link.href = use.source.dailymed;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = `${use.source.name || 'DailyMed'} ${use.source.label_date || ''}`.trim();
+          source.append(link);
+          block.append(source);
         }
       }
       for (const pair of med.interactions || []) {

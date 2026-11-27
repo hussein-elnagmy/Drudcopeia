@@ -267,6 +267,17 @@
     return best;
   }
 
+  /* "What is it for" and "what does it damage" ask for one note of the card, not the card. */
+  function intentFocus(text) {
+    const normalized = T().normalize(text || '');
+    const any = words => words.some(word => normalized.includes(T().normalize(word)));
+    if (any(['استخدام', 'بيستخدم', 'بيستخدمو', 'فايدة', 'فايده', 'فوائد', 'فائدة', 'بيفيد في ايه'])
+      || any(['used for', 'what is it for', ' uses', ' use of', 'benefit', 'indication'])) return 'uses';
+    if (any(['اضرار', 'أضرار', 'اعراض جانبية', 'أعراض جانبية', 'اثار جانبية', 'آثار جانبية', 'تأثيرات جانبية', 'ضرر'])
+      || any(['side effect', 'adverse'])) return 'effects';
+    return '';
+  }
+
   function retrieve(question, options) {
     if (!medicineIndex) build({});
     const opts = options || {};
@@ -383,6 +394,7 @@
       id: hit.id,
       score: hit.score,
       exactName: hit.exactName,
+      section: entry.section || '',
       fields: { title: entry.title || '', text: String(entry.text || '').slice(0, 1400) },
       source: entry.source || databaseSource(),
       text: `${entry.title || ''}\n${String(entry.text || '').slice(0, 1400)}`
@@ -524,6 +536,7 @@
       documents: documents.map(record => ({
         title: record.fields.title,
         excerpt: T().truncate(record.fields.text, 700),
+        section: record.section || '',
         sourceLabel: sourceLabel(record.source, language),
         source: record.source
       })),
@@ -834,6 +847,46 @@
     };
   }
 
+  /* Sourced per-ingredient monographs (U.S. FDA labels via openFDA/DailyMed), the same
+     bundle the medicines directory shows. Loaded once, on demand. */
+  let monoCache = null;
+  let monoPromise = null;
+  function loadMonographs() {
+    if (monoCache) return Promise.resolve(monoCache);
+    if (!monoPromise) {
+      monoPromise = fetch('assets/monographs.json', { cache: 'force-cache' })
+        .then(response => (response.ok ? response.json() : null))
+        .then(payload => { monoCache = payload && payload.items ? payload : null; return monoCache; })
+        .catch(() => null);
+    }
+    return monoPromise;
+  }
+  function monoClean(value) {
+    return String(value || '').toLowerCase().replace(/[+/,;._()\-]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  async function monographsFor(records) {
+    const mono = await loadMonographs();
+    const out = new Map();
+    if (!mono) return out;
+    for (const record of records || []) {
+      if (record.kind !== 'medicine') continue;
+      const parts = String(record.fields.ingredient || '').split(/[+,;]/);
+      const found = [];
+      const seen = new Set();
+      for (const part of parts) {
+        for (const variant of [part, String(part).replace(/\([^)]*\)/g, ' ')]) {
+          const hit = mono.index[monoClean(variant)];
+          if (hit !== undefined && !seen.has(hit)) {
+            seen.add(hit);
+            found.push(mono.items[hit]);
+          }
+        }
+      }
+      if (found.length) out.set(record.id, found.slice(0, 3));
+    }
+    return out;
+  }
+
   const api = {
     configure,
     build,
@@ -846,6 +899,9 @@
     safetyFlags,
     clinicalFor,
     interactionsFor,
+    intentFocus,
+    intentSection,
+    monographsFor,
     entities,
     officialLinks,
     stats,
