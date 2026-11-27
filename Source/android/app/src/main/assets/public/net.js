@@ -56,23 +56,28 @@
     return err;
   }
 
-  // The manual offline-mode switch was removed (r189): privacy comes from the
-  // allow-list gate below, not from a toggle. Any flag a reader stored while
-  // the switch existed is cleared so nobody stays blocked with no way back.
-  // The bundled dataset still answers every search without a connection.
+  // The manual offline-mode switch was removed (r189) and later restored:
+  // the flag is now honoured again, so check() refuses network while it is on.
   function isOffline() {
     var cfg = config();
     var key = (cfg && cfg.offlineKey) || OFFLINE_KEY;
     var store = storage();
-    if (store) {
-      try { if (store.getItem(key) !== null) store.removeItem(key); } catch (_) {}
-    }
-    return false;
+    if (!store) return false;
+    try { return store.getItem(key) === '1'; } catch (_) { return false; }
   }
 
   function setOffline(enabled) {
-    notifyNativeOfflineMode(false);
-    return false;
+    var cfg = config();
+    var key = (cfg && cfg.offlineKey) || OFFLINE_KEY;
+    var store = storage();
+    if (store) {
+      try {
+        if (enabled) store.setItem(key, '1');
+        else store.removeItem(key);
+      } catch (_) {}
+    }
+    notifyNativeOfflineMode(!!enabled);
+    return !!enabled;
   }
 
   function notifyNativeOfflineMode(enabled) {
@@ -316,6 +321,10 @@
             return response.arrayBuffer().then(function (buffer) {
               chunks.push(new Uint8Array(buffer));
               received += buffer.byteLength;
+              if (entry && entry.maxBytes && received > entry.maxBytes) {
+                controller.abort();
+                throw PrivacyBlockedError('download-exceeded-max-bytes');
+              }
               if (onProgress) onProgress(received, Number(response.headers.get('x-total-size')) || 0);
               var range = response.headers.get('content-range');
               var total = range ? Number(String(range).split('/')[1]) : received;
@@ -416,7 +425,7 @@
   }
 
   function verifySha256(buffer, expectedHex) {
-    if (!expectedHex) return Promise.resolve(true);
+    if (!expectedHex) return Promise.resolve(false);
     return sha256Hex(buffer).then(function (actual) {
       return String(actual).toLowerCase() === String(expectedHex).toLowerCase();
     });
@@ -444,8 +453,13 @@
         root.navigator.sendBeacon = blockedTransport('sendBeacon');
       }
     } catch (_) {}
+    if (root.fetch !== guard) return false;
     root.__dawayaFetchGuard = true;
     return true;
+  }
+
+  function guardInstalled() {
+    return root.__dawayaFetchGuard === true && root.fetch !== undefined && typeof root.fetch === 'function';
   }
 
   installGuard();
@@ -470,6 +484,7 @@
     sha256Hex: sha256Hex,
     verifySha256: verifySha256,
     installGuard: installGuard,
+    guardInstalled: guardInstalled,
     allowlistedHosts: function () {
       var cfg = config();
       return cfg ? cfg.allowedHosts.map(function (entry) { return entry.host; }) : [];
