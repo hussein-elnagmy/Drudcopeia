@@ -6,8 +6,12 @@
  * Run with: npm run sync:web (or npm run sync:ios to also update Xcode).
  */
 import { access, cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+const execFileAsync = promisify(execFile);
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sourceDir = path.join(root, 'webapp');
@@ -42,6 +46,17 @@ async function main() {
   }
   await ensureFile(bridgeFile, 'native bridge');
 
+  // Derive the shell revision from the service worker instead of hardcoding
+  // it, so the injected bridge tag always matches the cached shell version.
+  const workerText = await readFile(path.join(sourceDir, 'service-worker.js'), 'utf8');
+  const versionMatch = workerText.match(/dawaya-shell-v(\d+)/);
+  if (!versionMatch) throw new Error('service-worker.js does not contain a dawaya-shell-v<N> version');
+  const shellVersion = versionMatch[1];
+
+  // Privacy gate runs BEFORE www/ is deleted, so a failing gate never
+  // leaves a half-synced output behind.
+  await execFileAsync('python3', [path.join(root, 'scripts', 'privacy-check.py')], { cwd: root });
+
   await rm(outputDir, { recursive: true, force: true });
   await mkdir(outputDir, { recursive: true });
   await cp(sourceDir, outputDir, {
@@ -54,7 +69,7 @@ async function main() {
   const indexPath = path.join(outputDir, 'index.html');
   let html = await readFile(indexPath, 'utf8');
 
-  const shellTag = '<script src="ios-shell.js?v=103"></script>';
+  const shellTag = `<script src="ios-shell.js?v=${shellVersion}"></script>`;
   if (!html.includes(shellTag)) {
     const firstCoreScript = '<script src="core.js';
     if (!html.includes(firstCoreScript)) {
@@ -63,9 +78,10 @@ async function main() {
     html = html.replace(firstCoreScript, `${shellTag}\n  ${firstCoreScript}`);
   }
 
-  // Service workers only run on http(s); the native shells use custom URL
-  // schemes and bundle every asset, so the worker is unnecessary there.
-  if (!html.includes("/^https?:$/.test(location.protocol)")) {
+  // The service-worker registration guard lives in sw-register.js (not
+  // inline in index.html), so check the file that actually carries it.
+  const registerText = await readFile(path.join(outputDir, 'sw-register.js'), 'utf8');
+  if (!registerText.includes("/^https?:$/.test(location.protocol)")) {
     throw new Error('Could not find the service worker registration guard');
   }
 
