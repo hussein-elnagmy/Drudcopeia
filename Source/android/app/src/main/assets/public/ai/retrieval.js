@@ -515,6 +515,7 @@
       kind: 'card',
       label: 'بطاقة الدواء من قاعدة البيانات',
       medicines: medicines.map(record => ({
+        id: record.id,
         tradeNameAr: record.fields.tradeNameAr,
         tradeNameEn: record.fields.tradeNameEn,
         ingredient: record.fields.ingredient,
