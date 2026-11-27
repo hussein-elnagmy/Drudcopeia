@@ -44,28 +44,27 @@ jobs:
           cp "$ANDROID_NDK_LATEST_HOME"/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/*/lib/linux/aarch64/libomp.so \
             "$JNILIBS/libomp.so"
           file "$JNILIBS/libllamaserver.so"
-      - name: Build APK (release-signed when the keystore secret exists, else debug)
+      - name: Build APK (release-signed; fails if the keystore secret is missing)
         working-directory: Source/android
         env:
           KS_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
           KS_PW: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
         run: |
           rm -f local.properties
-          if [ -n "$KS_B64" ] && [ -n "$KS_PW" ]; then
-            printf '%s' "$KS_B64" | base64 -d > release.p12
-            {
-              echo "storeFile=release.p12"
-              echo "storePassword=$KS_PW"
-              echo "keyAlias=drugcopeia"
-              echo "keyPassword=$KS_PW"
-            } > keystore.properties
-            ./gradlew assembleRelease --no-daemon --stacktrace
-            rm -f release.p12 keystore.properties
-            echo "APK_KIND=release" >> "$GITHUB_ENV"
-          else
-            ./gradlew assembleDebug --no-daemon --stacktrace
-            echo "APK_KIND=debug" >> "$GITHUB_ENV"
+          if [ -z "$KS_B64" ] || [ -z "$KS_PW" ]; then
+            echo "ERROR: ANDROID_KEYSTORE_B64 / ANDROID_KEYSTORE_PASSWORD secrets are missing — refusing to ship a debug APK as a release." >&2
+            exit 1
           fi
+          printf '%s' "$KS_B64" | base64 -d > release.p12
+          {
+            echo "storeFile=release.p12"
+            echo "storePassword=$KS_PW"
+            echo "keyAlias=drugcopeia"
+            echo "keyPassword=$KS_PW"
+          } > keystore.properties
+          ./gradlew assembleRelease --no-daemon --stacktrace
+          rm -f release.p12 keystore.properties
+          echo "APK_KIND=release" >> "$GITHUB_ENV"
       - name: Verify APK signature
         run: |
           APK=$(ls Source/android/app/build/outputs/apk/*/*.apk | head -1)
@@ -102,7 +101,7 @@ jobs:
           curl -fL -o /tmp/llama-runtime/win.zip https://github.com/ggml-org/llama.cpp/releases/download/b11985/llama-b11985-bin-win-cpu-x64.zip
           echo '1c93f23afd48f8434c4cdc4d9f0a46f47a0d98ea6b3214007cbddc10c34c0c16  /tmp/llama-runtime/win.zip' | sha256sum -c -
       - name: Install go-winres on the host toolchain
-        run: go install github.com/tc-hib/go-winres@latest
+        run: go install github.com/tc-hib/go-winres@${{ vars.GO_WINRES_VERSION }}
       - name: Cross-compile Windows exe
         working-directory: Source/windows
         env:
@@ -206,14 +205,19 @@ jobs:
           find dist/Dawaya-macos-dmg -name '*.dmg' -exec cp {} "release/Drugcopeia-r${R}-macos.dmg" \;
           find dist/Dawaya-ios-simulator-unsigned -name '*.zip' -exec cp {} "release/Drugcopeia-r${R}-ios-unsigned.zip" \;
           cp "Drugcopeia-r${R}.zip" "release/Drugcopeia-r${R}-source-web.zip"
+          (cd release && sha256sum * > SHA256SUMS)
           ls -la release
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           R=$(tr -d '[:space:]' < Source/REVISION)
-          # Always recreate so rebuilt assets replace stale ones.
-          gh release delete "r${R}" -y >/dev/null 2>&1 || true
+          # Never delete and recreate an existing tag: a rebuilt release must
+          # get a new revision, so published hashes can never change silently.
+          if gh release view "r${R}" >/dev/null 2>&1; then
+            echo "ERROR: release r${R} already exists — bump Source/REVISION instead of recreating it." >&2
+            exit 1
+          fi
           gh release create "r${R}" release/* \
             --title "Drugcopeia r${R}" \
             --notes "Full app, all platforms, revision r${R}. android.apk for Android, windows.exe for Windows, macos.dmg for macOS, ios-unsigned.zip is the unsigned iOS build (sign and install locally with Xcode), source-web.zip is the full source including the web/PWA version."
