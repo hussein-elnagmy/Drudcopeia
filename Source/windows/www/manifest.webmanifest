@@ -3,7 +3,9 @@
   "name": "Drugcopeia - Egypt Medicine Guide",
   "short_name": "Drugcopeia",
   "description": "Search Egyptian medicines and explore health conditions.",
-  "lang": "en",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["health", "medical", "reference"],
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -35,5 +37,11 @@
       "type": "image/png",
       "purpose": "any"
     }
+  ]
+,
+  "shortcuts": [
+    { "name": "بحث عن دواء", "short_name": "بحث", "url": "./?page=medicines", "icons": [{ "src": "assets/red-crescent-rx-192.png", "sizes": "192x192" }] },
+    { "name": "التذكيرات", "short_name": "التذكيرات", "url": "./?page=reminders", "icons": [{ "src": "assets/red-crescent-rx-192.png", "sizes": "192x192" }] },
+    { "name": "فحص التداخلات", "short_name": "التداخلات", "url": "./?page=interactions", "icons": [{ "src": "assets/red-crescent-rx-192.png", "sizes": "192x192" }] }
   ]
 }
