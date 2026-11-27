@@ -362,12 +362,24 @@
     return text;
   }
 
+  /* r204: dedupe by canonical URL as well as by id, so the same article
+     arriving from two feeds (or under two ids) shows once. */
+  function canonicalUrl(row) {
+    var raw = String(row && (row.url || row.link) || '');
+    try {
+      var parsed = new URL(raw);
+      return (parsed.protocol + '//' + parsed.host + parsed.pathname.replace(/\/+$/, '')).toLowerCase();
+    } catch (e) { return raw.split(/[?#]/)[0].replace(/\/+$/, '').toLowerCase(); }
+  }
   function dedupe(rows) {
     var seen = {};
+    var seenUrls = {};
     return rows.filter(function (row) {
       if (!row || !row.id || !row.title || !row.summary) return false;
-      if (seen[row.id] || tooOld(row.date) || tooNew(row.date)) return false;
+      var url = canonicalUrl(row);
+      if (seen[row.id] || (url && seenUrls[url]) || tooOld(row.date) || tooNew(row.date)) return false;
       seen[row.id] = true;
+      if (url) seenUrls[url] = true;
       return true;
     }).sort(function (left, right) {
       return String(right.date || '').localeCompare(String(left.date || ''));
