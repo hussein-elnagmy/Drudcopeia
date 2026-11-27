@@ -493,6 +493,18 @@
         notify();
         return true;
       },
+      /* r204: delete-all. Reminder names/doses are still stored as plain
+         JSON in localStorage (same as before); at-rest encryption was not
+         added because the native shells read the same keys and a key
+         migration would risk losing existing reminders. */
+      clearAll() {
+        if (!items.length && !Object.keys(taken).length) return false;
+        items = [];
+        taken = {};
+        save();
+        notify();
+        return true;
+      },
       takenFor(date = new Date()) {
         return new Set(taken[localDateKey(date)] || []);
       },
