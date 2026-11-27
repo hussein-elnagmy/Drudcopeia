@@ -283,7 +283,9 @@ async function main() {
     const options = (await read('ExportOptions.plist')).toString('utf8');
     assert(/<key>method<\/key>\s*<string>app-store-connect<\/string>/.test(options), 'export method must be app-store-connect');
     assert(/<key>signingStyle<\/key>\s*<string>automatic<\/string>/.test(options), 'export should use automatic signing');
-    assert(options.includes('YOUR_TEAM_ID'), 'ExportOptions.plist must be edited with your Team ID');
+    assert(!options.includes('YOUR_TEAM_ID'), 'ExportOptions.plist still contains the YOUR_TEAM_ID placeholder — replace it with your real 10-character Team ID');
+    const teamId = (options.match(/<key>teamID<\/key>\s*<string>([^<]+)<\/string>/) || [])[1];
+    assert(teamId && /^[A-Z0-9]{10}$/.test(teamId), 'ExportOptions.plist must contain a real 10-character Team ID');
   });
 
   if (failures) {

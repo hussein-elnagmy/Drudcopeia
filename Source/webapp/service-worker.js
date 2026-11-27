@@ -1,9 +1,22 @@
 const CACHE_NAME = 'dawaya-shell-v202';
 const APP_SHELL = ['./', './index.html', './styles.css?v=202', './boot-theme.js?v=202', './sw-register.js?v=202', './generated/privacy-config.js?v=202', './net.js?v=202', './core.js?v=202', './lab-tests.js?v=202', './clinical-tools.js?v=202', './reading.js?v=202', './news.js?v=202', './news.json', './app.js?v=202', './alt-map.js?v=202', './same-spec.js?v=202', './features.js?v=202', './assets/data/pregnancy-safety.json', './ai/text.js?v=202', './ai/search-index.js?v=202', './ai/safety.js?v=202', './ai/retrieval.js?v=202', './ai/llm-bridge.js?v=202', './ai/wasm-bridge.js?v=202', './ai/model-manager.js?v=202', './ai/pipeline.js?v=202', './ai/secure-history.js?v=202', './ai/photo-ask.js?v=202', './ai/chat-ui.js?v=202', './assets/ai/model-config.json', './assets/ai/policy-config.json', './assets/ai/messages-ar.json', './assets/ai/messages-en.json', './assets/ai/dataset-meta.json', './assets/ai/prompts/system-ar.txt', './assets/ai/prompts/system-en.txt', './assets/ai/prompts/chat-ar.txt', './assets/ai/prompts/chat-en.txt', './assets/ai/prompts/classifier.txt', './manifest.webmanifest', './assets/red-crescent-rx-96.png', './assets/red-crescent-rx-192.png', './assets/red-crescent-rx-512.png', './assets/red-crescent-rx-dark-96.png', './assets/red-crescent-rx-dark-192.png', './assets/barcode-index.json', './assets/lab-tests-content.json', './assets/conditions.json', './assets/monographs.json', './assets/egyptian-drugs.json?v=202', './assets/dawaya-mark.svg', './assets/apple-touch-icon.png'];
 
+const CORE_SHELL = APP_SHELL.slice(0, 10);
+const DATA_FILES = APP_SHELL.slice(10);
+
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)));
-  self.skipWaiting();
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    // Stage 1: the core shell must install atomically — if it fails, the
+    // worker must not activate at all.
+    await cache.addAll(CORE_SHELL);
+    // Stage 2: data files one by one; a single bad file no longer kills the
+    // whole install, it is just skipped and re-fetched on demand.
+    for (const url of DATA_FILES) {
+      try { await cache.add(url); } catch (_) {}
+    }
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate', event => {
