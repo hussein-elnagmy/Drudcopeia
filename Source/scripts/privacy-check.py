@@ -171,7 +171,7 @@ NATIVE_SOURCES = (
     + walk(WINDOWS, (".go",))
     + walk(NATIVE, (".js",))
 )
-CODE_SYMBOL_FILES = WEB_SHIPPED + NATIVE_SOURCES
+CODE_SYMBOL_FILES = WEB_SHIPPED + AI_FILES + NATIVE_SOURCES
 
 scanned.extend(WEB_SHIPPED)
 scanned.extend(NATIVE_SOURCES)
@@ -347,7 +347,8 @@ def check_web_network():
         ("host-not-allowlisted", "unknown hosts are refused"),
         ("XMLHttpRequest = blockedTransport", "XHR is blocked"),
         ("sendBeacon = blockedTransport", "sendBeacon is blocked"),
-        ("    return false;\n  }\n\n  function setOffline", "online is the default and no stored switch can block the app"),
+        ("store.getItem(key) === '1'", "the persisted offline flag is honoured"),
+        ("store.setItem(key, '1')", "the offline switch can be stored"),
     ]
     for needle, why in required:
         if needle not in net:
