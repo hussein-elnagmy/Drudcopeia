@@ -385,7 +385,8 @@
   }
 
   function worst(entries) {
-    return (entries || []).reduce((current, entry) => {
+    if (!entries || !entries.length) return 'none';
+    return entries.reduce((current, entry) => {
       const severity = entry && entry.pair ? entry.pair.severity : entry;
       return severity && rank(severity) < rank(current) ? severity : current;
     }, 'moderate');
@@ -433,7 +434,7 @@
       entries,
       total: entries.length,
       takenCount,
-      pendingCount: entries.length - takenCount,
+      pendingCount: pending.length,
       progress: entries.length ? takenCount / entries.length : 0,
       nextId: pending.length ? pending[0].id : '',
       dueCount: entries.filter(entry => entry.state === 'due').length,
